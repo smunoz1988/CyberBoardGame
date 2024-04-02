@@ -10,7 +10,13 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen 
+        name="CyberBoardGame" 
+        component={HomeScreen} 
+        options={{
+          headerTitleAlign: 'center',
+        }}
+        />
         <Stack.Screen name="Mission" component={MissionScreen} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { Button, TextInput, StyleSheet, Text, ScrollView } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 
-function HomeScreen({ navigation }) {
-  const [playerCount, setPlayerCount] = useState('');
+const HomeScreen = ({ navigation }) => {
+  const [playerCount, setPlayerCount] = useState(null);
   const [playerNames, setPlayerNames] = useState([]);
 
-  // Ensure playerCount is a positive integer before using it to set playerNames
-  useEffect(() => {
-    const count = parseInt(playerCount, 10);
-    if (!isNaN(count) && count > 0) {
-      setPlayerNames(new Array(count).fill(''));
+  const handlePlayerCountChange = (value) => {
+    setPlayerCount(value);
+    if (value) {
+      setPlayerNames(new Array(parseInt(value)).fill(''));
     } else {
       setPlayerNames([]);
     }
-  }, [playerCount]);
+  };
 
   const handleNameChange = (text, index) => {
     const newNames = [...playerNames];
@@ -22,12 +22,12 @@ function HomeScreen({ navigation }) {
   };
 
   const renderNameInputs = () => {
-    return playerNames.map((name, index) => (
+    return playerNames.map((_, index) => (
       <TextInput
-        key={index.toString()} // It's better to use unique identifiers as keys, but for simplicity index is used here
+        key={index}
         style={styles.input}
         onChangeText={(text) => handleNameChange(text, index)}
-        value={name}
+        value={playerNames[index]}
         placeholder={`Player ${index + 1} Name`}
       />
     ));
@@ -35,35 +35,68 @@ function HomeScreen({ navigation }) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text>How many players want to play?</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={text => setPlayerCount(text.replace(/[^0-9]/g, ''))} // Only allow numeric input
-        value={playerCount}
-        keyboardType="numeric"
-        placeholder="Number of Players"
+      <Text style={styles.title}>Welcome to the Mission Tracker!</Text>
+      <Text style={styles.title}>Select the number of players:</Text>
+      <RNPickerSelect
+        onValueChange={handlePlayerCountChange}
+        items={[
+          { label: '2', value: '2' },
+          { label: '3', value: '3' },
+          { label: '4', value: '4' },
+        ]}
+        style={pickerSelectStyles}
+        placeholder={{ label: 'Select number of players', value: null }}
       />
       {renderNameInputs()}
       <Button
         title="Start Mission"
         onPress={() => navigation.navigate('Mission', { playerNames })}
-        disabled={playerNames.length === 0 || playerNames.includes('')} // Also disable button if playerCount is 0
+        disabled={!playerCount || playerNames.includes('')}
       />
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     padding: 20,
   },
   input: {
     height: 40,
-    width: '90%', // Adjust width as needed
-    margin: 12,
+    width: '100%',
+    marginVertical: 10,
     borderWidth: 1,
     padding: 10,
+  },
+  title: {
+    marginBottom: 20,
+    textAlign: 'center',
+    fontSize: 18,
+  },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 4,
+    color: 'black',
+    paddingRight: 30, 
+    marginBottom: 20,
+  },
+  inputAndroid: {
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderWidth: 0.5,
+    borderColor: 'purple',
+    borderRadius: 8,
+    color: 'black',
+    paddingRight: 30,
+    marginBottom: 20,
   },
 });
 
