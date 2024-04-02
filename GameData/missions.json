@@ -3,25 +3,25 @@
       "name": "Templo",
       "objectives": ["Eliminar objetivo", "Defender al objetivo"],
       "enemies": [
-        {"name": "tech soldier 1", "image": "Enemy1Image"},
-        {"name": "tech soldier 2", "image": "Enemy1Image"},
-        {"name": "iron caveman 1", "image": "Enemy2Image"}
+        {"name": "Tech Soldier 1", "image": "Enemy1Image"},
+        {"name": "Tech Soldier 2", "image": "Enemy1Image"},
+        {"name": "Iron Caveman 1", "image": "Enemy2Image"}
       ]
     },
     {
       "name": "Cuartel",
       "objectives": ["Jackear 1 computadora", "Jackear 2 computadoras", "Jackear 3 computadoras"],
       "enemies": [
-        {"name": "tech soldier 1", "image": "Enemy1Image"},
-        {"name": "tech soldier 2", "image": "Enemy1Image"}
+        {"name": "Tech Soldier 1", "image": "Enemy1Image"},
+        {"name": "Tech Soldier 2", "image": "Enemy1Image"}
       ]
     },
     {
       "name": "Bunker",
       "objectives": ["Desactivar la bomba", "Matar a todos los enemigos"],
       "enemies": [
-        {"name": "tech soldier 1", "image": "Enemy1Image"},
-        {"name": "iron caveman 1", "image": "Enemy2Image"}
+        {"name": "Tech Soldier 1", "image": "Enemy1Image"},
+        {"name": "Iron Caveman 1", "image": "Enemy2Image"}
       ]
     }
 ]
