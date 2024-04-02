@@ -1,19 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 import missions from '../GameData/missions';
+import Enemy1Image from '../assets/tech-soldier.png';
+import Enemy2Image from '../assets/iron-caveman.png';
 
 function MissionScreen({ route }) {
   const { playerNames } = route.params;
   const [mission, setMission] = useState(null);
 
   useEffect(() => {
-    // Function to select a random mission and objective
     const loadMission = () => {
       const selectedMission = missions[Math.floor(Math.random() * missions.length)];
       const selectedObjective = selectedMission.objectives[Math.floor(Math.random() * selectedMission.objectives.length)];
+
+      const enemiesWithImages = selectedMission.enemies.map(enemy => {
+        let image;
+        switch (enemy.image) {
+          case 'Enemy1Image':
+            image = Enemy1Image;
+            break;
+          case 'Enemy2Image':
+            image = Enemy2Image;
+            break;
+          default:
+            image = Enemy1Image;
+        }
+        return { ...enemy, image };
+      });
+
       setMission({
         ...selectedMission,
-        objective: selectedObjective, // Override the objectives array with a single selected objective
+        objective: selectedObjective,
+        enemies: enemiesWithImages,
       });
     };
 
@@ -34,7 +52,10 @@ function MissionScreen({ route }) {
           <Text>Objective: {mission.objective}</Text>
           <Text>Enemies:</Text>
           {mission.enemies.map((enemy, index) => (
-            <Text key={index}>{enemy}</Text>
+            <View key={index} style={styles.enemyContainer}>
+              <Text>{enemy.name}</Text>
+              <Image source={enemy.image} style={styles.enemyImage} />
+            </View>
           ))}
         </View>
       )}
@@ -57,6 +78,15 @@ const styles = StyleSheet.create({
   missionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  enemyContainer: {
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  enemyImage: {
+    width: 50,
+    height: 50,
+    marginTop: 5,
   },
 });
 
