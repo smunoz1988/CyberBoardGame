@@ -1,4 +1,6 @@
-[
+// CONSIDERAR PONER LOS ENEMIGOS COMO PARTE DE LOS OBJETIVOS
+
+[ 
     {
       "name": "Templo",
       "objectives": ["Eliminar objetivo", "Defender al objetivo"],
