@@ -13,7 +13,7 @@ function MissionScreen({ route }) {
       const selectedMission = missions[Math.floor(Math.random() * missions.length)];
       const selectedObjective = selectedMission.objectives[Math.floor(Math.random() * selectedMission.objectives.length)];
 
-      const enemiesWithImages = selectedMission.enemies.map(enemy => {
+      const enemiesWithImages = selectedObjective.enemies.map(enemy => {
         let image;
         switch (enemy.image) {
           case 'Enemy1Image':
@@ -30,13 +30,13 @@ function MissionScreen({ route }) {
 
       setMission({
         ...selectedMission,
-        objective: selectedObjective,
-        enemies: enemiesWithImages,
+        objective: selectedObjective.objective,
+        enemies: enemiesWithImages, 
       });
     };
 
     loadMission();
-  }, []);
+  }, [route.params]);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -60,7 +60,7 @@ function MissionScreen({ route }) {
         </View>
       )}
       <Text>Mapa del nivel</Text>
-      <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRspkQWM_CO2-MTC0bedTLyMe5z0_6rI_S1g7PdvbY_zQ&s'}} style={styles.level} />
+      <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRspkQWM_CO2-MTC0bedTLyMe5z0_6rI_S1g7PdvbY_zQ&s' }} style={styles.level} />
     </ScrollView>
   );
 }

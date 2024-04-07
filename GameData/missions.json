@@ -1,27 +1,61 @@
-[ 
-    {
-      "name": "Templo",
-      "objectives": ["Eliminar objetivo", "Defender al objetivo"],
-      "enemies": [
-        {"name": "Tech Soldier 1", "image": "Enemy1Image"},
-        {"name": "Tech Soldier 2", "image": "Enemy1Image"},
-        {"name": "Iron Caveman 1", "image": "Enemy2Image"}
-      ]
-    },
-    {
-      "name": "Cuartel",
-      "objectives": ["Jackear 1 computadora", "Jackear 2 computadoras", "Jackear 3 computadoras"],
-      "enemies": [
-        {"name": "Tech Soldier 1", "image": "Enemy1Image"},
-        {"name": "Tech Soldier 2", "image": "Enemy1Image"}
-      ]
-    },
-    {
-      "name": "Bunker",
-      "objectives": ["Desactivar la bomba", "Matar a todos los enemigos"],
-      "enemies": [
-        {"name": "Tech Soldier 1", "image": "Enemy1Image"},
-        {"name": "Iron Caveman 1", "image": "Enemy2Image"}
-      ]
-    }
+[
+  {
+    "name": "Templo",
+    "objectives": [
+      {
+        "objective": "Eliminar objetivo",
+        "enemies": [
+          {"name": "Tech Soldier 1", "image": "Enemy1Image"},
+          {"name": "Tech Soldier 2", "image": "Enemy1Image"},
+          {"name": "Tech Soldier 3", "image": "Enemy1Image"}
+        ]
+      },
+      {
+        "objective": "Defender al objetivo",
+        "enemies": [
+          {"name": "Iron Caveman 1", "image": "Enemy2Image"},
+          {"name": "Iron Caveman 2", "image": "Enemy2Image"},
+          {"name": "Iron Caveman 3", "image": "Enemy2Image"}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Cuartel",
+    "objectives": [
+      {
+        "objective": "Jackear 1 computadora",
+        "enemies": [
+          {"name": "Tech Soldier 1", "image": "Enemy1Image"}
+        ]
+      },
+      {
+        "objective": "Jackear 2 computadoras",
+        "enemies": [
+          {"name": "Tech Soldier 2", "image": "Enemy1Image"}
+        ]
+      },
+      {
+        "objective": "Jackear 3 computadoras",
+        "enemies": [{"name": "Tech Soldier 2", "image": "Enemy1Image"}]
+      }
+    ]
+  },
+  {
+    "name": "Bunker",
+    "objectives": [
+      {
+        "objective": "Desactivar la bomba",
+        "enemies": [
+          {"name": "Tech Soldier 1", "image": "Enemy1Image"}
+        ]
+      },
+      {
+        "objective": "Matar a todos los enemigos",
+        "enemies": [
+          {"name": "Iron Caveman 1", "image": "Enemy2Image"}
+        ]
+      }
+    ]
+  }
 ]
