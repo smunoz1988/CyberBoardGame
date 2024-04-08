@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, Button } from 'react-native';
 import missions from '../GameData/missions';
 import Enemy1Image from '../assets/tech-soldier.png';
 import Enemy2Image from '../assets/iron-caveman.png';
 
-function MissionScreen({ route }) {
+function MissionScreen({ route, navigation}) {
   const { playerNames } = route.params;
   const [mission, setMission] = useState(null);
 
@@ -61,6 +61,7 @@ function MissionScreen({ route }) {
       )}
       <Text>Mapa del nivel</Text>
       <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRspkQWM_CO2-MTC0bedTLyMe5z0_6rI_S1g7PdvbY_zQ&s' }} style={styles.level} />
+      <Button title="Go to Mercenary" onPress={() => navigation.navigate('Mercenary')} />
     </ScrollView>
   );
 }

@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './Screens/HomeScreen';
 import MissionScreen from './Screens/MissionScreen';
+import MercenaryScreen from './Screens/MercenaryScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ function App() {
         }}
         />
         <Stack.Screen name="Mission" component={MissionScreen} />
+        <Stack.Screen name="Mercenary" component={MercenaryScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
