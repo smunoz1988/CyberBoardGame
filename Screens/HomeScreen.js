@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextInput, StyleSheet, Text, ScrollView, View, ActivityIndicator } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import { Video } from 'expo-av';
-import BackgroundImage from '../assets/background-main.mp4'; 
+// import { Video } from 'expo-av';
+// import BackgroundImage from '../assets/background-main.mp4'; 
 
 const HomeScreen = ({ navigation }) => {
   const [playerCount, setPlayerCount] = useState(null);
@@ -42,14 +42,14 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.fullScreen}>
-      <Video
+      {/* <Video
         source={BackgroundImage} 
         style={styles.backgroundVideo}
         isMuted={true}
         shouldPlay={true}
         isLooping
         resizeMode="cover"
-      />
+      /> */}
         <ScrollView contentContainerStyle={styles.container}>
           {isLoading ? (
             <View>
@@ -73,7 +73,9 @@ const HomeScreen = ({ navigation }) => {
                   placeholder={{ label: '0', value: null }}
                 />
               </View>
-              {renderNameInputs()}
+              <View style={styles.inputsContainer}>
+                {renderNameInputs()}
+              </View>
               <Button
                 title="Start Mission"
                 onPress={() => navigation.navigate('Mission', { playerNames })}
@@ -110,6 +112,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  inputsContainer: {
+    height: 300,
+
   },
   input: {
     backgroundColor: 'white',
