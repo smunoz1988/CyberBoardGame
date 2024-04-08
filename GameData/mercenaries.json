@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "name": "THE WINGED SOLDIER",
+    "styles": [
+      {
+        "style": "Commando",
+        "health": 25
+      },
+      {
+        "style": "Hawk",
+        "health": 12
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "GRIMM TRIGGER",
+    "styles": [
+      {
+        "style": "Sniper",
+        "health": 19
+      },
+      {
+        "style": "Twin Fury",
+        "health": 19
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Support",
+    "styles": [
+      {
+        "style": "Support 1",
+        "health": 17
+      },
+      {
+        "style": "Support 2",
+        "health": 17
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Cyber Ninja",
+    "styles": [
+      {
+        "style": "Assasin 1",
+        "health": 17
+      },
+      {
+        "style": "Assasin 2",
+        "health": 17
+      }
+    ]
+  }
+]
+  
