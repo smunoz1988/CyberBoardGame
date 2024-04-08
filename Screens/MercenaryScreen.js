@@ -1,16 +1,18 @@
 import { Text, ScrollView, StyleSheet } from "react-native";
 
 const MercenaryScreen = ({ route }) => {
-  const { playerNames } = route.params;
+  const { playerNames, mission } = route.params;
   return (
     <ScrollView contentContainerStyle={styles.container}>
-    <Text>Mercenary Screen</Text>
-    <Text>Players:</Text>
-      {playerNames.map((name, index) => (
-        <Text key={index} style={styles.playerName}>
-          Player {index + 1}: {name}
-        </Text>
-      ))}
+      <Text>Players:</Text>
+        {playerNames.map((name, index) => (
+          <Text key={index} style={styles.playerName}>
+            Player {index + 1}: {name}
+          </Text>
+        ))}
+      <Text>Mission: {mission.name}</Text>
+      <Text>Objective: {mission.objective}</Text>
+      <Text>Choose your Mercenary</Text>
     </ScrollView>
   )
 }
