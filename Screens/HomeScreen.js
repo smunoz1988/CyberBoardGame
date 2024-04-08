@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
-import { Button, TextInput, StyleSheet, Text, ScrollView, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Button, TextInput, StyleSheet, Text, ScrollView, View, ActivityIndicator } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { Video } from 'expo-av';
-import BackgroundImage from '../assets/background-main.mp4'; // Ensure this is the correct import path
+import BackgroundImage from '../assets/background-main.mp4'; 
 
 const HomeScreen = ({ navigation }) => {
   const [playerCount, setPlayerCount] = useState(null);
   const [playerNames, setPlayerNames] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Adjusted handlePlayerCountChange to ensure state updates correctly
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handlePlayerCountChange = (value) => {
     setPlayerCount(value);
     setPlayerNames(new Array(parseInt(value || 0)).fill(''));
@@ -42,30 +50,39 @@ const HomeScreen = ({ navigation }) => {
         isLooping
         resizeMode="cover"
       />
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.overlay}>
-          <Text style={styles.title}>Welcome to the Mission Tracker!</Text>
-          <Text style={styles.title}>Select the number of players:</Text>
-          <RNPickerSelect
-            onValueChange={handlePlayerCountChange}
-            items={[
-              { label: '2', value: '2' },
-              { label: '3', value: '3' },
-              { label: '4', value: '4' },
-            ]}
-            style={pickerSelectStyles}
-            useNativeAndroidPickerStyle={false} // Ensure consistent styling across platforms
-            placeholder={{ label: 'Select number of players', value: null }}
-          />
-          {renderNameInputs()}
-          <Button
-            title="Start Mission"
-            onPress={() => navigation.navigate('Mission', { playerNames })}
-            disabled={!playerCount || playerNames.includes('')}
-          />
-        </View>
-      </ScrollView>
-    </View>
+        <ScrollView contentContainerStyle={styles.container}>
+          {isLoading ? (
+            <View>
+              <ActivityIndicator size="large" color="white" />
+              <Text style={styles.title}>Loading...</Text>
+            </View>
+          ) : (
+            <View style={styles.overlay}>
+              <Text style={styles.title}>Welcome to the Mission Tracker!</Text>
+              <View style={styles.pickerContainer}>
+                <Text style={styles.title}>Select the number of players:</Text>
+                <RNPickerSelect
+                  onValueChange={handlePlayerCountChange}
+                  items={[
+                    { label: '2', value: '2' },
+                    { label: '3', value: '3' },
+                    { label: '4', value: '4' },
+                  ]}
+                  style={pickerSelectStyles}
+                  useNativeAndroidPickerStyle={false}
+                  placeholder={{ label: '0', value: null }}
+                />
+              </View>
+              {renderNameInputs()}
+              <Button
+                title="Start Mission"
+                onPress={() => navigation.navigate('Mission', { playerNames })}
+                disabled={!playerCount || playerNames.includes('')}
+              />
+            </View>
+          )}
+          </ScrollView>
+      </View>
   );
 };
 
@@ -78,18 +95,29 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent overlay for content visibility
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    borderRadius: 10,
     padding: 20,
+    width: '90%',
+    height: '90%',
+    justifyContent: 'space-around',   
+  },
+  pickerContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   input: {
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     height: 40,
     marginBottom: 10,
     paddingHorizontal: 10,
-    color: 'white',
-    opacity: 0.8,
+    color: 'black',
+    opacity: 0.8, 
     textAlign: 'center',
   },
   title: {
@@ -109,9 +137,9 @@ const pickerSelectStyles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 4,
     color: 'white',
-    paddingRight: 30, 
     marginBottom: 20,
     textAlign: 'center',
+    width: 80,
   },
   inputAndroid: {
     fontSize: 16,
@@ -121,10 +149,9 @@ const pickerSelectStyles = StyleSheet.create({
     borderColor: 'purple',
     borderRadius: 8,
     color: 'white',
-    paddingRight: 30,
     marginBottom: 20,
     textAlign: 'center',
-    width: 250,
+    width: 80,
   },
 });
 
