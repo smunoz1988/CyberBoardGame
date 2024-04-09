@@ -1,4 +1,5 @@
-import { Text, ScrollView, StyleSheet } from "react-native";
+import { Text, ScrollView, StyleSheet, View } from "react-native";
+import mercenaries from "../GameData/mercenaries";
 
 const MercenaryScreen = ({ route }) => {
   const { playerNames, mission } = route.params;
@@ -13,6 +14,17 @@ const MercenaryScreen = ({ route }) => {
       <Text>Mission: {mission.name}</Text>
       <Text>Objective: {mission.objective}</Text>
       <Text>Choose your Mercenary</Text>
+      {mercenaries.map((mercenary) => (
+        <View key={mercenary.id} style={styles.heroCard}>
+          <Text>{mercenary.name}</Text>
+          <Text>Health: {mercenary.health}</Text>
+          {mercenary.styles.map((style, index) => (
+            <View key={index}>
+              <Text>{style}</Text>
+            </View>
+          ))}
+        </View>
+      ))}
     </ScrollView>
   )
 }
@@ -25,6 +37,15 @@ const styles = StyleSheet.create({
   playerName: {
     color: 'black',
     fontSize: 20,
+  },
+  heroCard: {
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderRadius: 10,
+    borderWidth: 1,
+    margin: 10,
+    padding: 10,
+    width: '90%',
   },
 });
 

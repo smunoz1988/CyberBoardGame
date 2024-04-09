@@ -62,7 +62,7 @@ function MissionScreen({ route, navigation }) {
       <Text>Mapa del nivel</Text>
       <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRspkQWM_CO2-MTC0bedTLyMe5z0_6rI_S1g7PdvbY_zQ&s' }} style={styles.level} />
       <Button 
-        title="Go to Mercenary" 
+        title="Choose Mercenaries" 
         onPress={() => navigation.navigate('Mercenary', { playerNames, mission })} />
     </ScrollView>
   );

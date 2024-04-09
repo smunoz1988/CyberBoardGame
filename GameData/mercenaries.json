@@ -2,58 +2,62 @@
   {
     "id": 1,
     "name": "THE WINGED SOLDIER",
-    "styles": [
-      {
-        "style": "Commando",
-        "health": 25
-      },
-      {
-        "style": "Hawk",
-        "health": 12
-      }
-    ]
+    "health": 25,
+    "styles": ["Commando", "Hawk"]
   },
   {
     "id": 2,
     "name": "GRIMM TRIGGER",
-    "styles": [
-      {
-        "style": "Sniper",
-        "health": 19
-      },
-      {
-        "style": "Twin Fury",
-        "health": 19
-      }
-    ]
+    "health": 19,
+    "styles": ["Sniper", "Twin Fury"]
   },
   {
     "id": 3,
-    "name": "Support",
-    "styles": [
-      {
-        "style": "Support 1",
-        "health": 17
-      },
-      {
-        "style": "Support 2",
-        "health": 17
-      }
-    ]
+    "name": "SUPPORT MERCENARY",
+    "health": 17,
+    "styles": ["Support 1", "Support 2"]
   },
   {
     "id": 4,
-    "name": "Cyber Ninja",
-    "styles": [
-      {
-        "style": "Assasin 1",
-        "health": 17
-      },
-      {
-        "style": "Assasin 2",
-        "health": 17
-      }
-    ]
+    "name": "CYBER NINJA",
+    "health": 17,
+    "styles": ["Assasin 1", "Assasin 2"]
+  },
+  {
+    "id": 5,
+    "name": "ICE SOLDIER",
+    "health": 25,
+    "styles": ["Ice 1", "Ice 2"]
+  },
+  {
+    "id": 6,
+    "name": "SAMURAI",
+    "health": 19,
+    "styles": ["Samurai 1", "Samurai 2"]
+  },
+  {
+    "id": 7,
+    "name": "BATTLE MEDIC",
+    "health": 17,
+    "styles": ["BM 1", "BM 2"]
+  },
+  {
+    "id": 8,
+    "name": "HUNTER KILLER",
+    "health": 17,
+    "styles": ["HK 1", "HK 2"]
+  },
+  {
+    "id": 9,
+    "name": "HACKMASTER",
+    "health": 25,
+    "styles": ["HM 1", "HM 2"]
+  },
+  {
+    "id": 10,
+    "name": "DEATH KNIGHT",
+    "health": 19,
+    "styles": ["DN 1", "DN 2"]
   }
 ]
   
