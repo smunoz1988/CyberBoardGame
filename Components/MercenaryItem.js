@@ -1,18 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-// Destructure props correctly here
-const MercenaryItem = ({ mercenary }) => {
+const MercenaryItem = ({ mercenary, onMercenarySelect }) => {
   return (
-    <View style={styles.heroCard}>
-        <Text>{mercenary.name}</Text>
-        <Text>Health: {mercenary.health}</Text>
-        {mercenary.styles.map((style, index) => (
-        <View key={index}>
-            <Text>{style}</Text>
+    <TouchableOpacity style={styles.heroCard} onPress={() => onMercenarySelect(mercenary)}>
+        <View>
+            <Text>{mercenary.name}</Text>
+            <Text>Health: {mercenary.health}</Text>
+            <Text>Styles:</Text>
+            {mercenary.styles.map((style, index) => (
+            <View key={index}>
+                <Text>{style}</Text>
+            </View>
+            ))}
         </View>
-        ))}
-     </View>
+    </TouchableOpacity>
   );
 };
 
