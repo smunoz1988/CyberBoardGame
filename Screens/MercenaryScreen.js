@@ -1,5 +1,5 @@
   import React, { useState, useEffect } from 'react';
-  import { View, Text, StyleSheet, FlatList } from 'react-native';
+  import { View, Text, StyleSheet, FlatList, ScrollView } from 'react-native';
   import mercenaries from '../GameData/mercenaries';
   import MercenaryItem from '../Components/MercenaryItem';
 
@@ -34,7 +34,7 @@
         ))}
         <Text>Mission: {mission.name}</Text>
         <Text>Objective: {mission.objective}</Text>
-        <Text>Choose your Mercenary</Text>
+        <Text style={styles.title}>Choose your Mercenary:</Text>
         <FlatList
           data={mercenaries}
           renderItem={({ item }) => (
@@ -54,7 +54,16 @@
 
   const styles = StyleSheet.create({
     container: {
-      marginTop: 20,
+      flex: 1,
+      backgroundColor: '#121212', // Dark background
+      padding: 20,
+    },
+    title: {
+      color: '#0f0', // Neon green for text
+      fontSize: 24,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      marginBottom: 20,
     },
     mercenaryItem: {
       flex: 1,
@@ -67,7 +76,7 @@
       height: 200,
     },
     playerName: {
-      color: 'black',
+      color: 'white',
       fontSize: 20,
     },
   });

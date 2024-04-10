@@ -9,7 +9,7 @@ import { useFonts, Orbitron_400Regular, Orbitron_900Black } from '@expo-google-f
 
 const Stack = createNativeStackNavigator();
 
-function App() {
+const App = () => {
   let [fontsLoaded] = useFonts({
     Orbitron_400Regular,
     Orbitron_900Black,
