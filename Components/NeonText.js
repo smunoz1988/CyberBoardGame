@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     backgroundColor: '#000',
+    alignItems: 'center',
+    margin: 10,
   },
   neonText: {
     color: '#0FF', 

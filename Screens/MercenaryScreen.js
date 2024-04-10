@@ -2,6 +2,7 @@
   import { View, Text, StyleSheet, FlatList, ScrollView } from 'react-native';
   import mercenaries from '../GameData/mercenaries';
   import MercenaryItem from '../Components/MercenaryItem';
+  import NeonText from '../Components/NeonText';
 
   const MercenaryScreen = ({ route }) => {
     const { playerNames, mission } = route.params;
@@ -34,7 +35,8 @@
         ))}
         <Text>Mission: {mission.name}</Text>
         <Text>Objective: {mission.objective}</Text>
-        <Text style={styles.title}>Choose your Mercenary:</Text>
+        <Text style={styles.playerName}>Current Player: Player {currentPlayerIndex + 1}, {playerNames[currentPlayerIndex]}</Text>
+        <NeonText>Choose your Mercenary:</NeonText>
         <FlatList
           data={mercenaries}
           renderItem={({ item }) => (
@@ -46,8 +48,6 @@
           keyExtractor={(item) => item.id.toString()}
           numColumns={2}
         />
-        <Text>Current Player: Player {currentPlayerIndex + 1}</Text>
-        <Text>Current Player: {playerNames[currentPlayerIndex]}</Text>
       </View>
     );
   };
