@@ -3,6 +3,7 @@ import { Button, TextInput, StyleSheet, Text, ScrollView, View, ActivityIndicato
 import RNPickerSelect from 'react-native-picker-select';
 import { Video } from 'expo-av';
 import BackgroundImage from '../assets/background-main.mp4'; 
+import NeonText from '../Components/NeonText';
 
 const HomeScreen = ({ navigation }) => {
   const [playerCount, setPlayerCount] = useState(null);
@@ -60,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
             <View style={styles.overlay}>
               <Text style={styles.title}>Welcome to the Mission Tracker!</Text>
               <View style={styles.pickerContainer}>
-                <Text style={styles.title}>Select the number of players:</Text>
+                <NeonText>Select the number of players:</NeonText>
                 <RNPickerSelect
                   onValueChange={handlePlayerCountChange}
                   items={[
@@ -109,13 +110,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',   
   },
   pickerContainer: {
-    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   inputsContainer: {
     height: 300,
-
   },
   input: {
     backgroundColor: 'white',
@@ -145,7 +145,7 @@ const pickerSelectStyles = StyleSheet.create({
     color: 'white',
     marginBottom: 20,
     textAlign: 'center',
-    width: 80,
+    width: 50,
   },
   inputAndroid: {
     fontSize: 16,
@@ -157,7 +157,7 @@ const pickerSelectStyles = StyleSheet.create({
     color: 'white',
     marginBottom: 20,
     textAlign: 'center',
-    width: 80,
+    width: 50,
   },
 });
 
