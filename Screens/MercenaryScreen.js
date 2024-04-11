@@ -37,7 +37,7 @@
 
     const movingMargin = moveAnimation.interpolate({
       inputRange: [0, 1],
-      outputRange: [-50, 50], // Adjust the range for more subtle or pronounced movement
+      outputRange: [-50, 50], 
     });
 
     const handleMercenarySelect = (mercenary) => {
@@ -95,17 +95,17 @@
       position: 'relative',
     },
     backgroundImage: {
-      position: 'absolute', // Position it absolutely to fill the entire container
-      width: '150%', // Cover the full width
-      height: '100%', // Cover the full height
+      position: 'absolute', 
+      width: '150%', 
+      height: '100%', 
       top: 0,
       left: '-20%',
       right: 0,
       bottom: 0,
-      zIndex: -1, // Ensure it's behind all other content; might not be necessary but can be used for clarity
+      zIndex: -1, 
     },
     title: {
-      color: '#0f0', // Neon green for text
+      color: '#0f0', 
       fontSize: 24,
       fontWeight: 'bold',
       textAlign: 'center',

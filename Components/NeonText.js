@@ -39,17 +39,15 @@ const NeonText = ({ children }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    backgroundColor: '#000',
     alignItems: 'center',
     margin: 10,
   },
   neonText: {
-    color: '#0FF', 
-    fontSize: 20,
+    color: '#39FF14', 
+    fontSize: 60,
     fontFamily: 'Orbitron_900Black',
     textShadowColor: 'cyan',
-    textShadowOffset: { width: 0, height: 0 },
+    textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 10,
   },
 });

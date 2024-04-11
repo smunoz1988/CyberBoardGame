@@ -59,9 +59,9 @@ const HomeScreen = ({ navigation }) => {
             </View>
           ) : (
             <View style={styles.overlay}>
-              <Text style={styles.title}>Welcome to the Mission Tracker!</Text>
+              <NeonText style={styles.mainTitle}>IPERION</NeonText>
               <View style={styles.pickerContainer}>
-                <NeonText>Select the number of players:</NeonText>
+                <Text style={styles.selectText}>Select the number of players:</Text>
                 <RNPickerSelect
                   onValueChange={handlePlayerCountChange}
                   items={[
@@ -101,13 +101,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  overlay: {  
     borderRadius: 10,
     padding: 20,
     width: '90%',
     height: '90%',
     justifyContent: 'space-around',   
+  },
+  selectText: {
+    color: 'white',
+    fontSize: 18,
+    marginBottom: 20,
+    textAlign: 'center',
+    fontFamily: 'Orbitron_400Regular',
   },
   pickerContainer: {
     flexDirection: 'row',

@@ -23,13 +23,14 @@ const MercenaryItem = ({ mercenary, onMercenarySelect }) => {
 const styles = StyleSheet.create({
   heroCard: {
     flex: 1,
-    backgroundColor: '#2a2a2a', // Darker element background
+    backgroundColor: '#2a2a2a',
+    opacity: 0.9,
     borderRadius: 10,
     padding: 15,
     margin: 10,
-    flexDirection: 'row', // Align items in a row
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between', // Space items nicely
+    justifyContent: 'space-between',
     borderWidth: 1,
     borderColor: '#3f3', 
   },
