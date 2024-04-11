@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './Screens/HomeScreen';
 import MissionScreen from './Screens/MissionScreen';
 import MercenaryScreen from './Screens/MercenaryScreen';
+import MissionIntro from './Screens/MissionIntro';
 import { useFonts, Orbitron_400Regular, Orbitron_900Black } from '@expo-google-fonts/orbitron';
 
 const Stack = createNativeStackNavigator();
@@ -31,6 +32,7 @@ const App = () => {
         />
         <Stack.Screen name="Mission" component={MissionScreen} />
         <Stack.Screen name="Mercenary" component={MercenaryScreen} />
+        <Stack.Screen name="MissionIntro" component={MissionIntro} />
       </Stack.Navigator>
     </NavigationContainer>
   );

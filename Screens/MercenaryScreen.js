@@ -1,10 +1,10 @@
   import React, { useState, useEffect, useRef } from 'react';
-  import { View, Text, StyleSheet, FlatList, Animated } from 'react-native';
+  import { View, Text, StyleSheet, FlatList, Animated, Button } from 'react-native';
   import mercenaries from '../GameData/mercenaries';
   import MercenaryItem from '../Components/MercenaryItem';
   import NeonTextSelect from '../Components/NeonTextSelect';
 
-  const MercenaryScreen = ({ route }) => {
+  const MercenaryScreen = ({ route, navigation }) => {
     const { playerNames, mission } = route.params;
     const [selectedMercenaries, setSelectedMercenaries] = useState({});
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
@@ -84,6 +84,10 @@
           )}
           keyExtractor={(item) => item.id.toString()}
           numColumns={2}
+        />
+        <Button 
+          title="START MISSION" 
+          onPress={() => navigation.navigate('MissionIntro')} 
         />
       </View>
     );
