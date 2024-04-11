@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextInput, StyleSheet, Text, ScrollView, View, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
+import { TouchableOpacity, TextInput, StyleSheet, Text, ScrollView, View, ActivityIndicator, ImageBackground } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { Video } from 'expo-av';
 import BackgroundImage from '../assets/background-main.mp4'; 
@@ -31,22 +31,23 @@ const HomeScreen = ({ navigation }) => {
 
   const renderNameInputs = () => {
     return playerNames.map((_, index) => (
-      <TextInput
+      <ImageBackground
         key={index}
-        style={styles.input}
-        onChangeText={(text) => handleNameChange(text, index)}
-        value={playerNames[index]}
-        placeholder={`Player ${index + 1} Name`}
-      />
+        source={require('../assets/Loading-bar.png')}
+        style={styles.inputBackground}
+        resizeMode="cover"
+        >
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => handleNameChange(text, index)}
+          value={playerNames[index]}
+          placeholder={`Player ${index + 1} Name`}
+        />
+      </ImageBackground>
     ));
   };
 
   return (
-    <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
-    >
       <View style={styles.fullScreen}>
         <Video
           source={BackgroundImage} 
@@ -82,16 +83,17 @@ const HomeScreen = ({ navigation }) => {
                 <View style={styles.inputsContainer}>
                   {renderNameInputs()}
                 </View>
-                <Button
-                  title="Start Mission"
+                <TouchableOpacity
+                  style={[styles.startButton, !playerCount || playerNames.includes('') ? styles.buttonDisabled : null]}
                   onPress={() => navigation.navigate('Mission', { playerNames })}
                   disabled={!playerCount || playerNames.includes('')}
-                />
+                >
+                  <Text style={styles.startButtonText}>Start Mission</Text>
+                </TouchableOpacity>
               </View>
             )}
             </ScrollView>
         </View>
-    </KeyboardAvoidingView>
   );
 };
 
@@ -110,8 +112,8 @@ const styles = StyleSheet.create({
   overlay: {  
     borderRadius: 10,
     padding: 20,
-    width: '90%',
-    height: '90%',
+    width: '100%',
+    height: '100%',
     justifyContent: 'space-around',   
   },
   selectText: {
@@ -126,23 +128,32 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  inputsContainer: {
-    height: 300,
+  inputBackground: {
+    height: 50, // Make sure this matches or is a bit larger than your TextInput height
+    width: '100%', // Adjust according to your layout needs
+    justifyContent: 'center', // Centers the TextInput vertically
+    marginBottom: 20, // Adds space between each input
   },
   input: {
-    backgroundColor: 'white',
-    height: 40,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    color: 'black',
-    opacity: 0.8, 
+    fontFamily: 'Orbitron_400Regular',
+    color: 'white', 
     textAlign: 'center',
   },
-  title: {
+  startButton: {
+    backgroundColor: 'purple',
+    padding: 10,
+    borderRadius: 10,
+    alignItems: 'center', // Center text horizontally
+    justifyContent: 'center', // Center text vertically
+    height: 50, // Set a fixed height
+    opacity: 0.8, // You can adjust the opacity for disabled state as needed
+  },
+  startButtonText: {
     color: 'white',
-    fontSize: 18,
-    marginBottom: 20,
-    textAlign: 'center',
+    fontSize: 16, // Adjust text size as needed
+  },
+  buttonDisabled: {
+    backgroundColor: '#ccc', // Example disabled background color
   },
 });
 
