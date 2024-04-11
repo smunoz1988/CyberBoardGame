@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextInput, StyleSheet, Text, ScrollView, View, ActivityIndicator } from 'react-native';
+import { Button, TextInput, StyleSheet, Text, ScrollView, View, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { Video } from 'expo-av';
 import BackgroundImage from '../assets/background-main.mp4'; 
@@ -42,50 +42,56 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.fullScreen}>
-      <Video
-        source={BackgroundImage} 
-        style={styles.backgroundVideo}
-        isMuted={true}
-        shouldPlay={true}
-        isLooping
-        resizeMode="cover"
-      />
-        <ScrollView contentContainerStyle={styles.container}>
-          {isLoading ? (
-            <View>
-              <ActivityIndicator size="large" color="white" />
-              <Text style={styles.title}>Loading...</Text>
-            </View>
-          ) : (
-            <View style={styles.overlay}>
-              <NeonText style={styles.mainTitle}>IPERION</NeonText>
-              <View style={styles.pickerContainer}>
-                <Text style={styles.selectText}>Select the number of players:</Text>
-                <RNPickerSelect
-                  onValueChange={handlePlayerCountChange}
-                  items={[
-                    { label: '2', value: '2' },
-                    { label: '3', value: '3' },
-                    { label: '4', value: '4' },
-                  ]}
-                  style={pickerSelectStyles}
-                  useNativeAndroidPickerStyle={false}
-                  placeholder={{ label: '0', value: null }}
+    <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+    >
+      <View style={styles.fullScreen}>
+        <Video
+          source={BackgroundImage} 
+          style={styles.backgroundVideo}
+          isMuted={true}
+          shouldPlay={true}
+          isLooping
+          resizeMode="cover"
+        />
+          <ScrollView contentContainerStyle={styles.container}>
+            {isLoading ? (
+              <View>
+                <ActivityIndicator size="large" color="white" />
+                <Text style={styles.title}>Loading...</Text>
+              </View>
+            ) : (
+              <View style={styles.overlay}>
+                <NeonText style={styles.mainTitle}>IPERION</NeonText>
+                <View style={styles.pickerContainer}>
+                  <Text style={styles.selectText}>Select the number of players:</Text>
+                  <RNPickerSelect
+                    onValueChange={handlePlayerCountChange}
+                    items={[
+                      { label: '2', value: '2' },
+                      { label: '3', value: '3' },
+                      { label: '4', value: '4' },
+                    ]}
+                    style={pickerSelectStyles}
+                    useNativeAndroidPickerStyle={false}
+                    placeholder={{ label: '0', value: null }}
+                  />
+                </View>
+                <View style={styles.inputsContainer}>
+                  {renderNameInputs()}
+                </View>
+                <Button
+                  title="Start Mission"
+                  onPress={() => navigation.navigate('Mission', { playerNames })}
+                  disabled={!playerCount || playerNames.includes('')}
                 />
               </View>
-              <View style={styles.inputsContainer}>
-                {renderNameInputs()}
-              </View>
-              <Button
-                title="Start Mission"
-                onPress={() => navigation.navigate('Mission', { playerNames })}
-                disabled={!playerCount || playerNames.includes('')}
-              />
-            </View>
-          )}
-          </ScrollView>
-      </View>
+            )}
+            </ScrollView>
+        </View>
+    </KeyboardAvoidingView>
   );
 };
 
