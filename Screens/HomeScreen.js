@@ -140,7 +140,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   startButton: {
-    backgroundColor: 'purple',
+    backgroundColor: '#39FF14',
+    opacity: 0.8,
     padding: 10,
     borderRadius: 10,
     alignItems: 'center', // Center text horizontally
@@ -149,11 +150,12 @@ const styles = StyleSheet.create({
     opacity: 0.8, // You can adjust the opacity for disabled state as needed
   },
   startButtonText: {
+    fontFamily: 'Orbitron_900Black',
     color: 'white',
     fontSize: 16, // Adjust text size as needed
   },
   buttonDisabled: {
-    backgroundColor: '#ccc', // Example disabled background color
+    backgroundColor: '#ccc'
   },
 });
 

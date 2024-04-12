@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   neonText: {
-    color: '#39FF14', 
+    color: '#39FF14',
     fontSize: 60,
     fontFamily: 'Orbitron_900Black',
     textShadowColor: 'cyan',
