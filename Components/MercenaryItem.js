@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-
-const MercenaryItem = ({ mercenary, onMercenarySelect }) => {
+const MercenaryItem = ({ mercenary, onMercenarySelect, isDisabled }) => {
 
   return (
-    <TouchableOpacity style={styles.heroCard} onPress={() => onMercenarySelect(mercenary)}>
+    <TouchableOpacity 
+      style={[styles.heroCard, isDisabled && styles.disabledHeroCard]} 
+      onPress={() => !isDisabled && onMercenarySelect(mercenary)}
+      >
         <View>
             <Text style={styles.mercenaryName}>{mercenary.name}</Text>
             <Text style={styles.mercenaryHealth}>Health: {mercenary.health}</Text>
@@ -33,6 +35,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderWidth: 1,
     borderColor: '#3f3', 
+  },
+  disabledHeroCard: {
+    opacity: 0.5,
+    backgroundColor: '#555', // Darker or greyed out background
   },
   mercenaryName: {
     fontFamily: 'Orbitron_900Black',

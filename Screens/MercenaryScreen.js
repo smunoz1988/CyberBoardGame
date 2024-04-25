@@ -11,11 +11,7 @@ const MercenaryScreen = ({ route, navigation }) => {
   const moveAnimation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    const initialSelections = playerNames.reduce((acc, index) => {
-      acc[index] = null;
-      return acc;
-    }, {});
-    setSelectedMercenaries(initialSelections);
+    setSelectedMercenaries(playerNames.reduce((acc, name, index) => ({ ...acc, [index]: null }), {}));
   }, [playerNames]);
 
   useEffect(() => {
@@ -41,11 +37,11 @@ const MercenaryScreen = ({ route, navigation }) => {
   });
 
   const handleMercenarySelect = (mercenary) => {
-    setSelectedMercenaries(prev => ({
-      ...prev,
-      [currentPlayerIndex]: mercenary.name
-    }));
-    setCurrentPlayerIndex((currentPlayerIndex + 1) % playerNames.length);
+      setSelectedMercenaries(prev => ({
+        ...prev,
+        [currentPlayerIndex]: mercenary.name
+      }));
+      setCurrentPlayerIndex((currentPlayerIndex + 1) % playerNames.length);
   };
 
   return (
@@ -76,17 +72,21 @@ const MercenaryScreen = ({ route, navigation }) => {
       <NeonTextSelect>Choose your Mercenary:</NeonTextSelect>
       <FlatList
         data={mercenaries}
-        renderItem={({ item }) => (
+        renderItem={({ item }) => {
+          const isDisabled = Object.values(selectedMercenaries).includes(item.name);
+          return (
           <MercenaryItem 
             mercenary={item} 
             onMercenarySelect={() => handleMercenarySelect(item)}
+            isDisabled={isDisabled}
           />
-        )}
+          )
+        }}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
       />
       <Button 
-        title="START MISSION" 
+        title="START MISSION"
         onPress={() => navigation.navigate('MissionIntro')} 
       />
     </View>
