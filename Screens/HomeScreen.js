@@ -37,6 +37,7 @@ const HomeScreen = ({ navigation }) => {
         style={styles.inputBackground}
         resizeMode="cover"
         >
+        <Text style={styles.playerIndicator}>{`P ${index + 1}`}</Text>
         <TextInput
           style={styles.input}
           onChangeText={(text) => handleNameChange(text, index)}
@@ -83,16 +84,16 @@ const HomeScreen = ({ navigation }) => {
                 <View style={styles.inputsContainer}>
                   {renderNameInputs()}
                 </View>
-                <TouchableOpacity
-                  style={[styles.startButton, !playerCount || playerNames.includes('') ? styles.buttonDisabled : null]}
-                  onPress={() => navigation.navigate('Mission', { playerNames })}
-                  disabled={!playerCount || playerNames.includes('')}
-                >
-                  <Text style={styles.startButtonText}>Start Mission</Text>
-                </TouchableOpacity>
               </View>
             )}
             </ScrollView>
+            <TouchableOpacity
+              style={[styles.startButton, !playerCount || playerNames.includes('') ? styles.buttonDisabled : null]}
+              onPress={() => navigation.navigate('Mission', { playerNames })}
+              disabled={!playerCount || playerNames.includes('')}
+            >
+              <Text style={styles.startButtonText}>Start Mission</Text>
+            </TouchableOpacity>
         </View>
   );
 };
@@ -113,8 +114,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 20,
     width: '100%',
-    height: '100%',
-    justifyContent: 'space-around',   
+    height: '100%', 
   },
   selectText: {
     color: 'white',
@@ -128,16 +128,32 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  inputsContainer: {
+    width: '100%',
+  },
   inputBackground: {
-    height: 50, // Make sure this matches or is a bit larger than your TextInput height
+    height: 60, // Make sure this matches or is a bit larger than your TextInput height
     width: '100%', // Adjust according to your layout needs
-    justifyContent: 'center', // Centers the TextInput vertically
-    marginBottom: 20, // Adds space between each input
+    justifyContent: 'space-between',
+    marginBottom: 10, // Adds space between each input
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+  },
+  playerIndicator: {
+    flex: 1,
+    color: 'white',
+    fontSize: 16,
+    fontFamily: 'Orbitron_900Black',
+    textAlign: 'right',
   },
   input: {
     fontFamily: 'Orbitron_400Regular',
     color: 'white', 
     textAlign: 'center',
+    width: '84%',
+    height: 55,
+    paddingRight: 40,
   },
   startButton: {
     backgroundColor: '#39FF14',
@@ -146,8 +162,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center', // Center text horizontally
     justifyContent: 'center', // Center text vertically
-    height: 50, // Set a fixed height
-    opacity: 0.8, // You can adjust the opacity for disabled state as needed
+    height: 50, // Set a fixed heigh
+    marginBottom: 20,
+    width: '80%',
+    alignSelf: 'center',
   },
   startButtonText: {
     fontFamily: 'Orbitron_900Black',
