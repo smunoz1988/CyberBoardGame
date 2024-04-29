@@ -69,7 +69,28 @@ const HomeScreen = ({ navigation }) => {
                 <NeonText style={styles.mainTitle}>IPERION</NeonText>
                 <View style={styles.pickerContainer}>
                   <Text style={styles.selectText}>Select the number of players:</Text>
-                  <RNPickerSelect
+                  <View style={styles.playerButtonContainer}>
+                    <TouchableOpacity
+                      style={styles.numPlayersButton}
+                      onPress={() => handlePlayerCountChange('2')}
+                    >
+                      <Text style={styles.numPlayersText}>2</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.numPlayersButton}
+                      onPress={() => handlePlayerCountChange('3')}
+                    >
+                      <Text style={styles.numPlayersText}>3</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.numPlayersButton}
+                      onPress={() => handlePlayerCountChange('4')}
+                    >
+                      <Text style={styles.numPlayersText}>4</Text>
+                    </TouchableOpacity>
+                  </View>
+
+                  {/* <RNPickerSelect
                     onValueChange={handlePlayerCountChange}
                     items={[
                       { label: '2', value: '2' },
@@ -79,7 +100,7 @@ const HomeScreen = ({ navigation }) => {
                     style={pickerSelectStyles}
                     useNativeAndroidPickerStyle={false}
                     placeholder={{ label: '0', value: null }}
-                  />
+                  /> */}
                 </View>
                 <View style={styles.inputsContainer}>
                   {renderNameInputs()}
@@ -124,9 +145,28 @@ const styles = StyleSheet.create({
     fontFamily: 'Orbitron_400Regular',
   },
   pickerContainer: {
-    flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  playerButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  numPlayersButton: {
+    backgroundColor: '#39FF14',
+    marginHorizontal: 20,
+    padding: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    width: 50,
+  },
+  numPlayersText: {
+    fontFamily: 'Orbitron_900Black',
+    color: 'white',
+    fontSize: 16,
   },
   inputsContainer: {
     width: '100%',
@@ -177,31 +217,31 @@ const styles = StyleSheet.create({
   },
 });
 
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    color: 'white',
-    marginBottom: 20,
-    textAlign: 'center',
-    width: 50,
-  },
-  inputAndroid: {
-    fontSize: 16,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 0.5,
-    borderColor: 'purple',
-    borderRadius: 8,
-    color: 'white',
-    marginBottom: 20,
-    textAlign: 'center',
-    width: 50,
-  },
-});
+// const pickerSelectStyles = StyleSheet.create({
+//   inputIOS: {
+//     fontSize: 16,
+//     paddingVertical: 12,
+//     paddingHorizontal: 10,
+//     borderWidth: 1,
+//     borderColor: 'gray',
+//     borderRadius: 4,
+//     color: 'white',
+//     marginBottom: 20,
+//     textAlign: 'center',
+//     width: 50,
+//   },
+//   inputAndroid: {
+//     fontSize: 16,
+//     paddingHorizontal: 10,
+//     paddingVertical: 8,
+//     borderWidth: 0.5,
+//     borderColor: 'purple',
+//     borderRadius: 8,
+//     color: 'white',
+//     marginBottom: 20,
+//     textAlign: 'center',
+//     width: 50,
+//   },
+// });
 
 export default HomeScreen;
