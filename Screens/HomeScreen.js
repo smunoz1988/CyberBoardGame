@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, TextInput, StyleSheet, Text, ScrollView, View, ActivityIndicator, ImageBackground } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
 import { Video } from 'expo-av';
 import BackgroundImage from '../assets/background-main.mp4'; 
 import NeonText from '../Components/NeonText';
@@ -89,32 +88,20 @@ const HomeScreen = ({ navigation }) => {
                       <Text style={styles.numPlayersText}>4</Text>
                     </TouchableOpacity>
                   </View>
-
-                  {/* <RNPickerSelect
-                    onValueChange={handlePlayerCountChange}
-                    items={[
-                      { label: '2', value: '2' },
-                      { label: '3', value: '3' },
-                      { label: '4', value: '4' },
-                    ]}
-                    style={pickerSelectStyles}
-                    useNativeAndroidPickerStyle={false}
-                    placeholder={{ label: '0', value: null }}
-                  /> */}
                 </View>
                 <View style={styles.inputsContainer}>
                   {renderNameInputs()}
                 </View>
               </View>
             )}
+              <TouchableOpacity
+                style={[styles.startButton, !playerCount || playerNames.includes('') ? styles.buttonDisabled : null]}
+                onPress={() => navigation.navigate('Mission', { playerNames })}
+                disabled={!playerCount || playerNames.includes('')}
+              >
+                <Text style={styles.startButtonText}>Start Mission</Text>
+              </TouchableOpacity>
             </ScrollView>
-            <TouchableOpacity
-              style={[styles.startButton, !playerCount || playerNames.includes('') ? styles.buttonDisabled : null]}
-              onPress={() => navigation.navigate('Mission', { playerNames })}
-              disabled={!playerCount || playerNames.includes('')}
-            >
-              <Text style={styles.startButtonText}>Start Mission</Text>
-            </TouchableOpacity>
         </View>
   );
 };
@@ -216,32 +203,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc'
   },
 });
-
-// const pickerSelectStyles = StyleSheet.create({
-//   inputIOS: {
-//     fontSize: 16,
-//     paddingVertical: 12,
-//     paddingHorizontal: 10,
-//     borderWidth: 1,
-//     borderColor: 'gray',
-//     borderRadius: 4,
-//     color: 'white',
-//     marginBottom: 20,
-//     textAlign: 'center',
-//     width: 50,
-//   },
-//   inputAndroid: {
-//     fontSize: 16,
-//     paddingHorizontal: 10,
-//     paddingVertical: 8,
-//     borderWidth: 0.5,
-//     borderColor: 'purple',
-//     borderRadius: 8,
-//     color: 'white',
-//     marginBottom: 20,
-//     textAlign: 'center',
-//     width: 50,
-//   },
-// });
 
 export default HomeScreen;
