@@ -94,14 +94,14 @@ const HomeScreen = ({ navigation }) => {
                 </View>
               </View>
             )}
-              <TouchableOpacity
+            </ScrollView>
+            <TouchableOpacity
                 style={[styles.startButton, !playerCount || playerNames.includes('') ? styles.buttonDisabled : null]}
                 onPress={() => navigation.navigate('Mission', { playerNames })}
                 disabled={!playerCount || playerNames.includes('')}
               >
                 <Text style={styles.startButtonText}>Start Mission</Text>
               </TouchableOpacity>
-            </ScrollView>
         </View>
   );
 };
