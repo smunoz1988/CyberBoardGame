@@ -40,7 +40,7 @@ const NeonText = ({ children }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    margin: 10,
+    marginTop: 80,
   },
   neonText: {
     color: '#39FF14',
