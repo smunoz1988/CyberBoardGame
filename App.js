@@ -22,14 +22,8 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen 
-        name="CyberBoardGame" 
-        component={HomeScreen} 
-        options={{
-          headerTitleAlign: 'center',
-        }}
-        />
+      <Stack.Navigator screenOptions={{ headerShown:false }}>
+        <Stack.Screen name="CyberBoardGame" component={HomeScreen} />
         <Stack.Screen name="Mission" component={MissionScreen} />
         <Stack.Screen name="Mercenary" component={MercenaryScreen} />
         <Stack.Screen name="MissionIntro" component={MissionIntro} />

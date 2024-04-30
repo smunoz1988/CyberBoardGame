@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, TextInput, StyleSheet, Text, ScrollView, View, ActivityIndicator, ImageBackground } from 'react-native';
+import {
+  TouchableOpacity, TextInput, StyleSheet, Text, View, ActivityIndicator, ImageBackground,
+  ScrollView, KeyboardAvoidingView, Platform
+} from 'react-native';
 import { Video } from 'expo-av';
-import BackgroundImage from '../assets/background-main.mp4'; 
+import BackgroundImage from '../assets/background-main.mp4';
 import NeonText from '../Components/NeonText';
 
 const HomeScreen = ({ navigation }) => {
@@ -13,14 +16,19 @@ const HomeScreen = ({ navigation }) => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000);
-
     return () => clearTimeout(timer);
   }, []);
 
   const handlePlayerCountChange = (value) => {
+    const numPlayers = parseInt(value || 0);
+    if (numPlayers < playerNames.length) {
+      setPlayerNames(playerNames.slice(0, numPlayers));
+    } else {
+      setPlayerNames([...playerNames, ...new Array(numPlayers - playerNames.length).fill('')]);
+    }
     setPlayerCount(value);
-    setPlayerNames(new Array(parseInt(value || 0)).fill(''));
   };
+  
 
   const handleNameChange = (text, index) => {
     const newNames = [...playerNames];
@@ -35,7 +43,7 @@ const HomeScreen = ({ navigation }) => {
         source={require('../assets/Loading-bar.png')}
         style={styles.inputBackground}
         resizeMode="cover"
-        >
+      >
         <Text style={styles.playerIndicator}>{`P ${index + 1}`}</Text>
         <TextInput
           style={styles.input}
@@ -48,61 +56,63 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-      <View style={styles.fullScreen}>
-        <Video
-          source={BackgroundImage} 
-          style={styles.backgroundVideo}
-          isMuted={true}
-          shouldPlay={true}
-          isLooping
-          resizeMode="cover"
-        />
-          <ScrollView contentContainerStyle={styles.container}>
-            {isLoading ? (
-              <View>
-                <ActivityIndicator size="large" color="white" />
-                <Text style={styles.title}>Loading...</Text>
-              </View>
-            ) : (
-              <View style={styles.overlay}>
-                <NeonText style={styles.mainTitle}>IPERION</NeonText>
-                <View style={styles.pickerContainer}>
-                  <Text style={styles.selectText}>Select the number of players:</Text>
-                  <View style={styles.playerButtonContainer}>
-                    <TouchableOpacity
-                      style={styles.numPlayersButton}
-                      onPress={() => handlePlayerCountChange('2')}
-                    >
-                      <Text style={styles.numPlayersText}>2</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.numPlayersButton}
-                      onPress={() => handlePlayerCountChange('3')}
-                    >
-                      <Text style={styles.numPlayersText}>3</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.numPlayersButton}
-                      onPress={() => handlePlayerCountChange('4')}
-                    >
-                      <Text style={styles.numPlayersText}>4</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-                <View style={styles.inputsContainer}>
-                  {renderNameInputs()}
-                </View>
-              </View>
-            )}
-            </ScrollView>
-            <TouchableOpacity
-                style={[styles.startButton, !playerCount || playerNames.includes('') ? styles.buttonDisabled : null]}
-                onPress={() => navigation.navigate('Mission', { playerNames })}
-                disabled={!playerCount || playerNames.includes('')}
+    <KeyboardAvoidingView 
+      style={styles.fullScreen} 
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
+    >
+      <Video
+        source={BackgroundImage}
+        style={styles.backgroundVideo}
+        isMuted={true}
+        shouldPlay={true}
+        isLooping
+        resizeMode="cover"
+      />
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={[styles.contentContainer, {paddingBottom: 5}]} // Adjusted for scroll padding
+      >
+        {isLoading ? (
+          <ActivityIndicator size="large" color="white" />
+        ) : (
+          <View style={styles.overlay}>
+            <NeonText>CYBERION</NeonText>
+            <Text style={styles.selectText}>Select the number of players:</Text>
+            <View style={styles.playerButtonContainer}>
+              <TouchableOpacity
+                style={styles.numPlayersButton}
+                onPress={() => handlePlayerCountChange('2')}
               >
-                <Text style={styles.startButtonText}>Start Mission</Text>
+                <Text style={styles.numPlayersText}>2</Text>
               </TouchableOpacity>
-        </View>
+              <TouchableOpacity
+                style={styles.numPlayersButton}
+                onPress={() => handlePlayerCountChange('3')}
+              >
+                <Text style={styles.numPlayersText}>3</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.numPlayersButton}
+                onPress={() => handlePlayerCountChange('4')}
+              >
+                <Text style={styles.numPlayersText}>4</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.inputsContainer}>
+              {renderNameInputs()}
+            </View>
+          </View>
+        )}
+      </ScrollView>
+      <TouchableOpacity
+        style={[styles.startButton, !playerCount || playerNames.includes('') ? styles.buttonDisabled : null]}
+        onPress={() => navigation.navigate('Mission', { playerNames })}
+        disabled={!playerCount || playerNames.includes('')}
+      >
+        <Text style={styles.startButtonText}>Start Mission</Text>
+      </TouchableOpacity>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -115,6 +125,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  contentContainer: {
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -122,12 +134,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 20,
     width: '100%',
-    height: '100%', 
   },
   selectText: {
     color: 'white',
     fontSize: 18,
-    marginBottom: 20,
+    marginVertical: 40,
     textAlign: 'center',
     fontFamily: 'Orbitron_400Regular',
   },
@@ -138,7 +149,8 @@ const styles = StyleSheet.create({
   playerButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginHorizontal: 40,
+    marginBottom: 40,
   },
   numPlayersButton: {
     backgroundColor: '#39FF14',
@@ -156,13 +168,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   inputsContainer: {
-    width: '100%',
+    width: '80%',
+    alignSelf: 'center',
   },
   inputBackground: {
-    height: 60, // Make sure this matches or is a bit larger than your TextInput height
-    width: '100%', // Adjust according to your layout needs
+    height: 60, 
+    width: '100%', 
     justifyContent: 'space-between',
-    marginBottom: 10, // Adds space between each input
+    marginBottom: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
@@ -190,7 +203,8 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Center text horizontally
     justifyContent: 'center', // Center text vertically
     height: 50, // Set a fixed heigh
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 50,
     width: '80%',
     alignSelf: 'center',
   },
