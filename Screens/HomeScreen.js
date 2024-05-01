@@ -11,6 +11,9 @@ const HomeScreen = ({ navigation }) => {
   const [playerCount, setPlayerCount] = useState(null);
   const [playerNames, setPlayerNames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDisabled1, setIsDisabled1] = useState(false);
+  const [isDisabled2, setIsDisabled2] = useState(false);
+  const [isDisabled3, setIsDisabled3] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,7 +22,10 @@ const HomeScreen = ({ navigation }) => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handlePlayerCountChange = (value) => {
+  const handlePlayerCountChange = (value, two, three, four) => {
+    setIsDisabled1(two);
+    setIsDisabled2(three);
+    setIsDisabled3(four);
     const numPlayers = parseInt(value || 0);
     if (numPlayers < playerNames.length) {
       setPlayerNames(playerNames.slice(0, numPlayers));
@@ -74,27 +80,27 @@ const HomeScreen = ({ navigation }) => {
         contentContainerStyle={[styles.contentContainer, {paddingBottom: 5}]} // Adjusted for scroll padding
       >
         {isLoading ? (
-          <ActivityIndicator size="large" color="white" />
+          <ActivityIndicator style={styles.loading} size="large" color="white" />
         ) : (
           <View style={styles.overlay}>
             <NeonText>CYBERION</NeonText>
             <Text style={styles.selectText}>Select the number of players:</Text>
             <View style={styles.playerButtonContainer}>
               <TouchableOpacity
-                style={styles.numPlayersButton}
-                onPress={() => handlePlayerCountChange('2')}
+                style={[styles.numPlayersButton, isDisabled1 ? styles.playerButtonDisabled : null]}
+                onPress={() => handlePlayerCountChange('2', true, false, false)}
               >
                 <Text style={styles.numPlayersText}>2</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.numPlayersButton}
-                onPress={() => handlePlayerCountChange('3')}
+                style={[styles.numPlayersButton, isDisabled2 ? styles.playerButtonDisabled : null]}
+                onPress={() => handlePlayerCountChange('3', false,true, false)}
               >
                 <Text style={styles.numPlayersText}>3</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.numPlayersButton}
-                onPress={() => handlePlayerCountChange('4')}
+                style={[styles.numPlayersButton, isDisabled3 ? styles.playerButtonDisabled : null]}
+                onPress={() => handlePlayerCountChange('4', false, false, true)}
               >
                 <Text style={styles.numPlayersText}>4</Text>
               </TouchableOpacity>
@@ -110,13 +116,16 @@ const HomeScreen = ({ navigation }) => {
         onPress={() => navigation.navigate('Mission', { playerNames })}
         disabled={!playerCount || playerNames.includes('')}
       >
-        <Text style={styles.startButtonText}>Start Mission</Text>
+        <Text style={styles.startButtonText}>Search Mission</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
+  loading: {
+  marginTop : 60,
+  },
   fullScreen: {
     flex: 1,
   },
@@ -161,6 +170,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     width: 50,
+    opacity: 0.5,
+  },
+  playerButtonDisabled: {
+    opacity: 1,
   },
   numPlayersText: {
     fontFamily: 'Orbitron_900Black',
