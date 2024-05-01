@@ -87,6 +87,8 @@ function MissionScreen({ route, navigation }) {
               <View key={index} style={styles.enemyContainer}>
                 <Text>{enemy.name}</Text>
                 <Image source={enemy.image} style={styles.enemyImage} />
+                <Text>Quantity: {enemy.quantity}</Text>
+                <Text>HP: {enemy.hp} </Text>
               </View>
             ))}
           </View>

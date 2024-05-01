@@ -5,17 +5,32 @@
       {
         "objective": "Eliminar objetivo",
         "enemies": [
-          {"name": "Tech Soldier 1", "image": "Enemy1Image"},
-          {"name": "Tech Soldier 2", "image": "Enemy1Image"},
-          {"name": "Tech Soldier 3", "image": "Enemy1Image"}
+          {
+            "name": "Tech Soldier",
+            "quantity": 1,
+            "image": "Enemy1Image",
+            "description": "Soldado de tecnología",
+            "hp": 100
+          },
+          {
+            "name": "Iron Caveman",
+            "quantity": 1,
+            "image": "Enemy2Image",
+            "description": "Cavernícola de hierro",
+            "hp": 200
+          }
         ]
       },
       {
         "objective": "Defender al objetivo",
         "enemies": [
-          {"name": "Iron Caveman 1", "image": "Enemy2Image"},
-          {"name": "Iron Caveman 2", "image": "Enemy2Image"},
-          {"name": "Iron Caveman 3", "image": "Enemy2Image"}
+          {
+            "name": "Iron Caveman",
+            "quantity": 2,
+            "image": "Enemy2Image",
+            "description": "Cavernícola de hierro",
+            "hp": 200
+          }
         ]
       }
     ]
@@ -26,18 +41,52 @@
       {
         "objective": "Jackear 1 computadora",
         "enemies": [
-          {"name": "Tech Soldier 1", "image": "Enemy1Image"}
+          {
+            "name": "Tech Soldier",
+            "quantity": 3,
+            "image": "Enemy1Image",
+            "description": "Soldado de tecnología",
+            "hp": 100
+          },
+          {
+            "name": "Iron Caveman",
+            "quantity": 33,
+            "image": "Enemy2Image",
+            "description": "Cavernícola de hierro",
+            "hp": 200
+          }
         ]
       },
       {
         "objective": "Jackear 2 computadoras",
         "enemies": [
-          {"name": "Tech Soldier 2", "image": "Enemy1Image"}
+          {
+            "name": "Tech Soldier",
+            "quantity": 4,
+            "image": "Enemy1Image",
+            "description": "Soldado de tecnología",
+            "hp": 100
+          }
         ]
       },
       {
         "objective": "Jackear 3 computadoras",
-        "enemies": [{"name": "Tech Soldier 2", "image": "Enemy1Image"}]
+        "enemies": [
+          {
+            "name": "Tech Soldier",
+            "quantity": 5,
+            "image": "Enemy1Image",
+            "description": "Soldado de tecnología",
+            "hp": 100
+          },
+          {
+            "name": "Iron Caveman",
+            "quantity": 55,
+            "image": "Enemy2Image",
+            "description": "Cavernícola de hierro",
+            "hp": 200
+          }
+        ]
       }
     ]
   },
@@ -47,13 +96,25 @@
       {
         "objective": "Desactivar la bomba",
         "enemies": [
-          {"name": "Tech Soldier 1", "image": "Enemy1Image"}
+          {
+            "name": "Tech Soldier",
+            "quantity": 6,
+            "image": "Enemy1Image",
+            "description": "Soldado de tecnología",
+            "hp": 100
+          }
         ]
       },
       {
         "objective": "Matar a todos los enemigos",
         "enemies": [
-          {"name": "Iron Caveman 1", "image": "Enemy2Image"}
+          {
+            "name": "Tech Soldier",
+            "quantity": 7,
+            "image": "Enemy1Image",
+            "description": "Soldado de tecnología",
+            "hp": 100
+          }
         ]
       }
     ]
