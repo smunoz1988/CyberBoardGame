@@ -93,13 +93,12 @@ function MissionScreen({ route, navigation }) {
             ))}
           </View>
         )}
-        <Text>Mapa del nivel</Text>
         <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRspkQWM_CO2-MTC0bedTLyMe5z0_6rI_S1g7PdvbY_zQ&s' }} style={styles.level} />
         <TouchableOpacity
           style={[styles.startButton, playerNames.includes('') ? styles.buttonDisabled : null]}
           onPress={() => navigation.navigate('Mercenary', { playerNames, mission })}
           disabled={playerNames.includes('')}>
-          <Text style={styles.startButtonText}>Start Mission</Text>
+          <Text style={styles.startButtonText}>Select Mercenaries</Text>
         </TouchableOpacity>
       </ScrollView>
   );
@@ -109,6 +108,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
+    backgroundColor: '#121212', // Dark background for cyberpunk theme
   },
   backgroundImage: {
     position: 'absolute', 
@@ -118,30 +118,35 @@ const styles = StyleSheet.create({
     left: '-20%',
     right: 0,
     bottom: 0,
-    zIndex: -1, 
+    zIndex: -1,
+    opacity: 0.5,
   },
   playerName: {
     fontSize: 16,
     marginTop: 10,
   },
   missionContainer: {
-    marginTop: 20,
+    margin: 60,
     alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#1e1e1e', // Slightly lighter dark shade for the panel
+    borderRadius: 8,
+    borderStyle: 'solid',
+    borderColor: '#39FF14', // Neon green border
+    borderWidth: 2,
+    opacity: 0.8,
   },
   missionTitle: {
     fontSize: 25,
     fontFamily: 'Orbitron_900Black',
     padding: 10,
     color: '#0f0',
-    width: '80%',
-    textAlign: 'center',
   },
   missionObjective: {
     fontSize: 16,
     fontFamily: 'Orbitron_400Regular',
-    color: '#0f0',
+    color: 'white',
     width: '100%',
-    textAlign: 'center',
   },
   enemyContainer: {
     alignItems: 'center',
