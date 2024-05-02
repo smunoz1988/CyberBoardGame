@@ -44,6 +44,8 @@ const MercenaryScreen = ({ route, navigation }) => {
       setCurrentPlayerIndex((currentPlayerIndex + 1) % playerNames.length);
   };
 
+  const allMercenariesSelected = Object.values(selectedMercenaries).every(name => name !== null);
+
   return (
     <View style={styles.container}>
       <Animated.Image
@@ -86,9 +88,9 @@ const MercenaryScreen = ({ route, navigation }) => {
         numColumns={2}
       />
       <TouchableOpacity
-        style={[styles.startButton, playerNames.includes('') ? styles.buttonDisabled : null]}
+        style={[styles.startButton, !allMercenariesSelected ? styles.buttonDisabled : null]}
         onPress={() => navigation.navigate('MissionIntro', { playerNames, mission })}
-        disabled={playerNames.includes('')}>
+        disabled={!allMercenariesSelected}>
         <Text style={styles.startButtonText}>Start Mission</Text>
       </TouchableOpacity>
     </View>
