@@ -70,8 +70,7 @@ const MercenaryScreen = ({ route, navigation }) => {
       ))}
       <Text>Mission: {mission.name}</Text>
       <Text>Objective: {mission.objective}</Text>
-      <Text style={styles.playerName}>Current Player: Player {currentPlayerIndex + 1}, {playerNames[currentPlayerIndex]}</Text>
-      <NeonTextSelect>Choose your Mercenary:</NeonTextSelect>
+      <NeonTextSelect>Choose your Mercenary: {playerNames[currentPlayerIndex]}</NeonTextSelect>
       <FlatList
         data={mercenaries}
         renderItem={({ item }) => {
