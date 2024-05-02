@@ -1,34 +1,35 @@
 [
   {
-    "name": "Templo",
+    "name": "Temple",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.",
     "objectives": [
       {
-        "objective": "Eliminar objetivo",
+        "objective": "Eliminate target",
         "enemies": [
           {
             "name": "Tech Soldier",
             "quantity": 1,
             "image": "Enemy1Image",
-            "description": "Soldado de tecnología",
+            "description": "Technology-enhanced soldier",
             "hp": 100
           },
           {
             "name": "Iron Caveman",
             "quantity": 1,
             "image": "Enemy2Image",
-            "description": "Cavernícola de hierro",
+            "description": "Iron armored caveman",
             "hp": 200
           }
         ]
       },
       {
-        "objective": "Defender al objetivo",
+        "objective": "Defend the target",
         "enemies": [
           {
             "name": "Iron Caveman",
             "quantity": 2,
             "image": "Enemy2Image",
-            "description": "Cavernícola de hierro",
+            "description": "Iron armored caveman",
             "hp": 200
           }
         ]
@@ -36,54 +37,55 @@
     ]
   },
   {
-    "name": "Cuartel",
+    "name": "Barracks",
+    "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming.",
     "objectives": [
       {
-        "objective": "Jackear 1 computadora",
+        "objective": "Hack 1 computer",
         "enemies": [
           {
             "name": "Tech Soldier",
             "quantity": 3,
             "image": "Enemy1Image",
-            "description": "Soldado de tecnología",
+            "description": "Technology-enhanced soldier",
             "hp": 100
           },
           {
             "name": "Iron Caveman",
             "quantity": 33,
             "image": "Enemy2Image",
-            "description": "Cavernícola de hierro",
+            "description": "Iron armored caveman",
             "hp": 200
           }
         ]
       },
       {
-        "objective": "Jackear 2 computadoras",
+        "objective": "Hack 2 computers",
         "enemies": [
           {
             "name": "Tech Soldier",
             "quantity": 4,
             "image": "Enemy1Image",
-            "description": "Soldado de tecnología",
+            "description": "Technology-enhanced soldier",
             "hp": 100
           }
         ]
       },
       {
-        "objective": "Jackear 3 computadoras",
+        "objective": "Hack 3 computers",
         "enemies": [
           {
             "name": "Tech Soldier",
             "quantity": 5,
             "image": "Enemy1Image",
-            "description": "Soldado de tecnología",
+            "description": "Technology-enhanced soldier",
             "hp": 100
           },
           {
             "name": "Iron Caveman",
             "quantity": 55,
             "image": "Enemy2Image",
-            "description": "Cavernícola de hierro",
+            "description": "Iron armored caveman",
             "hp": 200
           }
         ]
@@ -92,27 +94,28 @@
   },
   {
     "name": "Bunker",
+    "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     "objectives": [
       {
-        "objective": "Desactivar la bomba",
+        "objective": "Deactivate the bomb",
         "enemies": [
           {
             "name": "Tech Soldier",
             "quantity": 6,
             "image": "Enemy1Image",
-            "description": "Soldado de tecnología",
+            "description": "Technology-enhanced soldier",
             "hp": 100
           }
         ]
       },
       {
-        "objective": "Matar a todos los enemigos",
+        "objective": "Kill all enemies",
         "enemies": [
           {
             "name": "Tech Soldier",
             "quantity": 7,
             "image": "Enemy1Image",
-            "description": "Soldado de tecnología",
+            "description": "Technology-enhanced soldier",
             "hp": 100
           }
         ]
