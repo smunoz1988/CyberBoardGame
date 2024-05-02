@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, Animated, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, Animated, TouchableOpacity, ImageBackground } from 'react-native';
 import missions from '../GameData/missions';
 import Enemy1Image from '../assets/tech-soldier.png';
 import Enemy2Image from '../assets/iron-caveman.png';
@@ -82,15 +82,21 @@ function MissionScreen({ route, navigation }) {
           <View style={styles.missionContainer}>
             <Text style={styles.missionTitle}>Mission: {mission.name}</Text>
             <Text style={styles.missionDescription}>{mission.description}</Text>
-            <Text style={styles.missionObjective}>Objective: {mission.objective}</Text>
+            <Text style={styles.missionObjective}>Objective:</Text>
+            <Text style={styles.missionDescription}>{mission.objective}</Text>
             <Text style={styles.missionObjective}>Enemy units:</Text>
             {mission.enemies.map((enemy, index) => (
-              <View key={index} style={styles.enemyContainer}>
+              <ImageBackground 
+                key={index}
+                source={require('../assets/enemies_cards_background.png')} 
+                style={styles.enemyContainer}
+                resizeMode="contain"
+              >
                 <Text>{enemy.name}</Text>
                 <Image source={enemy.image} style={styles.enemyImage} />
                 <Text>Quantity: {enemy.quantity}</Text>
                 <Text>HP: {enemy.hp} </Text>
-              </View>
+              </ImageBackground>
             ))}
             <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRspkQWM_CO2-MTC0bedTLyMe5z0_6rI_S1g7PdvbY_zQ&s' }} style={styles.level} />
           </View>
@@ -126,7 +132,6 @@ const styles = StyleSheet.create({
   missionContainer: {
     marginTop: 50,
     marginHorizontal: 20,
-    height: 800,
     padding: 20,
     backgroundColor: '#1e1e1e', // Slightly lighter dark shade for the panel
     borderRadius: 8,
@@ -158,7 +163,11 @@ const styles = StyleSheet.create({
   },
   enemyContainer: {
     alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
     marginTop: 10,
+    width: 250,
+    height: 250,
   },
   enemyImage: {
     width: 50,
@@ -166,6 +175,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   level: {
+    marginTop: 20,
     width: 250,
     height: 250,
     resizeMode: 'contain',
