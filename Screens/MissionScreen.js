@@ -81,8 +81,9 @@ function MissionScreen({ route, navigation }) {
         {mission && (
           <View style={styles.missionContainer}>
             <Text style={styles.missionTitle}>Mission: {mission.name}</Text>
+            <Text style={styles.missionDescription}>{mission.description}</Text>
             <Text style={styles.missionObjective}>Objective: {mission.objective}</Text>
-            <Text>Enemies:</Text>
+            <Text style={styles.missionObjective}>Enemy units:</Text>
             {mission.enemies.map((enemy, index) => (
               <View key={index} style={styles.enemyContainer}>
                 <Text>{enemy.name}</Text>
@@ -91,9 +92,9 @@ function MissionScreen({ route, navigation }) {
                 <Text>HP: {enemy.hp} </Text>
               </View>
             ))}
+            <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRspkQWM_CO2-MTC0bedTLyMe5z0_6rI_S1g7PdvbY_zQ&s' }} style={styles.level} />
           </View>
         )}
-        <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRspkQWM_CO2-MTC0bedTLyMe5z0_6rI_S1g7PdvbY_zQ&s' }} style={styles.level} />
         <TouchableOpacity
           style={[styles.startButton, playerNames.includes('') ? styles.buttonDisabled : null]}
           onPress={() => navigation.navigate('Mercenary', { playerNames, mission })}
@@ -108,7 +109,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-    backgroundColor: '#121212', // Dark background for cyberpunk theme
+    backgroundColor: '#121212', 
+    height: '100%',
   },
   backgroundImage: {
     position: 'absolute', 
@@ -121,13 +123,10 @@ const styles = StyleSheet.create({
     zIndex: -1,
     opacity: 0.5,
   },
-  playerName: {
-    fontSize: 16,
-    marginTop: 10,
-  },
   missionContainer: {
-    margin: 60,
-    alignItems: 'center',
+    marginTop: 50,
+    marginHorizontal: 20,
+    height: 800,
     padding: 20,
     backgroundColor: '#1e1e1e', // Slightly lighter dark shade for the panel
     borderRadius: 8,
@@ -137,15 +136,24 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
   missionTitle: {
+    padding: 10,
+    paddingBottom: 20,
     fontSize: 25,
     fontFamily: 'Orbitron_900Black',
-    padding: 10,
     color: '#0f0',
+    textAlign: 'center',
   },
-  missionObjective: {
+  missionDescription: {
     fontSize: 16,
     fontFamily: 'Orbitron_400Regular',
     color: 'white',
+    width: '100%',
+  },
+  missionObjective: {
+    paddingVertical: 20,
+    fontSize: 16,
+    fontFamily: 'Orbitron_400Regular',
+    color: '#0f0',
     width: '100%',
   },
   enemyContainer: {
@@ -158,10 +166,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   level: {
-    width: 350,
-    height: 350,
+    width: 250,
+    height: 250,
     resizeMode: 'contain',
-    margin: 20,
   },
   startButton: {
     backgroundColor: '#39FF14',

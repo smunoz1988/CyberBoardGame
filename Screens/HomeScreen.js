@@ -4,7 +4,7 @@ import {
   ScrollView, KeyboardAvoidingView, Platform
 } from 'react-native';
 import { Video } from 'expo-av';
-import BackgroundImage from '../assets/background-main.mp4';
+import BackgroundVideo from '../assets/background-main.mp4';
 import NeonText from '../Components/NeonText';
 
 const HomeScreen = ({ navigation }) => {
@@ -68,7 +68,7 @@ const HomeScreen = ({ navigation }) => {
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
     >
       <Video
-        source={BackgroundImage}
+        source={BackgroundVideo}
         style={styles.backgroundVideo}
         isMuted={true}
         shouldPlay={true}
