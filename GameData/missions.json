@@ -26,8 +26,15 @@
         "objective": "Defend the target",
         "enemies": [
           {
+            "name": "Tech Soldier",
+            "quantity": 1,
+            "image": "Enemy1Image",
+            "description": "Technology-enhanced soldier",
+            "hp": 100
+          },
+          {
             "name": "Iron Caveman",
-            "quantity": 2,
+            "quantity": 1,
             "image": "Enemy2Image",
             "description": "Iron armored caveman",
             "hp": 200
@@ -68,6 +75,20 @@
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
             "hp": 100
+          },
+          {
+            "name": "Tech Soldier",
+            "quantity": 1,
+            "image": "Enemy1Image",
+            "description": "Technology-enhanced soldier",
+            "hp": 100
+          },
+          {
+            "name": "Iron Caveman",
+            "quantity": 1,
+            "image": "Enemy2Image",
+            "description": "Iron armored caveman",
+            "hp": 200
           }
         ]
       },
@@ -105,6 +126,20 @@
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
             "hp": 100
+          },
+          {
+            "name": "Tech Soldier",
+            "quantity": 1,
+            "image": "Enemy1Image",
+            "description": "Technology-enhanced soldier",
+            "hp": 100
+          },
+          {
+            "name": "Iron Caveman",
+            "quantity": 1,
+            "image": "Enemy2Image",
+            "description": "Iron armored caveman",
+            "hp": 200
           }
         ]
       },
@@ -117,6 +152,20 @@
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
             "hp": 100
+          },
+          {
+            "name": "Tech Soldier",
+            "quantity": 1,
+            "image": "Enemy1Image",
+            "description": "Technology-enhanced soldier",
+            "hp": 100
+          },
+          {
+            "name": "Iron Caveman",
+            "quantity": 1,
+            "image": "Enemy2Image",
+            "description": "Iron armored caveman",
+            "hp": 200
           }
         ]
       }

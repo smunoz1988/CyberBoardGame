@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, Animated, TouchableOpacity, ImageBackground } from 'react-native';
+import PagerView from 'react-native-pager-view';
 import missions from '../GameData/missions';
 import Enemy1Image from '../assets/tech-soldier.png';
 import Enemy2Image from '../assets/iron-caveman.png';
@@ -8,7 +9,18 @@ import Enemy2Image from '../assets/iron-caveman.png';
 function MissionScreen({ route, navigation }) {
   const { playerNames } = route.params;
   const [mission, setMission] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
   const moveAnimation = useRef(new Animated.Value(0)).current;
+
+  const onPageSelected = (e) => {
+    setCurrentPage(e.nativeEvent.position);
+  };
+
+  const renderPagination = () => {
+    return mission.enemies.map((_, index) => (
+      <Text key={index} style={index === currentPage ? styles.activeDot : styles.dot}>{index+1}</Text>
+    ));
+  };
 
   useEffect(() => {
     const loadMission = () => {
@@ -85,7 +97,7 @@ function MissionScreen({ route, navigation }) {
             <Text style={styles.missionObjective}>Objective:</Text>
             <Text style={styles.missionDescription}>{mission.objective}</Text>
             <Text style={styles.missionObjective}>Enemy units:</Text>
-            {mission.enemies.map((enemy, index) => (
+            {/* {mission.enemies.map((enemy, index) => (
               <ImageBackground 
                 key={index}
                 source={require('../assets/enemies_cards_background.png')} 
@@ -97,7 +109,28 @@ function MissionScreen({ route, navigation }) {
                 <Text style={styles.enemyInfo}>Quantity: {enemy.quantity}</Text>
                 <Text style={styles.enemyInfo}>HP: {enemy.hp} </Text>
               </ImageBackground>
-            ))}
+            ))} */}
+            <View style={styles.containerPager}>
+              <PagerView style={styles.pageCont} initialPage={0} onPageSelected={onPageSelected}>
+                {mission.enemies.map((enemy, index) => (
+                  <View style={styles.page} key={index}>
+                    <ImageBackground 
+                      source={require('../assets/enemies_cards_background.png')} 
+                      style={styles.enemyContainer}
+                      resizeMode="contain"
+                    >
+                      <Text style={styles.enemyInfo}>{enemy.name}</Text>
+                      <Image source={enemy.image} style={styles.enemyImage} />
+                      <Text style={styles.enemyInfo}>Quantity: {enemy.quantity}</Text>
+                      <Text style={styles.enemyInfo}>HP: {enemy.hp}</Text>
+                    </ImageBackground>
+                  </View>
+                ))}
+              </PagerView>
+              <View style={styles.paginationWrapper}>
+                {renderPagination()}
+              </View>
+            </View>
             <Text style={styles.missionObjective}>Map:</Text>
             <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRspkQWM_CO2-MTC0bedTLyMe5z0_6rI_S1g7PdvbY_zQ&s' }} style={styles.level} />
           </View>
@@ -113,11 +146,37 @@ function MissionScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+  pageCont: {
+    flex: 1,
+  },
+  page: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
-    position: 'relative',
-    backgroundColor: '#121212', 
     height: '100%',
+    backgroundColor: '#121212', 
+  },
+  containerPager: {
+    flex: 1,
+    height: '100%',
+  },
+  paginationWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
+  dot: {
+    color: 'gray',
+    margin: 3,
+  },
+  activeDot: {
+    color: '#0f0',
+    marginHorizontal: 3,
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   backgroundImage: {
     position: 'absolute', 
