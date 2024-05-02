@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, FlatList, Animated, Button } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Animated, Button, TouchableOpacity } from 'react-native';
 import mercenaries from '../GameData/mercenaries';
 import MercenaryItem from '../Components/MercenaryItem';
 import NeonTextSelect from '../Components/NeonTextSelect';
@@ -85,10 +85,12 @@ const MercenaryScreen = ({ route, navigation }) => {
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
       />
-      <Button 
-        title="START MISSION"
-        onPress={() => navigation.navigate('MissionIntro')} 
-      />
+      <TouchableOpacity
+        style={[styles.startButton, playerNames.includes('') ? styles.buttonDisabled : null]}
+        onPress={() => navigation.navigate('MissionIntro', { playerNames, mission })}
+        disabled={playerNames.includes('')}>
+        <Text style={styles.startButtonText}>Start Mission</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -128,6 +130,27 @@ const styles = StyleSheet.create({
   playerName: {
     color: 'white',
     fontSize: 20,
+  },
+  startButton: {
+    backgroundColor: '#39FF14',
+    opacity: 0.8,
+    padding: 10,
+    borderRadius: 10,
+    alignItems: 'center', // Center text horizontally
+    justifyContent: 'center', // Center text vertically
+    height: 50, // Set a fixed heigh
+    marginTop: 20,
+    marginBottom: 50,
+    width: '80%',
+    alignSelf: 'center',
+  },
+  startButtonText: {
+    fontFamily: 'Orbitron_900Black',
+    color: 'white',
+    fontSize: 16, // Adjust text size as needed
+  },
+  buttonDisabled: {
+    backgroundColor: '#ccc'
   },
 });
 
