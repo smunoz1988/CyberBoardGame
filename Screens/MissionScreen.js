@@ -92,12 +92,13 @@ function MissionScreen({ route, navigation }) {
                 style={styles.enemyContainer}
                 resizeMode="contain"
               >
-                <Text>{enemy.name}</Text>
+                <Text style={styles.enemyInfo}>{enemy.name}</Text>
                 <Image source={enemy.image} style={styles.enemyImage} />
-                <Text>Quantity: {enemy.quantity}</Text>
-                <Text>HP: {enemy.hp} </Text>
+                <Text style={styles.enemyInfo}>Quantity: {enemy.quantity}</Text>
+                <Text style={styles.enemyInfo}>HP: {enemy.hp} </Text>
               </ImageBackground>
             ))}
+            <Text style={styles.missionObjective}>Map:</Text>
             <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRspkQWM_CO2-MTC0bedTLyMe5z0_6rI_S1g7PdvbY_zQ&s' }} style={styles.level} />
           </View>
         )}
@@ -169,6 +170,12 @@ const styles = StyleSheet.create({
     width: 250,
     height: 250,
   },
+  enemyInfo: {
+    fontFamily: 'Orbitron_400Regular',
+    color: 'white',
+    fontSize: 12,
+    textAlign: 'center',
+  },
   enemyImage: {
     width: 50,
     height: 50,
@@ -179,6 +186,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 250,
     resizeMode: 'contain',
+    alignSelf: 'center',
   },
   startButton: {
     backgroundColor: '#39FF14',
