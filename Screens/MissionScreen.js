@@ -43,7 +43,8 @@ function MissionScreen({ route, navigation }) {
       });
 
       setMission({
-        ...selectedMission,
+        name: selectedMission.name,
+        description: selectedMission.description,
         objective: selectedObjective.objective,
         enemies: enemiesWithImages, 
       });
