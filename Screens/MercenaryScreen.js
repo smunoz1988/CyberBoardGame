@@ -88,7 +88,7 @@ const MercenaryScreen = ({ route, navigation }) => {
       />
       <TouchableOpacity
         style={[styles.startButton, !allMercenariesSelected ? styles.buttonDisabled : null]}
-        onPress={() => navigation.navigate('MissionIntro', { playerNames, mission })}
+        onPress={() => navigation.navigate('MissionIntro', { selectedMercenaries, mission })}
         disabled={!allMercenariesSelected}>
         <Text style={styles.startButtonText}>Start Mission</Text>
       </TouchableOpacity>
