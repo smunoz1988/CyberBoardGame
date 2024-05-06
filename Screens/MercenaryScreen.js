@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, FlatList, Animated, Button, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Animated, TouchableOpacity } from 'react-native';
 import mercenaries from '../GameData/mercenaries';
 import MercenaryItem from '../Components/MercenaryItem';
 import NeonTextSelect from '../Components/NeonTextSelect';
