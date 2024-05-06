@@ -11,8 +11,11 @@ const MissionIntro = ({ route }) => {
   console.log('enemies', enemies);
   console.log('mercenaries', mercenaries);
 
+  // incluir mercenarios en la lista de enemigos y ordenar por iniciativa que va a ser random
+
   return (
     <ScrollView>
+      <Text style={style.clock}>tiempo atras</Text>
       {enemies.map((enemy, index) => (
         counter = 0,
         Array.from({ length: enemy.quantity }).map((_, i) => (
@@ -23,6 +26,14 @@ const MissionIntro = ({ route }) => {
       <Text>Objective:</Text>
     </ScrollView>
   )
+}
+
+const style = {
+  clock: {
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: 50
+  }
 }
 
 export default MissionIntro;
