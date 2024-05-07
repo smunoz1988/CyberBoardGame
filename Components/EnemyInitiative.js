@@ -2,11 +2,11 @@ import React from 'react';
 import { useState } from 'react'; 
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const EnemyInitiative = ({ id, enemy }) => {
+const EnemyInitiative = ({ enemy }) => {
   const [enemyHp, setEnemyHp] = useState(enemy.hp);
   return (
     <View style={styles.card}>
-      <Text style={styles.name}>{enemy.name} {id}</Text>
+      <Text style={styles.name}>{enemy.name} {enemy.enemyId}</Text>
       <Text>{enemy.description}</Text>
       <Text>HP: {enemyHp}</Text>
       <TouchableOpacity style={styles.damageButtons} onPress={() => setEnemyHp(enemyHp - 1)}>
