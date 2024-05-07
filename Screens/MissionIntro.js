@@ -34,17 +34,24 @@ const MissionIntro = ({ route }) => {
     setInitiativesList(array);
   };
 
+  const handleDeleteCharacter = (character) => {
+    setInitiativesList(initiativesList.filter(item => item !== character));
+  }
+
+  console.log(initiativesList);
+
   return (
     <ScrollView>
       <Text style={style.clock}>tiempo atras</Text>
       {initiativesList.map((character, index) => {
+        const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.type}-${index}`;
         if (character.type === 'enemy') {
-          return <EnemyInitiative key={index} listNum={index+1} enemy={character} />;
+          return <EnemyInitiative key={key} listNum={index+1} enemy={character} onEnemyDelete={() => handleDeleteCharacter(character)}/>;
         } else {
-          return <MercenaryInitiative key={index} listNum={index+1} mercenary={character} />
+          return <MercenaryInitiative key={key} listNum={index+1} mercenary={character} />
         }
       })}
-      <TouchableOpacity style={style.startButton} onPress={() => shuffleArray(combinedArray)}>
+      <TouchableOpacity style={style.startButton} onPress={() => shuffleArray(initiativesList)}>
         <Text style={style.startButtonText}>Launch Initiatives</Text>
       </TouchableOpacity>
     </ScrollView>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react'; 
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const EnemyInitiative = ({ listNum, enemy }) => {
+const EnemyInitiative = ({ listNum, enemy, onEnemyDelete }) => {
   const [enemyHp, setEnemyHp] = useState(enemy.hp);
   return (
     <View style={styles.card}>
@@ -10,12 +10,15 @@ const EnemyInitiative = ({ listNum, enemy }) => {
       <Text style={styles.name}>{enemy.name} {enemy.enemyId}</Text>
       <Text>{enemy.description}</Text>
       <Text>HP: {enemyHp}</Text>
-      <TouchableOpacity style={styles.damageButtons} onPress={() => setEnemyHp(enemyHp - 1)}>
+      <TouchableOpacity disabled={enemyHp <= 0} style={styles.damageButtons} onPress={() => setEnemyHp(enemyHp - 1)}>
         <Text>Damage</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.cureButtons} onPress={() => setEnemyHp(enemyHp + 1)}>
         <Text>Cure</Text>
       </TouchableOpacity>
+      {enemyHp <= 0 && <TouchableOpacity style={styles.deleteButtons} onPress={() => onEnemyDelete(enemy)}>
+        <Text>Kill Enemy</Text>
+      </TouchableOpacity>}
     </View>
   );
 };
@@ -58,6 +61,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     width: 50,
+    opacity: 0.5,
+  },
+  deleteButtons: {
+    backgroundColor: '#39FF14',
+    marginHorizontal: 20,
+    padding: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    width: 200,
     opacity: 0.5,
   },
 });
