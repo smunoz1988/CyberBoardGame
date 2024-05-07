@@ -1,4 +1,6 @@
-import { ScrollView, Text } from 'react-native';
+import React from 'react';
+import { useState } from 'react';
+import { ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import EnemyInitiative from "../Components/EnemyInitiative";
 import MercenaryInitiative from '../Components/MercenaryInitiative';
 
@@ -6,49 +8,71 @@ const MissionIntro = ({ route }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
 
-// Convert mercenaries object to an array with type annotation
-const mercenaryArray = Object.keys(selectedMercenaries).map(key => ({
-  type: 'mercenary',
-  name: selectedMercenaries[key]
-}));
+  const mercenaryArray = Object.keys(selectedMercenaries).map(key => ({
+    type: 'mercenary',
+    name: selectedMercenaries[key]
+  }));
 
-// Convert enemies array to include a type property
-const typedEnemies = enemies.flatMap(enemy =>
-  Array.from({ length: enemy.quantity }).map((_, i) => ({
-    type: 'enemy',
-    name: enemy.name,
-    enemyId: i + 1,
-    hp: enemy.hp,
-  }))
-);
+  const typedEnemies = enemies.flatMap(enemy =>
+    Array.from({ length: enemy.quantity }).map((_, i) => ({
+      type: 'enemy',
+      name: enemy.name,
+      enemyId: i + 1,
+      hp: enemy.hp,
+    }))
+  );
 
-// Combine both arrays into one
-const combinedArray = [...typedEnemies, ...mercenaryArray];
+  const combinedArray = [...mercenaryArray, ...typedEnemies];
+  const [initiativesList, setInitiativesList] = useState(combinedArray);
 
-// Output the combined array to console
-console.log(combinedArray);
+  const shuffleArray = (originalArray) => {
+    let array = [...originalArray]; 
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];  
+    }
+    setInitiativesList(array);
+  };
 
   return (
     <ScrollView>
       <Text style={style.clock}>tiempo atras</Text>
-      {combinedArray.map((character, index) => {
+      {initiativesList.map((character, index) => {
         if (character.type === 'enemy') {
-          return <EnemyInitiative key={index} enemy={character} />;
+          return <EnemyInitiative key={index} listNum={index+1} enemy={character} />;
         } else {
-          return <MercenaryInitiative key={index} mercenary={character} />
+          return <MercenaryInitiative key={index} listNum={index+1} mercenary={character} />
         }
       })}
-      <Text>Objective:</Text>
+      <TouchableOpacity style={style.startButton} onPress={() => shuffleArray(combinedArray)}>
+        <Text style={style.startButtonText}>Launch Initiatives</Text>
+      </TouchableOpacity>
     </ScrollView>
   )
 }
 
-const style = {
+const style = StyleSheet.create({
   clock: {
     fontSize: 20,
     textAlign: 'center',
     marginTop: 50
-  }
-}
+  },
+  startButton: {
+    backgroundColor: '#39FF14',
+    opacity: 0.8,
+    padding: 10,
+    borderRadius: 10,
+    alignItems: 'center', // Center text horizontally
+    justifyContent: 'center', // Center text vertically
+    height: 50, // Set a fixed height
+    opacity: 0.8, // You can adjust the opacity for disabled state as needed
+    margin: 20,
+  },
+  startButtonText: {
+    fontFamily: 'Orbitron_900Black',
+    color: 'white',
+    fontSize: 16, // Adjust text size as needed
+  },
+});
 
 export default MissionIntro;

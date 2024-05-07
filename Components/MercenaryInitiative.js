@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const MercenaryInitiative = ({ mercenary }) => {
+const MercenaryInitiative = ({ listNum, mercenary }) => {
   return (
     <View style={styles.card}>
+      <Text>Initiative: {listNum}</Text>
       <Text style={styles.name}>{mercenary.name}</Text>
     </View>
   );
