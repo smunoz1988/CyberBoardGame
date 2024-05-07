@@ -1,10 +1,10 @@
 import { ScrollView, Text } from 'react-native';
 import EnemyInitiative from "../Components/EnemyInitiative";
+import MercenaryInitiative from '../Components/MercenaryInitiative';
 
 const MissionIntro = ({ route }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
-  let counter = 0;
 
 // Convert mercenaries object to an array with type annotation
 const mercenaryArray = Object.keys(selectedMercenaries).map(key => ({
@@ -13,10 +13,14 @@ const mercenaryArray = Object.keys(selectedMercenaries).map(key => ({
 }));
 
 // Convert enemies array to include a type property
-const typedEnemies = enemies.map(enemy => ({
-  ...enemy,
-  type: 'enemy'
-}));
+const typedEnemies = enemies.flatMap(enemy =>
+  Array.from({ length: enemy.quantity }).map((_, i) => ({
+    type: 'enemy',
+    name: enemy.name,
+    enemyId: i + 1,
+    hp: enemy.hp,
+  }))
+);
 
 // Combine both arrays into one
 const combinedArray = [...typedEnemies, ...mercenaryArray];
@@ -29,11 +33,9 @@ console.log(combinedArray);
       <Text style={style.clock}>tiempo atras</Text>
       {combinedArray.map((character, index) => {
         if (character.type === 'enemy') {
-          return Array.from({ length: character.quantity }).map((_, i) => {
-            return <EnemyInitiative key={`${index}-${i}`} id={i + 1} enemy={character} />;
-          });
+          return <EnemyInitiative key={index} enemy={character} />;
         } else {
-          return <Text key={index}>{character.name}</Text>;
+          return <MercenaryInitiative key={index} mercenary={character} />
         }
       })}
       <Text>Objective:</Text>
