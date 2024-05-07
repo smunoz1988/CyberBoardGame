@@ -10,7 +10,10 @@ const EnemyInitiative = ({ listNum, enemy, onEnemyDelete }) => {
       <Text style={styles.name}>{enemy.name} {enemy.enemyId}</Text>
       <Text>{enemy.description}</Text>
       <Text>HP: {enemyHp}</Text>
-      <TouchableOpacity disabled={enemyHp <= 0} style={styles.damageButtons} onPress={() => setEnemyHp(enemyHp - 1)}>
+      <TouchableOpacity 
+        disabled={enemyHp <= 0} 
+        style={[styles.damageButtons, enemyHp <= 0 && styles.disabledButton]} 
+        onPress={() => setEnemyHp(enemyHp - 1)}>
         <Text>Damage</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.cureButtons} onPress={() => setEnemyHp(enemyHp + 1)}>
@@ -52,6 +55,10 @@ const styles = StyleSheet.create({
     width: 50,
     opacity: 0.5,
   },
+  disabledButton: {
+    opacity: 0.3,
+    backgroundColor: 'grey',  // This can be adjusted to suit your design preferences
+  },
   cureButtons: {
     backgroundColor: '#39FF14',
     marginHorizontal: 20,
@@ -64,7 +71,7 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   deleteButtons: {
-    backgroundColor: '#39FF14',
+    backgroundColor: 'black',
     marginHorizontal: 20,
     padding: 10,
     borderRadius: 10,
