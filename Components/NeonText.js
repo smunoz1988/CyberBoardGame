@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   neonText: {
     color: '#39FF14',
-    fontSize: 60,
+    fontSize: 55,
     fontFamily: 'Orbitron_900Black',
     textShadowColor: 'cyan',
     textShadowOffset: { width: 1, height: 1 },

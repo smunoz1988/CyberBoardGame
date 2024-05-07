@@ -24,6 +24,7 @@ const MissionIntro = ({ route }) => {
 
   const combinedArray = [...mercenaryArray, ...typedEnemies];
   const [initiativesList, setInitiativesList] = useState(combinedArray);
+  const [turn, setTurn] = useState(0);
 
   const shuffleArray = (originalArray) => {
     let array = [...originalArray]; 
@@ -32,17 +33,17 @@ const MissionIntro = ({ route }) => {
       [array[i], array[j]] = [array[j], array[i]];  
     }
     setInitiativesList(array);
+    setTurn(prevTurn => prevTurn + 1);
   };
 
   const handleDeleteCharacter = (character) => {
     setInitiativesList(initiativesList.filter(item => item !== character));
   }
 
-  console.log(initiativesList);
-
   return (
     <ScrollView>
       <Text style={style.clock}>tiempo atras</Text>
+      <Text style={style.clock}>turn: {turn}</Text>
       {initiativesList.map((character, index) => {
         const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.type}-${index}`;
         if (character.type === 'enemy') {
