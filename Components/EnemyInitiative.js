@@ -2,10 +2,11 @@ import React from 'react';
 import { useState } from 'react'; 
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const EnemyInitiative = ({ enemy }) => {
+const EnemyInitiative = ({ listNum, enemy }) => {
   const [enemyHp, setEnemyHp] = useState(enemy.hp);
   return (
     <View style={styles.card}>
+      <Text>Initiative: {listNum}</Text>
       <Text style={styles.name}>{enemy.name} {enemy.enemyId}</Text>
       <Text>{enemy.description}</Text>
       <Text>HP: {enemyHp}</Text>
