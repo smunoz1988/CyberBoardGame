@@ -8,7 +8,6 @@ const EnemyInitiative = ({ listNum, enemy, onEnemyDelete }) => {
     <View style={styles.card}>
       <Text>Initiative: {listNum}</Text>
       <Text style={styles.name}>{enemy.name} {enemy.enemyId}</Text>
-      <Text>{enemy.description}</Text>
       <Text>HP: {enemyHp}</Text>
       <TouchableOpacity 
         disabled={enemyHp <= 0} 
