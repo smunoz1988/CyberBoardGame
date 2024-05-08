@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import EnemyInitiative from "../Components/EnemyInitiative";
 import MercenaryInitiative from '../Components/MercenaryInitiative';
 
@@ -10,7 +10,8 @@ const MissionIntro = ({ route }) => {
 
   const mercenaryArray = Object.keys(selectedMercenaries).map(key => ({
     type: 'mercenary',
-    name: selectedMercenaries[key]
+    name: selectedMercenaries[key].name,
+    hp: selectedMercenaries[key].hp,
   }));
 
   const typedEnemies = enemies.flatMap(enemy =>
@@ -41,32 +42,42 @@ const MissionIntro = ({ route }) => {
   }
 
   return (
-    <ScrollView>
+    <View style={style.container}>
       <Text style={style.clock}>tiempo atras</Text>
       <Text style={style.clock}>turn: {turn}</Text>
-      {initiativesList.map((character, index) => {
-        const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.type}-${index}`;
-        if (character.type === 'enemy') {
-          return <EnemyInitiative key={key} listNum={index+1} enemy={character} onEnemyDelete={() => handleDeleteCharacter(character)}/>;
-        } else {
-          return <MercenaryInitiative key={key} listNum={index+1} mercenary={character} />
-        }
-      })}
+      <ScrollView>
+        {initiativesList.map((character, index) => {
+          const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.type}-${index}`;
+          if (character.type === 'enemy') {
+            return <EnemyInitiative key={key} listNum={index+1} enemy={character} onEnemyDelete={() => handleDeleteCharacter(character)}/>;
+          } else {
+            return <MercenaryInitiative key={key} listNum={index+1} mercenary={character} onMercenaryDelete={() => handleDeleteCharacter(character)} />
+          }
+        })}
+      </ScrollView>
       <TouchableOpacity style={style.startButton} onPress={() => shuffleArray(initiativesList)}>
         <Text style={style.startButtonText}>Launch Initiatives</Text>
       </TouchableOpacity>
-    </ScrollView>
+    </View>
   )
 }
 
 const style = StyleSheet.create({
+  container : {
+    flex: 1,
+    backgroundColor: 'black',
+    padding: 20,
+  },
   clock: {
-    fontSize: 20,
-    textAlign: 'center',
-    marginTop: 50
+    fontSize: 24,
+    color: '#bb00ff', // Neon purple
+    textShadowColor: '#bb00ff',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 10,
+    fontFamily: 'Orbitron_900Black',
   },
   startButton: {
-    backgroundColor: '#39FF14',
+    backgroundColor: '#bb00ff',
     opacity: 0.8,
     padding: 10,
     borderRadius: 10,
@@ -80,6 +91,9 @@ const style = StyleSheet.create({
     fontFamily: 'Orbitron_900Black',
     color: 'white',
     fontSize: 16, // Adjust text size as needed
+    textShadowColor: 'white',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 10,
   },
 });
 

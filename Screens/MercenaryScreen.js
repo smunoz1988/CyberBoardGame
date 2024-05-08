@@ -39,12 +39,12 @@ const MercenaryScreen = ({ route, navigation }) => {
   const handleMercenarySelect = (mercenary) => {
       setSelectedMercenaries(prev => ({
         ...prev,
-        [currentPlayerIndex]: mercenary.name
+        [currentPlayerIndex]: { name: mercenary.name, hp: mercenary.health }
       }));
       setCurrentPlayerIndex((currentPlayerIndex + 1) % playerNames.length);
   };
 
-  const allMercenariesSelected = Object.values(selectedMercenaries).every(name => name !== null);
+  const allMercenariesSelected = Object.values(selectedMercenaries).every(merc => merc !== null && merc.name && merc.hp !== undefined);
 
   return (
     <View style={styles.container}>
@@ -65,7 +65,7 @@ const MercenaryScreen = ({ route, navigation }) => {
       <Text>Players:</Text>
       {playerNames.map((name, index) => (
         <Text key={index} style={styles.playerName}>
-          Player {index + 1}: {selectedMercenaries[index] ? selectedMercenaries[index] : 'Not selected'}
+          Player {index + 1}: {selectedMercenaries[index] ? selectedMercenaries[index].name : 'Not selected'}
         </Text>
       ))}
       <Text>Mission: {mission.name}</Text>
@@ -74,7 +74,7 @@ const MercenaryScreen = ({ route, navigation }) => {
       <FlatList
         data={mercenaries}
         renderItem={({ item }) => {
-          const isDisabled = Object.values(selectedMercenaries).includes(item.name);
+          const isDisabled = Object.values(selectedMercenaries).some(merc => merc && merc.name === item.name);
           return (
           <MercenaryItem 
             mercenary={item} 
