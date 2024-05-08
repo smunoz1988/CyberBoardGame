@@ -8,17 +8,17 @@
         "enemies": [
           {
             "name": "Tech Soldier",
-            "quantity": 1,
+            "quantity": 2,
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
-            "hp": 6
+            "hp": 12
           },
           {
             "name": "Iron Caveman",
             "quantity": 1,
             "image": "Enemy2Image",
             "description": "Iron armored caveman",
-            "hp": 10
+            "hp": 18
           }
         ]
       },
@@ -30,14 +30,14 @@
             "quantity": 1,
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
-            "hp": 6
+            "hp": 12
           },
           {
             "name": "Iron Caveman",
             "quantity": 1,
             "image": "Enemy2Image",
             "description": "Iron armored caveman",
-            "hp": 10
+            "hp": 18
           }
         ]
       }
@@ -55,14 +55,14 @@
             "quantity": 3,
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
-            "hp": 6
+            "hp": 12
           },
           {
             "name": "Iron Caveman",
             "quantity": 1,
             "image": "Enemy2Image",
             "description": "Iron armored caveman",
-            "hp": 10
+            "hp": 18
           }
         ]
       },
@@ -74,14 +74,14 @@
             "quantity": 2,
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
-            "hp": 6
+            "hp": 12
           },
           {
             "name": "Iron Caveman",
             "quantity": 1,
             "image": "Enemy2Image",
             "description": "Iron armored caveman",
-            "hp": 10
+            "hp": 18
           }
         ]
       },
@@ -93,14 +93,14 @@
             "quantity": 5,
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
-            "hp": 6
+            "hp": 12
           },
           {
             "name": "Iron Caveman",
             "quantity": 1,
             "image": "Enemy2Image",
             "description": "Iron armored caveman",
-            "hp": 10
+            "hp": 18
           }
         ]
       }
@@ -118,14 +118,14 @@
             "quantity": 3,
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
-            "hp": 6
+            "hp": 12
           },
           {
             "name": "Iron Caveman",
             "quantity": 1,
             "image": "Enemy2Image",
             "description": "Iron armored caveman",
-            "hp": 10
+            "hp": 18
           }
         ]
       },
@@ -137,14 +137,14 @@
             "quantity": 3,
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
-            "hp": 6
+            "hp": 12
           },
           {
             "name": "Iron Caveman",
             "quantity": 1,
             "image": "Enemy2Image",
             "description": "Iron armored caveman",
-            "hp": 10
+            "hp": 18
           }
         ]
       }
