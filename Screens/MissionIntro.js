@@ -45,10 +45,12 @@ const MissionIntro = ({ route }) => {
   return (
     <View style={style.container}>
       <Timer />
+      <Text style={style.turn}>Mission: {mission.name}</Text>
+      <Text style={style.turn}>Objective: {mission.objective}</Text>
       <Text style={style.turn}>Turn: {turn}</Text>
       <ScrollView>
         {initiativesList.map((character, index) => {
-          const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.type}-${index}`;
+          const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.name}`;
           if (character.type === 'enemy') {
             return <EnemyInitiative key={key} listNum={index+1} enemy={character} onEnemyDelete={() => handleDeleteCharacter(character)}/>;
           } else {

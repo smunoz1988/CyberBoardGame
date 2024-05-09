@@ -1,25 +1,25 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const MercenaryInitiative = ({ listNum, mercenary, onMercenaryDelete }) => {
   const [mercenaryHp, setMercenaryHp] = useState(mercenary.hp);
+
   return (
     <View style={styles.card}>
-      <Text>Initiative: {listNum}</Text>
+      <Text style={styles.initiativeText}>Initiative: {listNum}</Text>
       <Text style={styles.name}>{mercenary.name}</Text>
-      <Text>HP: {mercenaryHp}</Text>
+      <Text style={styles.hpText}>HP: {mercenaryHp}</Text>
       <TouchableOpacity 
         disabled={mercenaryHp <= 0} 
         style={[styles.damageButtons, mercenaryHp <= 0 && styles.disabledButton]} 
         onPress={() => setMercenaryHp(mercenaryHp - 1)}>
-        <Text>Damage</Text>
+        <Text style={styles.buttonText}>Damage</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.cureButtons} onPress={() => setMercenaryHp(mercenaryHp + 1)}>
-        <Text>Cure</Text>
+        <Text style={styles.buttonText}>Cure</Text>
       </TouchableOpacity>
       {mercenaryHp <= 0 && <TouchableOpacity style={styles.deleteButtons} onPress={() => onMercenaryDelete(mercenary)}>
-        <Text>Remove Hero</Text>
+        <Text style={styles.buttonText}>Remove Hero</Text>
       </TouchableOpacity>}
     </View>
   );
@@ -29,19 +29,25 @@ const styles = StyleSheet.create({
   card: {
     padding: 10,
     margin: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',  // Dark background
     borderRadius: 10,
+    borderWidth: 8,
+    borderColor: '#fff',  // White border for visibility
     elevation: 3,
     alignItems: 'center',
   },
-  image: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+  initiativeText: {
+    color: 'white',  // Light text for visibility
+    fontSize: 16,
+    marginBottom: 5,
   },
   name: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#bb00ff',  // Neon purple for names
+  },
+  hpText: {
+    color: 'white',  // Light text for visibility
   },
   damageButtons: {
     backgroundColor: 'red',
@@ -52,14 +58,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     width: 50,
-    opacity: 0.5,
+    opacity: 0.8,
   },
   disabledButton: {
     opacity: 0.3,
-    backgroundColor: 'grey',  // This can be adjusted to suit your design preferences
+    backgroundColor: 'grey',  // Adjust background for disabled state
   },
   cureButtons: {
-    backgroundColor: '#39FF14',
+    backgroundColor: '#39FF14',  // Neon green for cure buttons
     marginHorizontal: 20,
     padding: 10,
     borderRadius: 10,
@@ -67,10 +73,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     width: 50,
-    opacity: 0.5,
+    opacity: 0.8,
   },
   deleteButtons: {
-    backgroundColor: 'black',
+    backgroundColor: 'darkred',  // Dark red for delete buttons
     marginHorizontal: 20,
     padding: 10,
     borderRadius: 10,
@@ -78,7 +84,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     width: 200,
-    opacity: 0.5,
+    opacity: 0.8,
+  },
+  buttonText: {
+    color: 'white',  // Light text on buttons for visibility
+    fontWeight: 'bold',
   },
 });
 

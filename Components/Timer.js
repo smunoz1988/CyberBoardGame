@@ -14,7 +14,7 @@ const Timer = () => {
     } else if (!isRunning || seconds === 0) {
       clearInterval(intervalId);
       if (seconds === 0) {
-        alert('Valieron Mijos!');
+        alert('Valieron Mijas!');
         setIsRunning(false);
       }
     }
