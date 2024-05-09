@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { View, ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import EnemyInitiative from "../Components/EnemyInitiative";
 import MercenaryInitiative from '../Components/MercenaryInitiative';
+import Timer from '../Components/Timer';
 
 const MissionIntro = ({ route }) => {
   const { selectedMercenaries, mission } = route.params;
@@ -43,8 +44,8 @@ const MissionIntro = ({ route }) => {
 
   return (
     <View style={style.container}>
-      <Text style={style.clock}>tiempo atras</Text>
-      <Text style={style.clock}>turn: {turn}</Text>
+      <Timer />
+      <Text style={style.turn}>Turn: {turn}</Text>
       <ScrollView>
         {initiativesList.map((character, index) => {
           const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.type}-${index}`;
@@ -68,7 +69,7 @@ const style = StyleSheet.create({
     backgroundColor: 'black',
     padding: 20,
   },
-  clock: {
+  turn: {
     fontSize: 24,
     color: '#bb00ff', // Neon purple
     textShadowColor: '#bb00ff',
