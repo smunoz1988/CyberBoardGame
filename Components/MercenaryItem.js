@@ -17,6 +17,7 @@ const MercenaryItem = ({ mercenary, onMercenarySelect, isDisabled }) => {
                 <Text style={styles.mercenariesStyles}>{style}</Text>
             </View>
             ))}
+            <Text style={styles.mercenaryHealth}>Hiring cost: {mercenary.contractCost}</Text>
         </View>
     </TouchableOpacity>
   );

@@ -8,6 +8,7 @@ const MercenaryScreen = ({ route, navigation }) => {
   const { playerNames, mission } = route.params;
   const [selectedMercenaries, setSelectedMercenaries] = useState({});
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
+  const [availableTokens, setAvailableTokens] = useState(15);
   const moveAnimation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -31,17 +32,33 @@ const MercenaryScreen = ({ route, navigation }) => {
     ).start();
   }, [moveAnimation]);
 
+  const resetSelections = () => {
+    setSelectedMercenaries(playerNames.reduce((acc, name, index) => ({ ...acc, [index]: null }), {}));
+    setAvailableTokens(15); 
+    setCurrentPlayerIndex(0);
+  };
+
   const movingMargin = moveAnimation.interpolate({
     inputRange: [0, 1],
     outputRange: [-50, 50], 
   });
 
   const handleMercenarySelect = (mercenary) => {
-      setSelectedMercenaries(prev => ({
-        ...prev,
-        [currentPlayerIndex]: { name: mercenary.name, hp: mercenary.health }
-      }));
-      setCurrentPlayerIndex((currentPlayerIndex + 1) % playerNames.length);
+    const currentSelection = selectedMercenaries[currentPlayerIndex];
+
+    const tokensToRefund = currentSelection ? mercenaries.find(m => m.name === currentSelection.name).contractCost : 0;
+    const newCost = mercenary.contractCost;
+
+    if (availableTokens + tokensToRefund >= newCost) {
+        setSelectedMercenaries(prev => ({
+            ...prev,
+            [currentPlayerIndex]: { name: mercenary.name, hp: mercenary.health }
+        }));
+        setCurrentPlayerIndex((currentPlayerIndex + 1) % playerNames.length);
+        setAvailableTokens(prevTokens => prevTokens + tokensToRefund - newCost);
+    } else {
+        alert("Not enough tokens to hire this mercenary.");
+    }
   };
 
   const allMercenariesSelected = Object.values(selectedMercenaries).every(merc => merc !== null && merc.name && merc.hp !== undefined);
@@ -70,7 +87,13 @@ const MercenaryScreen = ({ route, navigation }) => {
       ))}
       <Text>Mission: {mission.name}</Text>
       <Text>Objective: {mission.objective}</Text>
+      <Text>Available Tokens: {availableTokens}</Text>
       <NeonTextSelect>Choose your Mercenary: {playerNames[currentPlayerIndex]}</NeonTextSelect>
+      <TouchableOpacity
+        style={styles.resetButton}
+        onPress={resetSelections}>
+        <Text style={styles.resetButtonText}>Reset Selections</Text>
+      </TouchableOpacity>
       <FlatList
         data={mercenaries}
         renderItem={({ item }) => {
