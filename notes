@@ -1,10 +1,19 @@
 1. checar posibilidad de hacer una pantalla previa donde el usuario elija si empezar una nueva partida o 
 irse a una pantalla donde se muestre lore. ver mas opciones de que se puede mostrar.
 
-2. miercoles, encontrar una solucion para el tiempo. debe mostrarse en pantalla y tener dos botones o uno para parar y empezar
-
 fuente titulo: https://fonts.google.com/specimen/Black+Ops+One?preview.text=EMPERYOR&query=ps
 
 referencias diseno:
 
 https://www.freepik.es/vector-gratis/plantilla-diseno-cartel-estetica-ano-2000_154651857.htm#fromView=search&page=1&position=40&uuid=77b9a257-e3ab-4151-92a9-7b80842c7fa3
+
+
+al pausar reloj, se mueve la ficha de token y se resuelven las condiciones del nivel (cartas de nivel). el usuario elige la opcion que salio.
+poner el nombre del usuario, player junto a su mercenario. 
+
+Nota: poner licencia en readme.
+
+
+cuando se baja o sube vida, el ataque y movimiento se estan actualizando. eso no debe pasar / al turno 0 no deberia pasar mostrarse el ataque y movimiento. 
+incluir un check para ir pasando los turnos de enemigos y mercenarios. 
+pomer limite para que no se pueda subi mas del limite de la vida.

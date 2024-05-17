@@ -1,12 +1,18 @@
-import React from 'react';
-import { useState } from 'react'; 
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const EnemyInitiative = ({ listNum, enemy, onEnemyDelete }) => {
   const [enemyHp, setEnemyHp] = useState(enemy.hp);
+
+  const getRandomDice = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   return (
     <View style={styles.card}>
       <Text>Initiative: {listNum}</Text>
+      <Text>Move: {getRandomDice(enemy.moveMin, enemy.moveMax)}</Text>
+      <Text>Attack: {getRandomDice(enemy.attackMin, enemy.attackMax)}</Text>
       <Text style={styles.name}>{enemy.name} {enemy.enemyId}</Text>
       <Text>HP: {enemyHp}</Text>
       <TouchableOpacity 
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
   },
   disabledButton: {
     opacity: 0.3,
-    backgroundColor: 'grey',  // This can be adjusted to suit your design preferences
+    backgroundColor: 'grey',
   },
   cureButtons: {
     backgroundColor: '#39FF14',

@@ -1,150 +1,32 @@
 [
   {
-    "name": "Temple",
+    "name": "Prueba 2",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.",
     "objectives": [
       {
-        "objective": "Eliminate target",
+        "objective": "Probar movimiento y ataque",
         "enemies": [
           {
             "name": "Tech Soldier",
-            "quantity": 2,
+            "quantity": 7,
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
-            "hp": 12
+            "hp": 12,
+            "moveMin": 1,
+            "moveMax": 3,
+            "attackMin": 1,
+            "attackMax": 5
           },
           {
             "name": "Iron Caveman",
             "quantity": 1,
             "image": "Enemy2Image",
             "description": "Iron armored caveman",
-            "hp": 18
-          }
-        ]
-      },
-      {
-        "objective": "Defend the target",
-        "enemies": [
-          {
-            "name": "Tech Soldier",
-            "quantity": 1,
-            "image": "Enemy1Image",
-            "description": "Technology-enhanced soldier",
-            "hp": 12
-          },
-          {
-            "name": "Iron Caveman",
-            "quantity": 1,
-            "image": "Enemy2Image",
-            "description": "Iron armored caveman",
-            "hp": 18
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Barracks",
-    "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming.",
-    "objectives": [
-      {
-        "objective": "Hack 1 computer",
-        "enemies": [
-          {
-            "name": "Tech Soldier",
-            "quantity": 3,
-            "image": "Enemy1Image",
-            "description": "Technology-enhanced soldier",
-            "hp": 12
-          },
-          {
-            "name": "Iron Caveman",
-            "quantity": 1,
-            "image": "Enemy2Image",
-            "description": "Iron armored caveman",
-            "hp": 18
-          }
-        ]
-      },
-      {
-        "objective": "Hack 2 computers",
-        "enemies": [
-          {
-            "name": "Tech Soldier",
-            "quantity": 2,
-            "image": "Enemy1Image",
-            "description": "Technology-enhanced soldier",
-            "hp": 12
-          },
-          {
-            "name": "Iron Caveman",
-            "quantity": 1,
-            "image": "Enemy2Image",
-            "description": "Iron armored caveman",
-            "hp": 18
-          }
-        ]
-      },
-      {
-        "objective": "Hack 3 computers",
-        "enemies": [
-          {
-            "name": "Tech Soldier",
-            "quantity": 5,
-            "image": "Enemy1Image",
-            "description": "Technology-enhanced soldier",
-            "hp": 12
-          },
-          {
-            "name": "Iron Caveman",
-            "quantity": 1,
-            "image": "Enemy2Image",
-            "description": "Iron armored caveman",
-            "hp": 18
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Bunker",
-    "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "objectives": [
-      {
-        "objective": "Deactivate the bomb",
-        "enemies": [
-          {
-            "name": "Tech Soldier",
-            "quantity": 3,
-            "image": "Enemy1Image",
-            "description": "Technology-enhanced soldier",
-            "hp": 12
-          },
-          {
-            "name": "Iron Caveman",
-            "quantity": 1,
-            "image": "Enemy2Image",
-            "description": "Iron armored caveman",
-            "hp": 18
-          }
-        ]
-      },
-      {
-        "objective": "Kill all enemies",
-        "enemies": [
-          {
-            "name": "Tech Soldier",
-            "quantity": 3,
-            "image": "Enemy1Image",
-            "description": "Technology-enhanced soldier",
-            "hp": 12
-          },
-          {
-            "name": "Iron Caveman",
-            "quantity": 1,
-            "image": "Enemy2Image",
-            "description": "Iron armored caveman",
-            "hp": 18
+            "hp": 18,
+            "moveMin": 1,
+            "moveMax": 2,
+            "attackMin": 5,
+            "attackMax": 10
           }
         ]
       }

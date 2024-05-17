@@ -21,6 +21,10 @@ const MissionIntro = ({ route }) => {
       name: enemy.name,
       enemyId: i + 1,
       hp: enemy.hp,
+      moveMin: enemy.moveMin,
+      moveMax: enemy.moveMax,
+      attackMin: enemy.attackMin,
+      attackMax: enemy.attackMax,
     }))
   );
 
