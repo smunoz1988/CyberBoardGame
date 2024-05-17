@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const EnemyInitiative = ({ listNum, enemy, onEnemyDelete }) => {
   const [enemyHp, setEnemyHp] = useState(enemy.hp);
 
-  const getRandomDice = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
   return (
     <View style={styles.card}>
       <Text>Initiative: {listNum}</Text>
-      <Text>Move: {getRandomDice(enemy.moveMin, enemy.moveMax)}</Text>
-      <Text>Attack: {getRandomDice(enemy.attackMin, enemy.attackMax)}</Text>
+      <Text>Move: {enemy.move}</Text>
+      <Text>Attack: {enemy.attack}</Text>
       <Text style={styles.name}>{enemy.name} {enemy.enemyId}</Text>
       <Text>HP: {enemyHp}</Text>
-      <TouchableOpacity 
-        disabled={enemyHp <= 0} 
-        style={[styles.damageButtons, enemyHp <= 0 && styles.disabledButton]} 
-        onPress={() => setEnemyHp(enemyHp - 1)}>
+      <TouchableOpacity
+        disabled={enemyHp <= 0}
+        style={[styles.damageButtons, enemyHp <= 0 && styles.disabledButton]}
+        onPress={() => setEnemyHp(enemyHp - 1)}
+      >
         <Text>Damage</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.cureButtons} onPress={() => setEnemyHp(enemyHp + 1)}>
@@ -39,11 +36,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 3,
     alignItems: 'center',
-  },
-  image: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
   },
   name: {
     fontSize: 16,

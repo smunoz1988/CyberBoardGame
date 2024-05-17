@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { View, ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import EnemyInitiative from "../Components/EnemyInitiative";
 import MercenaryInitiative from '../Components/MercenaryInitiative';
@@ -8,6 +7,10 @@ import Timer from '../Components/Timer';
 const MissionIntro = ({ route }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
+
+  const getRandomDice = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
 
   const mercenaryArray = Object.keys(selectedMercenaries).map(key => ({
     type: 'mercenary',
@@ -25,6 +28,8 @@ const MissionIntro = ({ route }) => {
       moveMax: enemy.moveMax,
       attackMin: enemy.attackMin,
       attackMax: enemy.attackMax,
+      move: getRandomDice(enemy.moveMin, enemy.moveMax), // Initial random move
+      attack: getRandomDice(enemy.attackMin, enemy.attackMax), // Initial random attack
     }))
   );
 
@@ -33,18 +38,29 @@ const MissionIntro = ({ route }) => {
   const [turn, setTurn] = useState(0);
 
   const shuffleArray = (originalArray) => {
-    let array = [...originalArray]; 
+    let array = originalArray.map(character => {
+      if (character.type === 'enemy') {
+        return {
+          ...character,
+          move: getRandomDice(character.moveMin, character.moveMax),
+          attack: getRandomDice(character.attackMin, character.attackMax),
+        };
+      }
+      return character;
+    });
+
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];  
+      [array[i], array[j]] = [array[j], array[i]];
     }
+
     setInitiativesList(array);
     setTurn(prevTurn => prevTurn + 1);
   };
 
   const handleDeleteCharacter = (character) => {
     setInitiativesList(initiativesList.filter(item => item !== character));
-  }
+  };
 
   return (
     <View style={style.container}>
@@ -56,9 +72,9 @@ const MissionIntro = ({ route }) => {
         {initiativesList.map((character, index) => {
           const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.name}`;
           if (character.type === 'enemy') {
-            return <EnemyInitiative key={key} listNum={index+1} enemy={character} onEnemyDelete={() => handleDeleteCharacter(character)}/>;
+            return <EnemyInitiative key={key} listNum={index + 1} enemy={character} onEnemyDelete={() => handleDeleteCharacter(character)} />;
           } else {
-            return <MercenaryInitiative key={key} listNum={index+1} mercenary={character} onMercenaryDelete={() => handleDeleteCharacter(character)} />
+            return <MercenaryInitiative key={key} listNum={index + 1} mercenary={character} onMercenaryDelete={() => handleDeleteCharacter(character)} />;
           }
         })}
       </ScrollView>
@@ -66,11 +82,11 @@ const MissionIntro = ({ route }) => {
         <Text style={style.startButtonText}>Launch Initiatives</Text>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
 const style = StyleSheet.create({
-  container : {
+  container: {
     flex: 1,
     backgroundColor: 'black',
     padding: 20,
@@ -91,7 +107,6 @@ const style = StyleSheet.create({
     alignItems: 'center', // Center text horizontally
     justifyContent: 'center', // Center text vertically
     height: 50, // Set a fixed height
-    opacity: 0.8, // You can adjust the opacity for disabled state as needed
     margin: 20,
   },
   startButtonText: {
