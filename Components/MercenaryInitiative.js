@@ -10,12 +10,12 @@ const MercenaryInitiative = ({ listNum, mercenary, onMercenaryDelete }) => {
       <Text style={styles.name}>{mercenary.name}</Text>
       <Text style={styles.hpText}>HP: {mercenaryHp}</Text>
       <TouchableOpacity 
-        disabled={mercenaryHp <= 0} 
+        disabled={mercenaryHp <= 0}
         style={[styles.damageButtons, mercenaryHp <= 0 && styles.disabledButton]} 
         onPress={() => setMercenaryHp(mercenaryHp - 1)}>
         <Text style={styles.buttonText}>Damage</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.cureButtons} onPress={() => setMercenaryHp(mercenaryHp + 1)}>
+      <TouchableOpacity disabled={mercenaryHp == mercenary.hp} style={[styles.cureButtons, mercenaryHp == mercenary.hp && styles.disabledButton]} onPress={() => setMercenaryHp(mercenaryHp + 1)}>
         <Text style={styles.buttonText}>Cure</Text>
       </TouchableOpacity>
       {mercenaryHp <= 0 && <TouchableOpacity style={styles.deleteButtons} onPress={() => onMercenaryDelete(mercenary)}>

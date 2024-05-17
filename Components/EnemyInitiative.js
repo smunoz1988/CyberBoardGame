@@ -22,7 +22,7 @@ const EnemyInitiative = ({ listNum, enemy, onEnemyDelete, turn }) => {
       >
         <Text>Damage</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.cureButtons} onPress={() => setEnemyHp(enemyHp + 1)}>
+      <TouchableOpacity disabled={enemyHp == enemy.hp} style={[styles.cureButtons, enemyHp == enemy.hp && styles.disabledButton]} onPress={() => setEnemyHp(enemyHp + 1)}>
         <Text>Cure</Text>
       </TouchableOpacity>
       {enemyHp <= 0 && <TouchableOpacity style={styles.deleteButtons} onPress={() => onEnemyDelete(enemy)}>
