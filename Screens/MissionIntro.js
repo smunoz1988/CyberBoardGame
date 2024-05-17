@@ -7,6 +7,7 @@ import Timer from '../Components/Timer';
 const MissionIntro = ({ route }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
+  const [turn, setTurn] = useState(0);
 
   const getRandomDice = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -35,7 +36,7 @@ const MissionIntro = ({ route }) => {
 
   const combinedArray = [...mercenaryArray, ...typedEnemies];
   const [initiativesList, setInitiativesList] = useState(combinedArray);
-  const [turn, setTurn] = useState(0);
+
 
   const shuffleArray = (originalArray) => {
     let array = originalArray.map(character => {
@@ -72,7 +73,7 @@ const MissionIntro = ({ route }) => {
         {initiativesList.map((character, index) => {
           const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.name}`;
           if (character.type === 'enemy') {
-            return <EnemyInitiative key={key} listNum={index + 1} enemy={character} onEnemyDelete={() => handleDeleteCharacter(character)} />;
+            return <EnemyInitiative key={key} listNum={index + 1} enemy={character} onEnemyDelete={() => handleDeleteCharacter(character)} turn={turn} />;
           } else {
             return <MercenaryInitiative key={key} listNum={index + 1} mercenary={character} onMercenaryDelete={() => handleDeleteCharacter(character)} />;
           }

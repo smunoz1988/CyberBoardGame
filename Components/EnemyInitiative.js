@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const EnemyInitiative = ({ listNum, enemy, onEnemyDelete }) => {
+const EnemyInitiative = ({ listNum, enemy, onEnemyDelete, turn }) => {
   const [enemyHp, setEnemyHp] = useState(enemy.hp);
 
   return (
     <View style={styles.card}>
       <Text>Initiative: {listNum}</Text>
-      <Text>Move: {enemy.move}</Text>
-      <Text>Attack: {enemy.attack}</Text>
+      {turn !== 0 && (
+        <>
+          <Text>Move: {enemy.move}</Text>
+          <Text>Attack: {enemy.attack}</Text>
+        </>
+      )}
       <Text style={styles.name}>{enemy.name} {enemy.enemyId}</Text>
       <Text>HP: {enemyHp}</Text>
       <TouchableOpacity
