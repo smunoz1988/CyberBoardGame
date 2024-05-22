@@ -6,34 +6,44 @@ const MercenaryInitiative = ({ listNum, mercenary, onMercenaryDelete }) => {
 
   return (
     <View style={styles.card}>
-      <Text style={styles.initiativeText}>Initiative: {listNum}</Text>
-      <Text style={styles.name}>{mercenary.name}</Text>
-      <Text style={styles.hpText}>HP: {mercenaryHp}</Text>
-      <TouchableOpacity 
-        disabled={mercenaryHp <= 0}
-        style={[styles.damageButtons, mercenaryHp <= 0 && styles.disabledButton]} 
-        onPress={() => setMercenaryHp(mercenaryHp - 1)}>
-        <Text style={styles.buttonText}>Damage</Text>
-      </TouchableOpacity>
+      <Text style={styles.initiativeText}>{listNum}</Text>
       <TouchableOpacity disabled={mercenaryHp == mercenary.hp} style={[styles.cureButtons, mercenaryHp == mercenary.hp && styles.disabledButton]} onPress={() => setMercenaryHp(mercenaryHp + 1)}>
         <Text style={styles.buttonText}>Cure</Text>
       </TouchableOpacity>
-      {mercenaryHp <= 0 && <TouchableOpacity style={styles.deleteButtons} onPress={() => onMercenaryDelete(mercenary)}>
-        <Text style={styles.buttonText}>Remove Hero</Text>
-      </TouchableOpacity>}
+      <View style={styles.titleHpCont}>
+        <Text style={styles.name}>{mercenary.name}</Text>
+        <Text style={styles.hpText}>HP: {mercenaryHp}</Text>
+      </View>
+      {mercenaryHp > 0? (
+        <TouchableOpacity 
+          style={[styles.damageButtons]}
+          onPress={() => setMercenaryHp(mercenaryHp - 1)}>
+          <Text style={styles.buttonText}>Damage</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity 
+          style={styles.deleteButtons} 
+          onPress={() => onMercenaryDelete(mercenary)}>
+          <Text style={styles.buttonText}>Remove Hero</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    padding: 10,
     margin: 10,
+    padding: 10,
     backgroundColor: '#000',  // Dark background
     borderRadius: 10,
     borderWidth: 8,
     borderColor: '#fff',  // White border for visibility
     elevation: 3,
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  titleHpCont: {
     alignItems: 'center',
   },
   initiativeText: {
@@ -62,7 +72,7 @@ const styles = StyleSheet.create({
   },
   disabledButton: {
     opacity: 0.3,
-    backgroundColor: 'grey',  // Adjust background for disabled state
+    backgroundColor: 'white',  // Adjust background for disabled state
   },
   cureButtons: {
     backgroundColor: '#39FF14',  // Neon green for cure buttons
@@ -83,7 +93,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 50,
-    width: 200,
+    width: 50,
     opacity: 0.8,
   },
   buttonText: {

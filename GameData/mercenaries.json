@@ -3,70 +3,60 @@
     "id": 1,
     "name": "THE WINGED SOLDIER",
     "health": 25,
-    "styles": ["Commando", "Hawk"],
     "contractCost": 3
   },
   {
     "id": 2,
     "name": "GRIMM TRIGGER",
     "health": 19,
-    "styles": ["Sniper Assasin", "Twin Fury"],
     "contractCost": 2
   },
   {
     "id": 3,
     "name": "PHANTOM NINJA",
     "health": 13,
-    "styles": ["Sword Master", "Phantom Phase"],
     "contractCost": 1
   },
   {
     "id": 4,
     "name": "CYBER GHOST",
     "health": 17,
-    "styles": ["Assasin 1", "Assas,in 2"],
     "contractCost": 5
   },
   {
     "id": 5,
     "name": "ICE SOLDIER",
     "health": 25,
-    "styles": ["Ice 1", "Ice 2"],
     "contractCost": 6
   },
   {
     "id": 6,
     "name": "SAMURAI",
     "health": 19,
-    "styles": ["Samurai 1", "Samur,ai 2"],
     "contractCost": 7
   },
   {
     "id": 7,
     "name": "BATTLE MEDIC",
     "health": 17,
-    "styles": ["BM 1", "BM 2"],
     "contractCost": 8
   },
   {
     "id": 8,
     "name": "HUNTER KILLER",
     "health": 17,
-    "styles": ["HK 1", "HK 2"],
     "contractCost": 9
   },
   {
     "id": 9,
     "name": "HACKMASTER",
     "health": 25,
-    "styles": ["HM 1", "HM 2"],
     "contractCost": 6
   },
   {
     "id": 10,
     "name": "DEATH KNIGHT",
     "health": 19,
-    "styles": ["DN 1", "DN 2"],
     "contractCost": 8
   }
 ]

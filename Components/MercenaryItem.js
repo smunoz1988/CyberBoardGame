@@ -11,12 +11,6 @@ const MercenaryItem = ({ mercenary, onMercenarySelect, isDisabled }) => {
         <View>
             <Text style={styles.mercenaryName}>{mercenary.name}</Text>
             <Text style={styles.mercenaryHealth}>Health: {mercenary.health}</Text>
-            <Text style={styles.mercenaryStyles}>Styles:</Text>
-            {mercenary.styles.map((style, index) => (
-            <View key={index}>
-                <Text style={styles.mercenariesStyles}>{style}</Text>
-            </View>
-            ))}
             <Text style={styles.mercenaryHealth}>Hiring cost: {mercenary.contractCost}</Text>
         </View>
     </TouchableOpacity>
@@ -48,14 +42,6 @@ const styles = StyleSheet.create({
   },
   mercenaryHealth: {
     color: '#f00',
-    fontSize: 16,
-  },
-  mercenaryStyles: {
-    color: '#0f0', 
-    fontSize: 16,
-  },
-  mercenariesStyles: {
-    color: '#f0f',
     fontSize: 16,
   },
 });
