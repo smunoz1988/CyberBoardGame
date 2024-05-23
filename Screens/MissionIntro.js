@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { CheckBox } from 'react-native-elements';
-import EnemyInitiative from "../Components/EnemyInitiative";
-import MercenaryInitiative from '../Components/MercenaryInitiative';
+import CharacterInitiative from '../Components/CharacterInitiative';
 import Timer from '../Components/Timer';
 
 const MissionIntro = ({ route }) => {
@@ -100,11 +99,7 @@ const MissionIntro = ({ route }) => {
                   onPress={() => handleCheckboxChange(index,!character.checked)}
                 />
               </View>
-              {character.type === 'enemy'? (
-                <EnemyInitiative listNum={index + 1} enemy={character} onEnemyDelete={() => handleDeleteCharacter(character)} turn={turn} />
-              ) : (
-                <MercenaryInitiative mercenary={character} onMercenaryDelete={() => handleDeleteCharacter(character)} />
-              )}
+                <CharacterInitiative character={character} onCharacterDelete={() => handleDeleteCharacter(character)} />
             </View>
           );
         })}

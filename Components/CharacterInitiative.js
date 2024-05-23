@@ -2,35 +2,54 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
-const MercenaryInitiative = ({ mercenary, onMercenaryDelete }) => {
-  const [mercenaryHp, setMercenaryHp] = useState(mercenary.hp);
+const CharacterInitiative = ({ character, onCharacterDelete }) => {
+  const [characterHp, setcharacterHp] = useState(character.hp);
 
   return (
     <View style={styles.card}>
       <View style={styles.titleHpCont}>
-        <Text style={styles.name}>{mercenary.name}</Text>
+        {character.type === 'enemy' ? (
+          <View style={styles.nameCont}>
+            <Text style={styles.nameEnemy}>{character.name} {character.enemyId}</Text>
+            <View style={styles.titleHpCont}>
+              <Text style={styles.moveTextNum}>{character.move}</Text>
+              <Text style={styles.moveText}>Move</Text>
+            </View>
+            <View style={styles.titleHpCont}>
+              <Text style={styles.attackNum}>{character.attack}</Text>
+              <Text style={styles.attackText}>Attack</Text>
+            </View>
+          </View>
+        ) : (
+          <Text style={styles.name}>{character.name}</Text>
+        )}
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity 
-          disabled={mercenaryHp == mercenary.hp} 
-          style={[styles.cureButtons, mercenaryHp == mercenary.hp && styles.disabledButton]} 
-          onPress={() => setMercenaryHp(mercenaryHp + 1)}>
+          disabled={characterHp == character.hp} 
+          style={[styles.cureButtons, characterHp == character.hp && styles.disabledButton]} 
+          onPress={() => setcharacterHp(characterHp + 1)}>
           <Icon name="heart-circle-plus" size={25} color="white" />
         </TouchableOpacity>
         <View style={styles.titleHpCont}>
-          <Text style={styles.hpTextNum}>{mercenaryHp}</Text>
+          <Text style={styles.hpTextNum}>{characterHp}</Text>
           <Text style={styles.hpText}>HP</Text>
         </View>
-        {mercenaryHp > 0? (
+        {character.type === 'enemy' && (
+            <>
+
+            </>
+          )}
+        {characterHp > 0? (
           <TouchableOpacity 
             style={[styles.damageButtons]}
-            onPress={() => setMercenaryHp(mercenaryHp - 1)}>
+            onPress={() => setcharacterHp(characterHp - 1)}>
             <Icon name="heart-crack" size={25} color="white" />
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
             style={styles.deleteButtons} 
-            onPress={() => onMercenaryDelete(mercenary)}>
+            onPress={() => onCharacterDelete(character)}>
             <Icon name="skull" size={25} color="white" />
           </TouchableOpacity>
         )}
@@ -49,15 +68,23 @@ const styles = StyleSheet.create({
   titleHpCont: {
     alignItems: 'center',
   },
-  initiativeText: {
-    color: 'white',  // Light text for visibility
-    fontSize: 16,
-    marginBottom: 5,
-  },
   name: {
     fontSize: 16,
     fontFamily: 'Orbitron_900Black',
     color: '#bb00ff',  // Neon purple for names
+    marginBottom: 10,
+  },
+  nameCont: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginBottom: 10,
+  },
+  nameEnemy: {
+    fontSize: 16,
+    fontFamily: 'Orbitron_900Black',
+    color: '#39FF14',  // Neon red for enemy names
     marginVertical: 10,
   },
   hpTextNum: {
@@ -69,6 +96,26 @@ const styles = StyleSheet.create({
     color: 'red',
     fontFamily: 'Orbitron_900Black',
     fontSize: 12,
+  },
+  moveTextNum: {
+    color: 'blue',
+    fontFamily: 'Orbitron_900Black',
+    fontSize: 20,
+  },
+  moveText: {
+    color: 'blue',
+    fontFamily: 'Orbitron_900Black',
+    fontSize: 8,
+  },
+  attackNum: {
+    color: 'yellow',
+    fontFamily: 'Orbitron_900Black',
+    fontSize: 20,
+  },
+  attackText: {
+    color: 'yellow',
+    fontFamily: 'Orbitron_900Black',
+    fontSize: 8,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -120,4 +167,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MercenaryInitiative;
+export default CharacterInitiative;
