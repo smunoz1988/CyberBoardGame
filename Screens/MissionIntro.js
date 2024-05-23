@@ -190,7 +190,7 @@ const MissionIntro = ({ route }) => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 25,
+    marginTop: 50,
     paddingHorizontal: 10,
   },
   turn: {
