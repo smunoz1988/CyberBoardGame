@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { CheckBox } from 'react-native-elements';
 import EnemyInitiative from "../Components/EnemyInitiative";
 import MercenaryInitiative from '../Components/MercenaryInitiative';
 import Timer from '../Components/Timer';
@@ -34,8 +35,22 @@ const MissionIntro = ({ route }) => {
     }))
   );
 
-  const combinedArray = [...mercenaryArray, ...typedEnemies];
+  const combinedArray = [...mercenaryArray, ...typedEnemies].map(character => ({
+    ...character,
+    checked: false,
+  }))
   const [initiativesList, setInitiativesList] = useState(combinedArray);
+
+  const handleCheckboxChange = (index, isChecked) => {
+    setInitiativesList(initiativesList.map((character, i) => {
+      if (i === index) {
+        return {...character, checked: isChecked };
+      }
+      return character;
+    }));
+  };
+  
+  const canLaunchInitiatives = () => initiativesList.every(character => character.checked);
 
 
   const shuffleArray = (originalArray) => {
@@ -48,6 +63,10 @@ const MissionIntro = ({ route }) => {
         };
       }
       return character;
+    });
+
+    array.forEach(character => {
+      character.checked = false;
     });
 
     for (let i = array.length - 1; i > 0; i--) {
@@ -66,20 +85,39 @@ const MissionIntro = ({ route }) => {
   return (
     <View style={style.container}>
       <Timer />
-      <Text style={style.turn}>Mission: {mission.name}</Text>
-      <Text style={style.turn}>Objective: {mission.objective}</Text>
-      <Text style={style.turn}>Turn: {turn}</Text>
       <ScrollView>
+        <Text style={style.turn}>Mission: {mission.name}</Text>
+        <Text style={style.turn}>Objective: {mission.objective}</Text>
+        <Text style={style.turn}>Turn: {turn}</Text>
         {initiativesList.map((character, index) => {
           const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.name}`;
-          if (character.type === 'enemy') {
-            return <EnemyInitiative key={key} listNum={index + 1} enemy={character} onEnemyDelete={() => handleDeleteCharacter(character)} turn={turn} />;
-          } else {
-            return <MercenaryInitiative key={key} listNum={index + 1} mercenary={character} onMercenaryDelete={() => handleDeleteCharacter(character)} />;
-          }
+          return (
+            <View key={key} style={style.initiativeContainer}>
+              <View style={style.checkContainer}>
+                <Text style={{ color: 'white' }}>{index + 1}</Text>
+                <CheckBox
+                  checked={character.checked}
+                  onPress={() => handleCheckboxChange(index,!character.checked)}
+                />
+              </View>
+              {character.type === 'enemy'? (
+                <EnemyInitiative listNum={index + 1} enemy={character} onEnemyDelete={() => handleDeleteCharacter(character)} turn={turn} />
+              ) : (
+                <MercenaryInitiative mercenary={character} onMercenaryDelete={() => handleDeleteCharacter(character)} />
+              )}
+            </View>
+          );
         })}
       </ScrollView>
-      <TouchableOpacity style={style.startButton} onPress={() => shuffleArray(initiativesList)}>
+
+      <TouchableOpacity 
+        style={style.startButton}
+        onPress={() => {
+          if (canLaunchInitiatives()) {
+            shuffleArray(initiativesList);
+          }
+        }}
+      >
         <Text style={style.startButtonText}>Launch Initiatives</Text>
       </TouchableOpacity>
     </View>
@@ -89,16 +127,32 @@ const MissionIntro = ({ route }) => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
     padding: 20,
   },
   turn: {
-    fontSize: 24,
+    fontSize: 16,
     color: '#bb00ff', // Neon purple
     textShadowColor: '#bb00ff',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
     fontFamily: 'Orbitron_900Black',
+  },
+  initiativeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+    borderRadius: 10,
+    borderWidth: 6,
+    borderColor: '#fff',  // White border for visibility
+    elevation: 3,
+    backgroundColor: '#2a2a2a', // Dark background
+  },
+  checkContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 10,
   },
   startButton: {
     backgroundColor: '#bb00ff',

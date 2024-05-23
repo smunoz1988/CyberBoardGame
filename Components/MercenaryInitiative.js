@@ -1,47 +1,45 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const MercenaryInitiative = ({ listNum, mercenary, onMercenaryDelete }) => {
+const MercenaryInitiative = ({ mercenary, onMercenaryDelete }) => {
   const [mercenaryHp, setMercenaryHp] = useState(mercenary.hp);
 
   return (
     <View style={styles.card}>
-      <Text style={styles.initiativeText}>{listNum}</Text>
-      <TouchableOpacity disabled={mercenaryHp == mercenary.hp} style={[styles.cureButtons, mercenaryHp == mercenary.hp && styles.disabledButton]} onPress={() => setMercenaryHp(mercenaryHp + 1)}>
-        <Text style={styles.buttonText}>Cure</Text>
-      </TouchableOpacity>
       <View style={styles.titleHpCont}>
         <Text style={styles.name}>{mercenary.name}</Text>
         <Text style={styles.hpText}>HP: {mercenaryHp}</Text>
       </View>
-      {mercenaryHp > 0? (
+      <View style={styles.buttonContainer}>
         <TouchableOpacity 
-          style={[styles.damageButtons]}
-          onPress={() => setMercenaryHp(mercenaryHp - 1)}>
-          <Text style={styles.buttonText}>Damage</Text>
+          disabled={mercenaryHp == mercenary.hp} 
+          style={[styles.cureButtons, mercenaryHp == mercenary.hp && styles.disabledButton]} 
+          onPress={() => setMercenaryHp(mercenaryHp + 1)}>
+          <Text style={styles.buttonText}>Cure</Text>
         </TouchableOpacity>
-      ) : (
-        <TouchableOpacity 
-          style={styles.deleteButtons} 
-          onPress={() => onMercenaryDelete(mercenary)}>
-          <Text style={styles.buttonText}>Remove Hero</Text>
-        </TouchableOpacity>
-      )}
+        {mercenaryHp > 0? (
+          <TouchableOpacity 
+            style={[styles.damageButtons]}
+            onPress={() => setMercenaryHp(mercenaryHp - 1)}>
+            <Text style={styles.buttonText}>Damage</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity 
+            style={styles.deleteButtons} 
+            onPress={() => onMercenaryDelete(mercenary)}>
+            <Text style={styles.buttonText}>Remove Hero</Text>
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    margin: 10,
-    padding: 10,
-    backgroundColor: '#000',  // Dark background
-    borderRadius: 10,
-    borderWidth: 8,
-    borderColor: '#fff',  // White border for visibility
-    elevation: 3,
     alignItems: 'center',
-    flexDirection: 'row',
+    backgroundColor: 'black',
+    padding: 5,
   },
   titleHpCont: {
     alignItems: 'center',
@@ -58,6 +56,11 @@ const styles = StyleSheet.create({
   },
   hpText: {
     color: 'white',  // Light text for visibility
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   damageButtons: {
     backgroundColor: 'red',
