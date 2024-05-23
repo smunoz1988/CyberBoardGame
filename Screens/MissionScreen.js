@@ -4,6 +4,7 @@ import PagerView from 'react-native-pager-view';
 import missions from '../GameData/missions';
 import Enemy1Image from '../assets/tech-soldier.png';
 import Enemy2Image from '../assets/iron-caveman.png';
+import Enemy3Image from '../assets/tricera-bot.png';
 // import TemploMap from '../assets/templo-map.png';
 
 function MissionScreen({ route, navigation }) {
@@ -35,6 +36,9 @@ function MissionScreen({ route, navigation }) {
             break;
           case 'Enemy2Image':
             image = Enemy2Image;
+            break;
+          case 'Enemy3Image':
+            image = Enemy3Image;
             break;
           default:
             image = Enemy1Image;
