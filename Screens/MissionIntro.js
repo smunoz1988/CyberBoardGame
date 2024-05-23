@@ -94,7 +94,7 @@ const MissionIntro = ({ route }) => {
           return (
             <View key={key} style={style.initiativeContainer}>
               <View style={style.checkContainer}>
-                <Text style={{ color: 'white' }}>{index + 1}</Text>
+                <Text style={style.initiativeCounter}>{index + 1}</Text>
                 <CheckBox
                   checked={character.checked}
                   onPress={() => handleCheckboxChange(index,!character.checked)}
@@ -140,7 +140,7 @@ const style = StyleSheet.create({
   initiativeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     marginVertical: 10,
     borderRadius: 10,
     borderWidth: 6,
@@ -153,6 +153,13 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 10,
+    flex: 1,
+  },
+  initiativeCounter: {
+    color: '#fff', // White text for visibility
+    fontSize: 32,
+    fontFamily: 'Orbitron_900Black',
+    paddingRight: 5,
   },
   startButton: {
     backgroundColor: '#bb00ff',

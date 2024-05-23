@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome6';
 
 const MercenaryInitiative = ({ mercenary, onMercenaryDelete }) => {
   const [mercenaryHp, setMercenaryHp] = useState(mercenary.hp);
@@ -8,26 +9,29 @@ const MercenaryInitiative = ({ mercenary, onMercenaryDelete }) => {
     <View style={styles.card}>
       <View style={styles.titleHpCont}>
         <Text style={styles.name}>{mercenary.name}</Text>
-        <Text style={styles.hpText}>HP: {mercenaryHp}</Text>
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity 
           disabled={mercenaryHp == mercenary.hp} 
           style={[styles.cureButtons, mercenaryHp == mercenary.hp && styles.disabledButton]} 
           onPress={() => setMercenaryHp(mercenaryHp + 1)}>
-          <Text style={styles.buttonText}>Cure</Text>
+          <Icon name="heart-circle-plus" size={25} color="white" />
         </TouchableOpacity>
+        <View style={styles.titleHpCont}>
+          <Text style={styles.hpTextNum}>{mercenaryHp}</Text>
+          <Text style={styles.hpText}>HP</Text>
+        </View>
         {mercenaryHp > 0? (
           <TouchableOpacity 
             style={[styles.damageButtons]}
             onPress={() => setMercenaryHp(mercenaryHp - 1)}>
-            <Text style={styles.buttonText}>Damage</Text>
+            <Icon name="heart-crack" size={25} color="white" />
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.deleteButtons} 
             onPress={() => onMercenaryDelete(mercenary)}>
-            <Text style={styles.buttonText}>Remove Hero</Text>
+            <Icon name="skull" size={25} color="white" />
           </TouchableOpacity>
         )}
       </View>
@@ -37,9 +41,10 @@ const MercenaryInitiative = ({ mercenary, onMercenaryDelete }) => {
 
 const styles = StyleSheet.create({
   card: {
-    alignItems: 'center',
     backgroundColor: 'black',
-    padding: 5,
+    flex: 6,
+    justifyContent: 'center',
+    padding: 10,
   },
   titleHpCont: {
     alignItems: 'center',
@@ -51,35 +56,46 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Orbitron_900Black',
     color: '#bb00ff',  // Neon purple for names
+    marginVertical: 10,
+  },
+  hpTextNum: {
+    color: 'red',
+    fontFamily: 'Orbitron_900Black',
+    fontSize: 24,
   },
   hpText: {
-    color: 'white',  // Light text for visibility
+    color: 'red',
+    fontFamily: 'Orbitron_900Black',
+    fontSize: 12,
   },
   buttonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
   damageButtons: {
-    backgroundColor: 'red',
-    marginHorizontal: 20,
+    backgroundColor: '#FF0000', // Semi-transparent black background
     padding: 10,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    borderColor: '#FF0000', // Red neon border
+    borderWidth: 2,
+    shadowColor: '#FF0000', // Red neon shadow
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
     height: 50,
     width: 50,
-    opacity: 0.8,
   },
   disabledButton: {
     opacity: 0.3,
     backgroundColor: 'white',  // Adjust background for disabled state
   },
   cureButtons: {
-    backgroundColor: '#39FF14',  // Neon green for cure buttons
-    marginHorizontal: 20,
+    backgroundColor: 'rgb(0,0,255)',  // Neon green for cure buttons
     padding: 10,
     borderRadius: 10,
     alignItems: 'center',
@@ -90,7 +106,6 @@ const styles = StyleSheet.create({
   },
   deleteButtons: {
     backgroundColor: 'darkred',  // Dark red for delete buttons
-    marginHorizontal: 20,
     padding: 10,
     borderRadius: 10,
     alignItems: 'center',
