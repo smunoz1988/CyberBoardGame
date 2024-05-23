@@ -35,11 +35,6 @@ const CharacterInitiative = ({ character, onCharacterDelete }) => {
           <Text style={styles.hpTextNum}>{characterHp}</Text>
           <Text style={styles.hpText}>HP</Text>
         </View>
-        {character.type === 'enemy' && (
-            <>
-
-            </>
-          )}
         {characterHp > 0? (
           <TouchableOpacity 
             style={[styles.damageButtons]}

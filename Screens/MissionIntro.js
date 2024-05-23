@@ -84,10 +84,21 @@ const MissionIntro = ({ route }) => {
   return (
     <View style={style.container}>
       <Timer />
+      <Text style={style.turn}>Mission: {mission.name}</Text>
+      <Text style={style.turn}>Objective: {mission.objective}</Text>
+      <Text style={style.turn}>Turn: {turn}</Text>
+      {turn == 0 ? (
+        <TouchableOpacity 
+        style={style.startButton}
+        onPress={() => {
+          shuffleArray(initiativesList);
+        }}
+      >
+        <Text style={style.startButtonText}>START GAME</Text>
+      </TouchableOpacity>
+      ) : (
+        <>
       <ScrollView>
-        <Text style={style.turn}>Mission: {mission.name}</Text>
-        <Text style={style.turn}>Objective: {mission.objective}</Text>
-        <Text style={style.turn}>Turn: {turn}</Text>
         {initiativesList.map((character, index) => {
           const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.name}`;
           return (
@@ -110,11 +121,15 @@ const MissionIntro = ({ route }) => {
         onPress={() => {
           if (canLaunchInitiatives()) {
             shuffleArray(initiativesList);
+          } else {
+            alert('Complete all characters turn to launch initiatives.');
           }
         }}
       >
         <Text style={style.startButtonText}>Launch Initiatives</Text>
       </TouchableOpacity>
+      </>
+      )}
     </View>
   );
 };
@@ -122,7 +137,8 @@ const MissionIntro = ({ route }) => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    marginTop: 25,
+    paddingHorizontal: 10,
   },
   turn: {
     fontSize: 16,
@@ -152,7 +168,8 @@ const style = StyleSheet.create({
   },
   initiativeCounter: {
     color: '#fff', // White text for visibility
-    fontSize: 32,
+    fontSize: 25,
+    paddingTop: 10,
     fontFamily: 'Orbitron_900Black',
     paddingRight: 5,
   },
