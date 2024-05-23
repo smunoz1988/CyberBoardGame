@@ -8,10 +8,23 @@ const MissionIntro = ({ route }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
   const [turn, setTurn] = useState(0);
-  const [planTimer, setPlanTimer] = useState(30);
+  const [planTimer, setPlanTimer] = useState(3);
   const [planTimerRunning, setPlanTimerRunning] = useState(false);
   const [gameTimer, setGameTimer] = useState(3600);
   const [gameTimerRunning, setGameTimerRunning] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const [showPause, setShowPause] = useState(true);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (showMessage) {
+        setShowMessage(false);
+      }
+    }
+    , 5000);
+
+    return () => clearInterval(intervalId);
+  }, [showMessage]);
 
   useEffect(() => {
     let intervalId;
@@ -22,7 +35,7 @@ const MissionIntro = ({ route }) => {
     } else if (!planTimerRunning || planTimer === 0) {
       clearInterval(intervalId);
       if (planTimer === 0) {
-        alert('Time to plan is over! Start your turn.');
+        setShowMessage(true);
         setPlanTimerRunning(false);
         setPlanTimer(30);
         setGameTimerRunning(true);
@@ -65,6 +78,7 @@ const MissionIntro = ({ route }) => {
       name: enemy.name,
       enemyId: i + 1,
       hp: enemy.hp,
+      range: enemy.range,
       moveMin: enemy.moveMin,
       moveMax: enemy.moveMax,
       attackMin: enemy.attackMin,
@@ -127,8 +141,35 @@ const MissionIntro = ({ route }) => {
     <View style={style.container}>
       <Text style={style.turn}>Mission: {mission.name}</Text>
       <Text style={style.turn}>Objective: {mission.objective}</Text>
-      <Timer sec={planTimer} title={"Planning Timer"} />
-      <Timer sec={gameTimer} title={"Game Timer"} />
+      <View style={style.timerContainer}>
+        <Timer sec={gameTimer} title={"Game Time"} />
+        {planTimerRunning && <Timer sec={planTimer} title={"Planning Time"} />}
+        {gameTimerRunning && showPause && (
+          <TouchableOpacity
+            style={style.startButton}
+            onPress={() => {
+              setGameTimerRunning(false);
+              setShowPause(false);
+            }}
+          >
+            <Text style={style.startButtonText}>Pause Game</Text>
+          </TouchableOpacity>
+        )}
+
+        {!gameTimerRunning && !showPause && (
+          <TouchableOpacity
+            style={style.startButton}
+            onPress={() => {
+              setGameTimerRunning(true);
+              setShowPause(true);
+            }}
+          >
+            <Text style={style.startButtonText}>Resume Game</Text>
+          </TouchableOpacity>
+        )}
+
+      </View>
+      {showMessage && <Text style={style.alertMessage}>Planning time is over! Game time has started.</Text>}
       {turn == 0 ? (
         <TouchableOpacity 
         style={style.startButton}
@@ -165,7 +206,7 @@ const MissionIntro = ({ route }) => {
           setGameTimerRunning(false);
         }}
       >
-        <Text style={style.startButtonText}>Pause Game</Text>
+        <Text style={style.startButtonText}>End Turn</Text>
       </TouchableOpacity>
       ) : (
       <TouchableOpacity 
@@ -193,6 +234,26 @@ const style = StyleSheet.create({
     marginTop: 50,
     paddingHorizontal: 10,
   },
+  timerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    margin: 10,
+
+  },
+  alertMessage: {
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '25%',
+    width: '50%',
+    height: '20%',
+    backgroundColor: 'rgba(255, 0, 0, 0.8)',
+    color: 'white',
+    padding: 10,
+    borderRadius: 10,
+    textAlign: 'center',
+    zIndex: 1,
+    elevation: 10,
+  },
   turn: {
     fontSize: 16,
     color: '#bb00ff', // Neon purple
@@ -200,6 +261,7 @@ const style = StyleSheet.create({
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
     fontFamily: 'Orbitron_900Black',
+    textAlign: 'center',
   },
   initiativeContainer: {
     flexDirection: 'row',

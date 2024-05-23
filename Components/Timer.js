@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000',
-    marginBottom: 40,
   },
   timerText: {
     fontFamily: 'Orbitron_900Black',
@@ -44,29 +43,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Orbitron_900Black',
     color: 'white',
     fontSize: 50, // Adjust text size as needed
-    textShadowColor: 'white',
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 10,
-    marginBottom: 20,
-  },
-  TouchableOpacityContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '80%',
-  },
-  button: {
-    backgroundColor: '#bb00ff',
-    padding: 10,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 50,
-    width: 80,
-  },
-  buttonText: {
-    fontFamily: 'Orbitron_900Black',
-    color: 'white',
-    fontSize: 16, // Adjust text size as needed
     textShadowColor: 'white',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,

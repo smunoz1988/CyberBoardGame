@@ -19,6 +19,10 @@ const CharacterInitiative = ({ character, onCharacterDelete }) => {
               <Text style={styles.attackNum}>{character.attack}</Text>
               <Text style={styles.attackText}>Attack</Text>
             </View>
+            <View style={styles.titleHpCont}>
+              <Text style={styles.rangeNum}>{character.range}</Text>
+              <Text style={styles.rangeText}>Range</Text>
+            </View>
           </View>
         ) : (
           <Text style={styles.name}>{character.name}</Text>
@@ -109,6 +113,16 @@ const styles = StyleSheet.create({
   },
   attackText: {
     color: 'yellow',
+    fontFamily: 'Orbitron_900Black',
+    fontSize: 8,
+  },
+  rangeNum: {
+    color: 'purple',
+    fontFamily: 'Orbitron_900Black',
+    fontSize: 20,
+  },
+  rangeText: {
+    color: 'purple',
     fontFamily: 'Orbitron_900Black',
     fontSize: 8,
   },
