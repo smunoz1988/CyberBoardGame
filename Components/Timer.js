@@ -1,60 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Timer = () => {
-  const [seconds, setSeconds] = useState(3600);
-  const [isRunning, setIsRunning] = useState(false);
+const Timer = ({sec, title}) => {
 
-  useEffect(() => {
-    let intervalId;
-    if (isRunning && seconds > 0) {
-      intervalId = setInterval(() => {
-        setSeconds((s) => s - 1);
-      }, 1000);
-    } else if (!isRunning || seconds === 0) {
-      clearInterval(intervalId);
-      if (seconds === 0) {
-        alert('Valieron Mijas!');
-        setIsRunning(false);
-      }
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+  
+    let formattedTime = '';
+    if (time < 31) {
+      formattedTime = seconds.toString().padStart(2, '0');
+    } else {
+      formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
-
-    return () => clearInterval(intervalId);
-  }, [isRunning, seconds]);
-
-  const formatTime = (sec) => {
-    const minutes = Math.floor(sec / 60);
-    const seconds = sec % 60;
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-  };
-
-  const startTimer = () => {
-    setIsRunning(true);
-  };
-
-  const stopTimer = () => {
-    setIsRunning(false);
-  };
-
-  const resetTimer = () => {
-    setSeconds(3600);
-    setIsRunning(false);
+  
+    return formattedTime;
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.timerText}>{formatTime(seconds)}</Text>
-      <View style={styles.TouchableOpacityContainer}>
-        <TouchableOpacity style={styles.button} onPress={startTimer} disabled={isRunning}>
-            <Text style={styles.buttonText}>Start</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={stopTimer} disabled={!isRunning}>
-            <Text style={styles.buttonText}>Stop</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={resetTimer}>
-            <Text style={styles.buttonText}>Reset</Text>
-        </TouchableOpacity>
-      </View>
+      <Text style={styles.timerText}>{title}</Text>
+      <Text style={styles.timerNums}>{formatTime(sec)}</Text>
     </View>
   );
 };
@@ -67,6 +33,14 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   timerText: {
+    fontFamily: 'Orbitron_900Black',
+    color: 'white',
+    fontSize: 15, // Adjust text size as needed
+    textShadowColor: 'white',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 10,
+  },
+  timerNums: {
     fontFamily: 'Orbitron_900Black',
     color: 'white',
     fontSize: 50, // Adjust text size as needed

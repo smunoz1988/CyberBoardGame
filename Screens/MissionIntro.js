@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import CharacterInitiative from '../Components/CharacterInitiative';
@@ -8,6 +8,46 @@ const MissionIntro = ({ route }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
   const [turn, setTurn] = useState(0);
+  const [planTimer, setPlanTimer] = useState(30);
+  const [planTimerRunning, setPlanTimerRunning] = useState(false);
+  const [gameTimer, setGameTimer] = useState(3600);
+  const [gameTimerRunning, setGameTimerRunning] = useState(false);
+
+  useEffect(() => {
+    let intervalId;
+    if (planTimerRunning && planTimer > 0) {
+      intervalId = setInterval(() => {
+        setPlanTimer((s) => s - 1);
+      }, 1000);
+    } else if (!planTimerRunning || planTimer === 0) {
+      clearInterval(intervalId);
+      if (planTimer === 0) {
+        alert('Time to plan is over! Start your turn.');
+        setPlanTimerRunning(false);
+        setPlanTimer(30);
+        setGameTimerRunning(true);
+      }
+    }
+
+    return () => clearInterval(intervalId);
+  }, [planTimerRunning, planTimer]);
+
+  useEffect(() => {
+    let intervalId;
+    if (gameTimerRunning && gameTimer > 0) {
+      intervalId = setInterval(() => {
+        setGameTimer((s) => s - 1);
+      }, 1000);
+    } else if (!gameTimerRunning || gameTimer === 0) {
+      clearInterval(intervalId);
+      if (gameTimer === 0) {
+        alert('Time is over!');
+        setGameTimerRunning(false);
+      }
+    }
+
+    return () => clearInterval(intervalId);
+  }, [gameTimerRunning, gameTimer]);
 
   const getRandomDice = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -75,6 +115,8 @@ const MissionIntro = ({ route }) => {
 
     setInitiativesList(array);
     setTurn(prevTurn => prevTurn + 1);
+    setGameTimerRunning(false);
+    setPlanTimerRunning(true);
   };
 
   const handleDeleteCharacter = (character) => {
@@ -83,10 +125,10 @@ const MissionIntro = ({ route }) => {
 
   return (
     <View style={style.container}>
-      <Timer />
       <Text style={style.turn}>Mission: {mission.name}</Text>
       <Text style={style.turn}>Objective: {mission.objective}</Text>
-      <Text style={style.turn}>Turn: {turn}</Text>
+      <Timer sec={planTimer} title={"Planning Timer"} />
+      <Timer sec={gameTimer} title={"Game Timer"} />
       {turn == 0 ? (
         <TouchableOpacity 
         style={style.startButton}
@@ -98,6 +140,7 @@ const MissionIntro = ({ route }) => {
       </TouchableOpacity>
       ) : (
         <>
+      <Text style={style.turn}>Turn: {turn}</Text>
       <ScrollView>
         {initiativesList.map((character, index) => {
           const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.name}`;
@@ -115,19 +158,29 @@ const MissionIntro = ({ route }) => {
           );
         })}
       </ScrollView>
-
+      {gameTimerRunning ? (
+        <TouchableOpacity
+        style={style.startButton}
+        onPress={() => {
+          setGameTimerRunning(false);
+        }}
+      >
+        <Text style={style.startButtonText}>Pause Game</Text>
+      </TouchableOpacity>
+      ) : (
       <TouchableOpacity 
         style={style.startButton}
         onPress={() => {
           if (canLaunchInitiatives()) {
             shuffleArray(initiativesList);
           } else {
-            alert('Complete all characters turn to launch initiatives.');
+            alert('Complete all characters turns to launch initiatives.');
           }
         }}
       >
         <Text style={style.startButtonText}>Launch Initiatives</Text>
       </TouchableOpacity>
+      )}
       </>
       )}
     </View>

@@ -7,8 +7,10 @@ referencias diseno:
 
 https://www.freepik.es/vector-gratis/plantilla-diseno-cartel-estetica-ano-2000_154651857.htm#fromView=search&page=1&position=40&uuid=77b9a257-e3ab-4151-92a9-7b80842c7fa3
 
-timer: solucionar lo de los 30 seg. considerar manejar la logica en el padre. que el padre le pase el tiempo al hijo.
-
 Nota: poner licencia en readme.
 
-incluir un check para ir pasando los turnos de enemigos y mercenarios. 
+en las misiones que son con olas, hay que tener una forma de ingresar los nuevos enemigos.
+
+
+fin de turno. para el cronometro. se hacen las cosas manuales. si no pasa nada se lanzan iniciativas. si es un mapa donde cada cierto tiempo se dan opciones de nivel, que la misma app resuelva esto.
+se debe poner un condicional en el boton de lanzar iniciativas

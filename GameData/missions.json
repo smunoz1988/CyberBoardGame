@@ -15,7 +15,8 @@
             "moveMin": 1,
             "moveMax": 3,
             "attackMin": 1,
-            "attackMax": 5
+            "attackMax": 5,
+            "range": 2
           },
           {
             "name": "Iron Caveman",
@@ -26,7 +27,8 @@
             "moveMin": 1,
             "moveMax": 2,
             "attackMin": 5,
-            "attackMax": 10
+            "attackMax": 10,
+            "range": 1
           }
         ]
       }
