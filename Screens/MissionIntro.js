@@ -8,13 +8,15 @@ const MissionIntro = ({ route }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
   const [turn, setTurn] = useState(0);
-  const [planTimer, setPlanTimer] = useState(3);
+  const [planTimer, setPlanTimer] = useState(5);
   const [planTimerRunning, setPlanTimerRunning] = useState(false);
   const [gameTimer, setGameTimer] = useState(3600);
   const [gameTimerRunning, setGameTimerRunning] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [showPause, setShowPause] = useState(true);
 
+
+  // mostrar alerta de fin de planificacion
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (showMessage) {
@@ -26,6 +28,7 @@ const MissionIntro = ({ route }) => {
     return () => clearInterval(intervalId);
   }, [showMessage]);
 
+  // timer de planificacion
   useEffect(() => {
     let intervalId;
     if (planTimerRunning && planTimer > 0) {
@@ -45,6 +48,7 @@ const MissionIntro = ({ route }) => {
     return () => clearInterval(intervalId);
   }, [planTimerRunning, planTimer]);
 
+  // timer de juego
   useEffect(() => {
     let intervalId;
     if (gameTimerRunning && gameTimer > 0) {
@@ -66,12 +70,14 @@ const MissionIntro = ({ route }) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
+  // array de mercenarios
   const mercenaryArray = Object.keys(selectedMercenaries).map(key => ({
     type: 'mercenary',
     name: selectedMercenaries[key].name,
     hp: selectedMercenaries[key].hp,
   }));
 
+  // array de enemigos
   const typedEnemies = enemies.flatMap(enemy =>
     Array.from({ length: enemy.quantity }).map((_, i) => ({
       type: 'enemy',
@@ -88,6 +94,7 @@ const MissionIntro = ({ route }) => {
     }))
   );
 
+  // juntar mercenarios con enemigos
   const combinedArray = [...mercenaryArray, ...typedEnemies].map(character => ({
     ...character,
     checked: false,
@@ -105,7 +112,7 @@ const MissionIntro = ({ route }) => {
   
   const canLaunchInitiatives = () => initiativesList.every(character => character.checked);
 
-
+  // generar iniciativas
   const shuffleArray = (originalArray) => {
     let array = originalArray.map(character => {
       if (character.type === 'enemy') {
@@ -141,46 +148,59 @@ const MissionIntro = ({ route }) => {
     <View style={style.container}>
       <Text style={style.turn}>Mission: {mission.name}</Text>
       <Text style={style.turn}>Objective: {mission.objective}</Text>
-      <View style={style.timerContainer}>
-        <Timer sec={gameTimer} title={"Game Time"} />
-        {planTimerRunning && <Timer sec={planTimer} title={"Planning Time"} />}
-        {gameTimerRunning && showPause && (
-          <TouchableOpacity
-            style={style.startButton}
-            onPress={() => {
-              setGameTimerRunning(false);
-              setShowPause(false);
-            }}
-          >
-            <Text style={style.startButtonText}>Pause Game</Text>
-          </TouchableOpacity>
-        )}
-
-        {!gameTimerRunning && !showPause && (
-          <TouchableOpacity
-            style={style.startButton}
-            onPress={() => {
-              setGameTimerRunning(true);
-              setShowPause(true);
-            }}
-          >
-            <Text style={style.startButtonText}>Resume Game</Text>
-          </TouchableOpacity>
-        )}
-
-      </View>
-      {showMessage && <Text style={style.alertMessage}>Planning time is over! Game time has started.</Text>}
       {turn == 0 ? (
-        <TouchableOpacity 
-        style={style.startButton}
-        onPress={() => {
-          shuffleArray(initiativesList);
-        }}
-      >
-        <Text style={style.startButtonText}>START GAME</Text>
-      </TouchableOpacity>
+        <>
+          <Text>AQUI SE VA A PONER UNA ANIMACION DE INTRO DEL JUEGO</Text>
+          <TouchableOpacity 
+            style={style.startButton}
+            onPress={() => {  
+              shuffleArray(initiativesList);
+            }}
+          >
+            <Text style={style.startButtonText}>START GAME</Text>
+          </TouchableOpacity> 
+        </>
+
       ) : (
         <>
+      <View style={style.timerContainer}>
+        <Timer sec={gameTimer} title={"Game Time"} />
+        <View style={style.phaseContainer}>
+          <Text style={style.phaseTitle}>Fase</Text>
+          {planTimerRunning && <Timer sec={planTimer} title={"Planning Time"} />}
+          {gameTimerRunning && showPause && (
+            <>
+              <Text style={style.phaseTitle}>Accion</Text>
+              <TouchableOpacity
+              style={style.startButton}
+              onPress={() => {
+                setGameTimerRunning(false);
+                setShowPause(false);
+              }}
+            >
+              <Text style={style.startButtonText}>Pause Game</Text>
+            </TouchableOpacity>
+            </>
+            
+          )}
+
+          {!gameTimerRunning && !showPause && (
+            <>
+              <Text style={style.phaseTitle}>Accion</Text>
+              <TouchableOpacity
+                style={style.startButton}
+                onPress={() => {
+                  setGameTimerRunning(true);
+                  setShowPause(true);
+                }}
+              >
+                <Text style={style.startButtonText}>Resume Game</Text>
+              </TouchableOpacity>
+            </>
+          )}
+        </View>
+      </View>
+      {showMessage && <Text style={style.alertMessage}>Planning time is over! Game time has started.</Text>}
       <Text style={style.turn}>Turn: {turn}</Text>
       <ScrollView>
         {initiativesList.map((character, index) => {
@@ -262,6 +282,14 @@ const style = StyleSheet.create({
     textShadowRadius: 10,
     fontFamily: 'Orbitron_900Black',
     textAlign: 'center',
+  },
+  phaseContainer: {
+    backgroundColor: 'black',
+  },
+  phaseTitle: {
+    fontFamily: 'Orbitron_900Black',
+    color: 'white',
+    fontSize: 16,
   },
   initiativeContainer: {
     flexDirection: 'row',
