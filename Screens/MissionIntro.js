@@ -8,13 +8,12 @@ const MissionIntro = ({ route }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
   const [turn, setTurn] = useState(0);
-  const [planTimer, setPlanTimer] = useState(5);
+  const [planTimer, setPlanTimer] = useState(10);
   const [planTimerRunning, setPlanTimerRunning] = useState(false);
   const [gameTimer, setGameTimer] = useState(3600);
   const [gameTimerRunning, setGameTimerRunning] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [showPause, setShowPause] = useState(true);
-
 
   // mostrar alerta de fin de planificacion
   useEffect(() => {
@@ -40,7 +39,6 @@ const MissionIntro = ({ route }) => {
       if (planTimer === 0) {
         setShowMessage(true);
         setPlanTimerRunning(false);
-        setPlanTimer(30);
         setGameTimerRunning(true);
       }
     }
@@ -133,7 +131,7 @@ const MissionIntro = ({ route }) => {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
-
+    setPlanTimer(12)
     setInitiativesList(array);
     setTurn(prevTurn => prevTurn + 1);
     setGameTimerRunning(false);
@@ -219,6 +217,17 @@ const MissionIntro = ({ route }) => {
           );
         })}
       </ScrollView>
+      {planTimer > 0 && 
+        <TouchableOpacity
+        style={style.startButton}
+        onPress={() => {
+          setPlanTimerRunning(false);
+
+        }}
+        >
+          <Text style={style.startButtonText}>Pause Planification</Text>
+        </TouchableOpacity>
+      }
       {gameTimerRunning ? (
         <TouchableOpacity
         style={style.startButton}
