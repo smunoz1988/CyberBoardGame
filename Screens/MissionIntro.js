@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import CharacterInitiative from '../Components/CharacterInitiative';
 import Timer from '../Components/Timer';
 
-const MissionIntro = ({ route }) => {
+const MissionIntro = ({ route, navigation }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
   const [turn, setTurn] = useState(0);
