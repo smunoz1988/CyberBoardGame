@@ -3,17 +3,18 @@ import { View, ScrollView, Text, TouchableOpacity, StyleSheet, Alert } from 'rea
 import { CheckBox } from 'react-native-elements';
 import CharacterInitiative from '../Components/CharacterInitiative';
 import Timer from '../Components/Timer';
+import PhaseButton from '../Components/PhaseButton';
 
 const MissionIntro = ({ route, navigation }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
   const [turn, setTurn] = useState(0);
-  const [planTimer, setPlanTimer] = useState(10);
+  const [planTimer, setPlanTimer] = useState(4);
   const [planTimerRunning, setPlanTimerRunning] = useState(false);
   const [gameTimer, setGameTimer] = useState(3600);
   const [gameTimerRunning, setGameTimerRunning] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
-  const [showPause, setShowPause] = useState(true);
+  const [showMessage, setShowMessage] = useState(false); // Mostrar mensaje de fin de planificacion
+  const [gamePhase, setGamePhase] = useState('planification');
 
   // mostrar alerta de fin de planificacion
   useEffect(() => {
@@ -38,6 +39,7 @@ const MissionIntro = ({ route, navigation }) => {
       clearInterval(intervalId);
       if (planTimer === 0) {
         setShowMessage(true);
+        setGamePhase('action');
         setPlanTimerRunning(false);
         setGameTimerRunning(true);
       }
@@ -97,6 +99,7 @@ const MissionIntro = ({ route, navigation }) => {
     ...character,
     checked: false,
   }))
+  
   const [initiativesList, setInitiativesList] = useState(combinedArray);
 
   const handleCheckboxChange = (index, isChecked) => {
@@ -108,7 +111,37 @@ const MissionIntro = ({ route, navigation }) => {
     }));
   };
   
-  const canLaunchInitiatives = () => initiativesList.every(character => character.checked);
+  const canEndTurn = () => initiativesList.every(character => character.checked);
+
+  const addSoldiers = (array) => {
+    const newSoldiers = [
+      {
+        type: 'enemy',
+        name: 'New Enemy',
+        enemyId: 20,
+        hp: 12,
+        range: 1,
+        moveMin: 1,
+        moveMax: 3,
+        attackMin: 4,
+        attackMax: 6,
+        checked: false,
+      },
+      {
+        type: 'enemy',
+        name: 'New Enemy',
+        enemyId: 21,
+        hp: 12,
+        range: 1,
+        moveMin: 1,
+        moveMax: 3,
+        attackMin: 4,
+        attackMax: 6,
+        checked: false,
+      },
+    ];
+    return [...array, ...newSoldiers];
+  };
 
   // generar iniciativas
   const shuffleArray = (originalArray) => {
@@ -131,10 +164,14 @@ const MissionIntro = ({ route, navigation }) => {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
-    setPlanTimer(12)
+
+    if (turn === 2) {
+      array = addSoldiers(array);
+    }
+
+    setPlanTimer(5)
     setInitiativesList(array);
     setTurn(prevTurn => prevTurn + 1);
-    setGameTimerRunning(false);
     setPlanTimerRunning(true);
   };
 
@@ -164,42 +201,19 @@ const MissionIntro = ({ route, navigation }) => {
       <View style={style.timerContainer}>
         <Timer sec={gameTimer} title={"Game Time"} />
         <View style={style.phaseContainer}>
-          <Text style={style.phaseTitle}>Fase</Text>
-          {planTimerRunning && <Timer sec={planTimer} title={"Planning Time"} />}
-          {gameTimerRunning && showPause && (
-            <>
-              <Text style={style.phaseTitle}>Accion</Text>
-              <TouchableOpacity
-              style={style.startButton}
-              onPress={() => {
-                setGameTimerRunning(false);
-                setShowPause(false);
-              }}
-            >
-              <Text style={style.startButtonText}>Pause Game</Text>
-            </TouchableOpacity>
-            </>
-            
-          )}
-
-          {!gameTimerRunning && !showPause && (
-            <>
-              <Text style={style.phaseTitle}>Accion</Text>
-              <TouchableOpacity
-                style={style.startButton}
-                onPress={() => {
-                  setGameTimerRunning(true);
-                  setShowPause(true);
-                }}
-              >
-                <Text style={style.startButtonText}>Resume Game</Text>
-              </TouchableOpacity>
-            </>
-          )}
+          <Text style={style.phaseTitle}>Phase</Text>
+          {/* planification */}
+          {gamePhase === 'planification' && <Timer sec={planTimer} title={"Planning Time"} />}
+          {/* action */}
+          {gamePhase === 'action' && <Text style={style.phaseTitle}>Action</Text>}
+          {/* endTurn */}
+          {gamePhase === 'endTurn' && <Text style={style.phaseTitle}>End Turn</Text>}
         </View>
       </View>
       {showMessage && <Text style={style.alertMessage}>Planning time is over! Game time has started.</Text>}
       <Text style={style.turn}>Turn: {turn}</Text>
+      {gamePhase === 'endTurn' && <Text style={style.turn}>End turn conditionals:</Text>}
+      {turn === 3 && <Text style={style.turn}>New enemies have appeared!</Text>}
       <ScrollView>
         {initiativesList.map((character, index) => {
           const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.name}`;
@@ -217,40 +231,19 @@ const MissionIntro = ({ route, navigation }) => {
           );
         })}
       </ScrollView>
-      {planTimer > 0 && 
-        <TouchableOpacity
-        style={style.startButton}
-        onPress={() => {
-          setPlanTimerRunning(false);
-
-        }}
-        >
-          <Text style={style.startButtonText}>Pause Planification</Text>
-        </TouchableOpacity>
-      }
-      {gameTimerRunning ? (
-        <TouchableOpacity
-        style={style.startButton}
-        onPress={() => {
-          setGameTimerRunning(false);
-        }}
-      >
-        <Text style={style.startButtonText}>End Turn</Text>
-      </TouchableOpacity>
-      ) : (
-      <TouchableOpacity 
-        style={style.startButton}
-        onPress={() => {
-          if (canLaunchInitiatives()) {
-            shuffleArray(initiativesList);
-          } else {
-            alert('Complete all characters turns to launch initiatives.');
-          }
-        }}
-      >
-        <Text style={style.startButtonText}>Launch Initiatives</Text>
-      </TouchableOpacity>
-      )}
+      <PhaseButton 
+          gamePhase={gamePhase}
+          setGamePhase={setGamePhase}
+          planTimer={planTimer}
+          planTimerRunning={planTimerRunning}
+          setPlanTimerRunning={setPlanTimerRunning}
+          gameTimer={gameTimer}
+          gameTimerRunning={gameTimerRunning}
+          setGameTimerRunning={setGameTimerRunning}
+          shuffleArray={shuffleArray}
+          initiativesList={initiativesList}
+          canEndTurn={canEndTurn()}
+        />
       </>
       )}
     </View>
