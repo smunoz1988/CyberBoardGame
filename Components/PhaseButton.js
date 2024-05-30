@@ -89,30 +89,30 @@ const PhaseButton = ({
       opacity: 0.8,
       padding: 10,
       borderRadius: 10,
-      alignItems: 'center', // Center text horizontally
-      justifyContent: 'center', // Center text vertically
-      height: 50, // Set a fixed height
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      height: 50, 
       margin: 20,
     },
     buttonText: {
       fontFamily: 'Orbitron_900Black',
       color: 'white',
-      fontSize: 16, // Adjust text size as needed
+      fontSize: 16, 
       textShadowColor: 'white',
       textShadowOffset: { width: 0, height: 0 },
       textShadowRadius: 10,
     },
     resumeButton: {
-      backgroundColor: '#4CAF50', // Green for resume
+      backgroundColor: '#4CAF50',
     },
     pauseButton: {
-      backgroundColor: '#FF9800', // Orange for pause
+      backgroundColor: '#FF9800',
     },
     nextButton: {
-      backgroundColor: '#2196F3', // Blue for next turn
+      backgroundColor: '#2196F3',
     },
     launchButton: {
-      backgroundColor: '#bb00ff', // Original neon purple for launch initiatives
+      backgroundColor: '#bb00ff',
     },
   });
 
