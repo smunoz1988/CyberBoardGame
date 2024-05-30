@@ -43,7 +43,25 @@
             "range": 1
           }
         ],
-        "levelCardTurn": 3
+        "levelCardTurn": 2,
+        "levelCardTurnEvents": [
+          {
+            "reinforcement": [
+              {
+                "name": "Tech Soldier",
+                "quantity": 2,
+                "image": "Enemy1Image",
+                "description": "Technology-enhanced soldier",
+                "hp": 12,
+                "moveMin": 1,
+                "moveMax": 3,
+                "attackMin": 1,
+                "attackMax": 5,
+                "range": 2
+              }
+            ]
+          }
+        ]
       }
     ]
   }

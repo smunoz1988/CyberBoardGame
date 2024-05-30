@@ -13,7 +13,7 @@ const MissionIntro = ({ route, navigation }) => {
   const [planTimerRunning, setPlanTimerRunning] = useState(false);
   const [gameTimer, setGameTimer] = useState(3600);
   const [gameTimerRunning, setGameTimerRunning] = useState(false);
-  const [showMessage, setShowMessage] = useState(false); // Mostrar mensaje de fin de planificacion
+  const [showMessage, setShowMessage] = useState(false);
   const [gamePhase, setGamePhase] = useState('planification');
 
   // mostrar alerta de fin de planificacion
@@ -145,6 +145,9 @@ const MissionIntro = ({ route, navigation }) => {
 
   // generar iniciativas
   const shuffleArray = (originalArray) => {
+    if (turn % mission.levelCardTurn === 0 && turn !== 0) {
+      originalArray = addSoldiers(originalArray);
+    }
     let array = originalArray.map(character => {
       if (character.type === 'enemy') {
         return {
@@ -163,10 +166,6 @@ const MissionIntro = ({ route, navigation }) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
-    }
-
-    if (turn === 2) {
-      array = addSoldiers(array);
     }
 
     setPlanTimer(5)
@@ -213,8 +212,19 @@ const MissionIntro = ({ route, navigation }) => {
       </View>
       {showMessage && <Text style={style.alertMessage}>Planning time is over! Game time has started.</Text>}
       <Text style={style.turn}>Turn: {turn}</Text>
-      {gamePhase === 'endTurn' && <Text style={style.turn}>End turn conditionals:</Text>}
-      {turn === 3 && <Text style={style.turn}>New enemies have appeared!</Text>}
+      {gamePhase === 'endTurn' && (
+        <>
+          <Text style={style.turn}>End turn actions:</Text>
+          <Text style={style.turn}>- Move level token</Text>
+          <Text style={style.turn}>- Move mercenary cards on cooldown</Text>
+        </>
+      )}
+      {turn % mission.levelCardTurn === 0 && turn !== 0 && gamePhase === 'endTurn' && (
+        <>
+        <Text style={style.turn}>End turn conditionals:</Text>
+        <Text style={style.turn}>- New enemies will be added</Text>
+        </>
+      )}
       <ScrollView>
         {initiativesList.map((character, index) => {
           const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.name}`;

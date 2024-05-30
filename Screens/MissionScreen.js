@@ -5,7 +5,6 @@ import missions from '../GameData/missions';
 import Enemy1Image from '../assets/tech-soldier.png';
 import Enemy2Image from '../assets/iron-caveman.png';
 import Enemy3Image from '../assets/tricera-bot.png';
-// import TemploMap from '../assets/templo-map.png';
 
 function MissionScreen({ route, navigation }) {
   const { playerNames } = route.params;
@@ -142,9 +141,9 @@ function MissionScreen({ route, navigation }) {
           </View>
         )}
         <TouchableOpacity
-          style={[styles.startButton, playerNames.includes('') ? styles.buttonDisabled : null]}
+          style={styles.startButton}
           onPress={() => navigation.navigate('Mercenary', { playerNames, mission })}
-          disabled={playerNames.includes('')}>
+        >
           <Text style={styles.startButtonText}>Select Mercenaries</Text>
         </TouchableOpacity>
       </ScrollView>
