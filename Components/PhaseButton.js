@@ -3,10 +3,8 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 const PhaseButton = ({ 
   gamePhase, 
   setGamePhase, 
-  planTimer, 
   planTimerRunning, 
   setPlanTimerRunning, 
-  gameTimer, 
   gameTimerRunning, 
   setGameTimerRunning, 
   shuffleArray, 
@@ -106,7 +104,7 @@ const PhaseButton = ({
       backgroundColor: '#4CAF50',
     },
     pauseButton: {
-      backgroundColor: '#FF9800',
+      backgroundColor: '#FF3131',
     },
     nextButton: {
       backgroundColor: '#2196F3',

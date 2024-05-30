@@ -50,7 +50,8 @@ function MissionScreen({ route, navigation }) {
         name: selectedMission.name,
         description: selectedMission.description,
         objective: selectedObjective.objective,
-        enemies: enemiesWithImages, 
+        enemies: enemiesWithImages,
+        levelCardTurn: selectedObjective.levelCardTurn,
       });
     };
 

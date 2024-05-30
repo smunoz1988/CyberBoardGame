@@ -183,6 +183,7 @@ const MissionIntro = ({ route, navigation }) => {
     <View style={style.container}>
       <Text style={style.turn}>Mission: {mission.name}</Text>
       <Text style={style.turn}>Objective: {mission.objective}</Text>
+      <Text style={style.turn}>card turn: {mission.levelCardTurn}</Text>
       {turn == 0 ? (
         <>
           <Text>AQUI SE VA A PONER UNA ANIMACION DE INTRO DEL JUEGO</Text>
@@ -234,10 +235,8 @@ const MissionIntro = ({ route, navigation }) => {
       <PhaseButton 
           gamePhase={gamePhase}
           setGamePhase={setGamePhase}
-          planTimer={planTimer}
           planTimerRunning={planTimerRunning}
           setPlanTimerRunning={setPlanTimerRunning}
-          gameTimer={gameTimer}
           gameTimerRunning={gameTimerRunning}
           setGameTimerRunning={setGameTimerRunning}
           shuffleArray={shuffleArray}
