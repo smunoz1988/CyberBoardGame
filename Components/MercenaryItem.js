@@ -1,18 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import BlackNight from '../assets/the-black-knight.webp';
 
 const MercenaryItem = ({ mercenary, onMercenarySelect, isDisabled }) => {
-
   return (
     <TouchableOpacity 
       style={[styles.heroCard, isDisabled && styles.disabledHeroCard]} 
       onPress={() => !isDisabled && onMercenarySelect(mercenary)}
-      >
-        <View>
-            <Text style={styles.mercenaryName}>{mercenary.name}</Text>
-            <Text style={styles.mercenaryHealth}>Health: {mercenary.health}</Text>
-            <Text style={styles.mercenaryHealth}>Hiring cost: {mercenary.contractCost}</Text>
+    >
+      <ImageBackground source={BlackNight} style={styles.backgroundImage}>
+        <View style={styles.contentContainer}>
+          <Text style={styles.mercenaryName}>{mercenary.name}</Text>
+          <Text style={styles.mercenaryHealth}>Health: {mercenary.health}</Text>
+          <Text style={styles.mercenaryHealth}>Hiring cost: {mercenary.contractCost}</Text>
         </View>
+      </ImageBackground>
     </TouchableOpacity>
   );
 };
@@ -20,24 +22,28 @@ const MercenaryItem = ({ mercenary, onMercenarySelect, isDisabled }) => {
 const styles = StyleSheet.create({
   heroCard: {
     flex: 1,
-    backgroundColor: '#2a2a2a',
-    opacity: 0.9,
     borderRadius: 10,
-    padding: 15,
+    overflow: 'hidden',
     margin: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderWidth: 1,
-    borderColor: '#3f3', 
+    borderWidth: 3,
+    borderColor: '#3f3',
   },
   disabledHeroCard: {
     opacity: 0.5,
-    backgroundColor: '#555', // Darker or greyed out background
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  contentContainer: {
+    backgroundColor: 'rgba(42, 42, 42, 0.3)', 
+    padding: 15,
+    height: 200,
+    justifyContent: 'center',
   },
   mercenaryName: {
     fontFamily: 'Orbitron_900Black',
-    color: '#fff', 
+    color: '#fff',
     fontSize: 18,
   },
   mercenaryHealth: {

@@ -6,7 +6,7 @@ import Enemy1Image from '../assets/tech-soldier.png';
 import Enemy2Image from '../assets/iron-caveman.png';
 import Enemy3Image from '../assets/tricera-bot.png';
 
-function MissionScreen({ route, navigation }) {
+const MissionScreen = ({ route, navigation }) => {
   const { playerNames } = route.params;
   const [mission, setMission] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);

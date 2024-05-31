@@ -186,6 +186,7 @@ const MissionIntro = ({ route, navigation }) => {
       {turn == 0 ? (
         <>
           <Text>AQUI SE VA A PONER UNA ANIMACION DE INTRO DEL JUEGO</Text>
+          <Text>Cartas de mercenarios en cooldown, turno en 0, enemigos en el nivel, cartas de nivel, entreotros</Text>
           <TouchableOpacity 
             style={style.startButton}
             onPress={() => {  
