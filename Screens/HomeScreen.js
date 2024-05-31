@@ -83,7 +83,7 @@ const HomeScreen = ({ navigation }) => {
           <ActivityIndicator style={styles.loading} size="large" color="white" />
         ) : (
           <View style={styles.overlay}>
-            <NeonText>IPERYON</NeonText>
+            <NeonText>HYMPERYON</NeonText>
             <Text style={styles.selectText}>Select the number of players:</Text>
             <View style={styles.playerButtonContainer}>
               <TouchableOpacity

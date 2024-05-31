@@ -40,11 +40,11 @@ const NeonText = ({ children }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginTop: 80,
+    marginTop: 120,
   },
   neonText: {
     color: '#39FF14',
-    fontSize: 55,
+    fontSize: 40,
     fontFamily: 'Orbitron_900Black',
     textShadowColor: 'cyan',
     textShadowOffset: { width: 1, height: 1 },

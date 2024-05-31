@@ -90,9 +90,9 @@ const MercenaryScreen = ({ route, navigation }) => {
       <Text>Available Tokens: {availableTokens}</Text>
       <NeonTextSelect>Choose your Mercenary: {playerNames[currentPlayerIndex]}</NeonTextSelect>
       <TouchableOpacity
-        style={styles.resetButton}
+        style={styles.startButton}
         onPress={resetSelections}>
-        <Text style={styles.resetButtonText}>Reset Selections</Text>
+        <Text style={styles.startButtonText}>Reset Selections</Text>
       </TouchableOpacity>
       <FlatList
         data={mercenaries}
