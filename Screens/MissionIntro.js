@@ -240,10 +240,10 @@ const MissionIntro = ({ route, navigation }) => {
         {initiativesList.map((character, index) => {
           const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.name}`;
           return (
-            <View key={key} style={style.initiativeContainer}>
+            <View key={key} style={[style.initiativeContainer, {backgroundColor: index === activePlayer && canEndTurn() === false ? '#bb00ff' : '#2a2a2a'}]}>
               <View style={style.checkContainer}>
                 <Text style={style.initiativeCounter}>{index + 1}</Text>
-                {index === activePlayer && <CheckBox
+                {index === activePlayer && canEndTurn() === false && <CheckBox
                   checked={character.checked}
                   onPress={() => handleCheckboxChange(index,!character.checked)}
                 />}
@@ -320,9 +320,9 @@ const style = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 10,
     borderWidth: 6,
-    borderColor: '#fff',  // White border for visibility
+    borderColor: '#fff',
     elevation: 3,
-    backgroundColor: '#2a2a2a', // Dark background
+    backgroundColor: '#2a2a2a',
   },
   checkContainer: {
     flexDirection: 'column',
@@ -332,7 +332,7 @@ const style = StyleSheet.create({
     flex: 1,
   },
   initiativeCounter: {
-    color: '#fff', // White text for visibility
+    color: '#fff', 
     fontSize: 25,
     paddingTop: 10,
     fontFamily: 'Orbitron_900Black',
@@ -343,15 +343,15 @@ const style = StyleSheet.create({
     opacity: 0.8,
     padding: 10,
     borderRadius: 10,
-    alignItems: 'center', // Center text horizontally
-    justifyContent: 'center', // Center text vertically
-    height: 50, // Set a fixed height
+    alignItems: 'center', 
+    justifyContent: 'center',
+    height: 50, 
     margin: 20,
   },
   startButtonText: {
     fontFamily: 'Orbitron_900Black',
     color: 'white',
-    fontSize: 16, // Adjust text size as needed
+    fontSize: 16,
     textShadowColor: 'white',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
