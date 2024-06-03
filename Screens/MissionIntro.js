@@ -9,12 +9,13 @@ const MissionIntro = ({ route, navigation }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
   const [turn, setTurn] = useState(0);
-  const [planTimer, setPlanTimer] = useState(4);
+  const [planTimer, setPlanTimer] = useState(15);
   const [planTimerRunning, setPlanTimerRunning] = useState(false);
   const [gameTimer, setGameTimer] = useState(3600);
   const [gameTimerRunning, setGameTimerRunning] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [gamePhase, setGamePhase] = useState('planification');
+  const [activePlayer, setActivePlayer] = useState(0);
 
   // mostrar alerta de fin de planificacion
   useEffect(() => {
@@ -109,6 +110,13 @@ const MissionIntro = ({ route, navigation }) => {
       }
       return character;
     }));
+    if (isChecked) {
+      if (index === initiativesList.length - 1) {
+        setActivePlayer(0);
+      } else {
+        setActivePlayer(index + 1);
+      }
+    }
   };
   
   const canEndTurn = () => initiativesList.every(character => character.checked);
@@ -168,7 +176,7 @@ const MissionIntro = ({ route, navigation }) => {
       [array[i], array[j]] = [array[j], array[i]];
     }
 
-    setPlanTimer(5)
+    setPlanTimer(15)
     setInitiativesList(array);
     setTurn(prevTurn => prevTurn + 1);
     setPlanTimerRunning(true);
@@ -213,6 +221,7 @@ const MissionIntro = ({ route, navigation }) => {
       </View>
       {showMessage && <Text style={style.alertMessage}>Planning time is over! Game time has started.</Text>}
       <Text style={style.turn}>Turn: {turn}</Text>
+      <Text style={style.turn}>Active player: {initiativesList[activePlayer].name}</Text>
       {gamePhase === 'endTurn' && (
         <>
           <Text style={style.turn}>End turn actions:</Text>
@@ -227,16 +236,17 @@ const MissionIntro = ({ route, navigation }) => {
         </>
       )}
       <ScrollView>
+        <Text>INITIATIVES</Text>
         {initiativesList.map((character, index) => {
           const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.name}`;
           return (
             <View key={key} style={style.initiativeContainer}>
               <View style={style.checkContainer}>
                 <Text style={style.initiativeCounter}>{index + 1}</Text>
-                <CheckBox
+                {index === activePlayer && <CheckBox
                   checked={character.checked}
                   onPress={() => handleCheckboxChange(index,!character.checked)}
-                />
+                />}
               </View>
                 <CharacterInitiative character={character} onCharacterDelete={() => handleDeleteCharacter(character)} />
             </View>
