@@ -221,10 +221,10 @@ const MissionIntro = ({ route, navigation }) => {
       </View>
       {showMessage && <Text style={style.alertMessage}>Planning time is over! Game time has started.</Text>}
       <Text style={style.turn}>Turn: {turn}</Text>
-      <Text style={style.turn}>Active player: {initiativesList[activePlayer].name}</Text>
-      {gamePhase === 'endTurn' && (
+      {gamePhase === 'action' && <Text style={style.turn}>Active player: {initiativesList[activePlayer].name}</Text>}
+      {gamePhase === 'planification' && (
         <>
-          <Text style={style.turn}>End turn actions:</Text>
+          <Text style={style.turn}>Planification actions:</Text>
           <Text style={style.turn}>- Move level token</Text>
           <Text style={style.turn}>- Move mercenary cards on cooldown</Text>
         </>
@@ -240,10 +240,10 @@ const MissionIntro = ({ route, navigation }) => {
         {initiativesList.map((character, index) => {
           const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.name}`;
           return (
-            <View key={key} style={[style.initiativeContainer, {backgroundColor: index === activePlayer && canEndTurn() === false ? '#bb00ff' : '#2a2a2a'}]}>
+            <View key={key} style={[style.initiativeContainer, index === activePlayer && canEndTurn() === false && gamePhase === 'action' && style.activePlayerContainer]}>
               <View style={style.checkContainer}>
                 <Text style={style.initiativeCounter}>{index + 1}</Text>
-                {index === activePlayer && canEndTurn() === false && <CheckBox
+                {index === activePlayer && canEndTurn() === false && gamePhase === 'action' && <CheckBox
                   checked={character.checked}
                   onPress={() => handleCheckboxChange(index,!character.checked)}
                 />}
@@ -323,6 +323,9 @@ const style = StyleSheet.create({
     borderColor: '#fff',
     elevation: 3,
     backgroundColor: '#2a2a2a',
+  },
+  activePlayerContainer: {
+    borderColor: '#bb00ff',
   },
   checkContainer: {
     flexDirection: 'column',
