@@ -9,13 +9,14 @@ const MissionIntro = ({ route, navigation }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
   const [turn, setTurn] = useState(0);
-  const [planTimer, setPlanTimer] = useState(15);
+  const [planTimer, setPlanTimer] = useState(3);
   const [planTimerRunning, setPlanTimerRunning] = useState(false);
   const [gameTimer, setGameTimer] = useState(3600);
   const [gameTimerRunning, setGameTimerRunning] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [gamePhase, setGamePhase] = useState('planification');
   const [activePlayer, setActivePlayer] = useState(0);
+  const [newEnemiesId, setNewEnemiesId] = useState(20); 
 
   // mostrar alerta de fin de planificacion
   useEffect(() => {
@@ -126,7 +127,7 @@ const MissionIntro = ({ route, navigation }) => {
       {
         type: 'enemy',
         name: 'New Enemy',
-        enemyId: 20,
+        enemyId: newEnemiesId,
         hp: 12,
         range: 1,
         moveMin: 1,
@@ -138,7 +139,7 @@ const MissionIntro = ({ route, navigation }) => {
       {
         type: 'enemy',
         name: 'New Enemy',
-        enemyId: 21,
+        enemyId: newEnemiesId + 1,
         hp: 12,
         range: 1,
         moveMin: 1,
@@ -148,12 +149,14 @@ const MissionIntro = ({ route, navigation }) => {
         checked: false,
       },
     ];
+    setNewEnemiesId(newEnemiesId + 2);
     return [...array, ...newSoldiers];
   };
 
   // generar iniciativas
   const shuffleArray = (originalArray) => {
-    if (turn % mission.levelCardTurn === 0 && turn !== 0) {
+    if ((turn + 1) % mission.levelCardTurn === 0 && turn !== 0) {
+      console.log('New enemies added!', 'Turn:', turn, mission.levelCardTurn);
       originalArray = addSoldiers(originalArray);
     }
     let array = originalArray.map(character => {
@@ -176,7 +179,9 @@ const MissionIntro = ({ route, navigation }) => {
       [array[i], array[j]] = [array[j], array[i]];
     }
 
-    setPlanTimer(15)
+    console.log('No enemies added!', 'Turn:', turn, mission.levelCardTurn);
+
+    setPlanTimer(3)
     setInitiativesList(array);
     setTurn(prevTurn => prevTurn + 1);
     setPlanTimerRunning(true);
@@ -229,7 +234,7 @@ const MissionIntro = ({ route, navigation }) => {
           <Text style={style.turn}>- Move mercenary cards on cooldown</Text>
         </>
       )}
-      {turn % mission.levelCardTurn === 0 && turn !== 0 && gamePhase === 'endTurn' && (
+      {(turn + 1) % mission.levelCardTurn === 0 && turn !== 0 && gamePhase === 'endTurn' && (
         <>
         <Text style={style.turn}>End turn conditionals:</Text>
         <Text style={style.turn}>- New enemies will be added</Text>
