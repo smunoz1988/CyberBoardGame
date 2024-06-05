@@ -28,7 +28,7 @@
             "moveMax": 2,
             "attackMin": 6,
             "attackMax": 8,
-            "range": 1
+            "range": 2
           }
         ],
         "levelCardTurn": 3,

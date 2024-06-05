@@ -25,7 +25,7 @@ const MissionIntro = ({ route, navigation }) => {
         setShowMessage(false);
       }
     }
-    , 5000);
+    , 2000);
 
     return () => clearInterval(intervalId);
   }, [showMessage]);
@@ -59,7 +59,8 @@ const MissionIntro = ({ route, navigation }) => {
       }, 1000);
     } else if (!gameTimerRunning || gameTimer === 0) {
       clearInterval(intervalId);
-      if (gameTimer === 0) {
+       // or turn === 13
+      if (gameTimer === 0 || turn === 12) { 
         alert('Time is over!');
         setGameTimerRunning(false);
       }
@@ -155,7 +156,7 @@ const MissionIntro = ({ route, navigation }) => {
 
   // generar iniciativas
   const shuffleArray = (originalArray) => {
-    if ((turn + 1) % mission.levelCardTurn === 0 && turn !== 0) {
+    if ((turn + 1) % mission.levelCardTurn === 0 && turn !== 0 && (turn + 1) !== 12) {
       console.log('New enemies added!', 'Turn:', turn, mission.levelCardTurn);
       originalArray = addSoldiers(originalArray);
     }
@@ -179,7 +180,7 @@ const MissionIntro = ({ route, navigation }) => {
       [array[i], array[j]] = [array[j], array[i]];
     }
 
-    console.log('No enemies added!', 'Turn:', turn, mission.levelCardTurn);
+    console.log('activePlayer:', activePlayer);
 
     setPlanTimer(30)
     setInitiativesList(array);
@@ -189,7 +190,15 @@ const MissionIntro = ({ route, navigation }) => {
 
   const handleDeleteCharacter = (character) => {
     setInitiativesList(initiativesList.filter(item => item !== character));
+    const index = initiativesList.findIndex(item => item === character);
+    if (index < activePlayer) {
+      setActivePlayer(activePlayer - 1);
+    }
   };
+
+  const generateRandomNumber = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
   return (
     <View style={style.container}>
@@ -222,22 +231,26 @@ const MissionIntro = ({ route, navigation }) => {
           {gamePhase === 'action' && <Text style={style.phaseTitle}>Action</Text>}
           {/* endTurn */}
           {gamePhase === 'endTurn' && <Text style={style.phaseTitle}>End Turn</Text>}
+            <Text style={style.alert}></Text>
         </View>
       </View>
       {showMessage && <Text style={style.alertMessage}>Planning time is over! Game time has started.</Text>}
       <Text style={style.turn}>Turn: {turn}</Text>
       {gamePhase === 'action' && <Text style={style.turn}>Active player: {initiativesList[activePlayer].name}</Text>}
+      <Text style={style.turn}>Active player: {activePlayer}</Text>
       {gamePhase === 'planification' && (
         <>
           <Text style={style.turn}>Planification actions:</Text>
-          <Text style={style.turn}>- Move level token</Text>
-          <Text style={style.turn}>- Move mercenary cards on cooldown</Text>
+          <Text style={style.alert}>- Move level token</Text>
+          <Text style={style.alert}>- Move mercenary cards on cooldown</Text>
         </>
       )}
-      {(turn + 1) % mission.levelCardTurn === 0 && turn !== 0 && gamePhase === 'endTurn' && (
+      {gamePhase === 'endTurn' && turn % mission.levelCardTurn === 0 && <Text style={style.alert}>resolve level cards</Text>}
+      {(turn + 1) % mission.levelCardTurn === 0 && turn !== 0 && gamePhase === 'endTurn' && turn !== 12 && (
         <>
-        <Text style={style.turn}>End turn conditionals:</Text>
-        <Text style={style.turn}>- New enemies will be added</Text>
+        <Text style={style.alert}>End turn conditionals:</Text>
+        <Text style={style.alert}>- New enemies will be added</Text>
+        <Text style={style.alert}>Entrance number: {generateRandomNumber(1, 4)}</Text>
         </>
       )}
       <ScrollView>
@@ -307,6 +320,12 @@ const style = StyleSheet.create({
     textShadowColor: '#bb00ff',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
+    fontFamily: 'Orbitron_900Black',
+    textAlign: 'center',
+  },
+  alert: {
+    color: 'red',
+    fontSize: 34,
     fontFamily: 'Orbitron_900Black',
     textAlign: 'center',
   },
