@@ -1,22 +1,22 @@
 [
   {
-    "name": "Prueba 2",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.",
+    "name": "Templo v1",
+    "description": "Prueba de movimiento y ataque en el templo",
     "objectives": [
       {
-        "objective": "Probar movimiento y ataque",
+        "objective": "Matar a todos",
         "enemies": [
           {
             "name": "Tech Soldier",
-            "quantity": 1,
+            "quantity": 4,
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
             "hp": 12,
-            "moveMin": 1,
-            "moveMax": 3,
+            "moveMin": 2,
+            "moveMax": 4,
             "attackMin": 1,
-            "attackMax": 5,
-            "range": 2
+            "attackMax": 4,
+            "range": 3
           },
           {
             "name": "Iron Caveman",
@@ -26,20 +26,8 @@
             "hp": 18,
             "moveMin": 1,
             "moveMax": 2,
-            "attackMin": 5,
-            "attackMax": 10,
-            "range": 1
-          },
-          {
-            "name": "TriceraBot",
-            "quantity": 1,
-            "image": "Enemy3Image",
-            "description": "Technology-enhanced Dinobot",
-            "hp": 25,
-            "moveMin": 1,
-            "moveMax": 3,
-            "attackMin": 1,
-            "attackMax": 5,
+            "attackMin": 6,
+            "attackMax": 8,
             "range": 1
           }
         ],
@@ -53,10 +41,10 @@
                 "image": "Enemy1Image",
                 "description": "Technology-enhanced soldier",
                 "hp": 12,
-                "moveMin": 1,
-                "moveMax": 3,
+                "moveMin": 2,
+                "moveMax": 4,
                 "attackMin": 1,
-                "attackMax": 5,
+                "attackMax": 4,
                 "range": 2
               }
             ]

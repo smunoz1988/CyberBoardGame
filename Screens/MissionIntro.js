@@ -9,7 +9,7 @@ const MissionIntro = ({ route, navigation }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
   const [turn, setTurn] = useState(0);
-  const [planTimer, setPlanTimer] = useState(3);
+  const [planTimer, setPlanTimer] = useState(30);
   const [planTimerRunning, setPlanTimerRunning] = useState(false);
   const [gameTimer, setGameTimer] = useState(3600);
   const [gameTimerRunning, setGameTimerRunning] = useState(false);
@@ -126,26 +126,26 @@ const MissionIntro = ({ route, navigation }) => {
     const newSoldiers = [
       {
         type: 'enemy',
-        name: 'New Enemy',
+        name: 'New Tech Soldier',
         enemyId: newEnemiesId,
         hp: 12,
-        range: 1,
-        moveMin: 1,
-        moveMax: 3,
-        attackMin: 4,
-        attackMax: 6,
+        range: 3,
+        moveMin: 2,
+        moveMax: 4,
+        attackMin: 1,
+        attackMax: 4,
         checked: false,
       },
       {
         type: 'enemy',
-        name: 'New Enemy',
+        name: 'New Tech Soldier',
         enemyId: newEnemiesId + 1,
         hp: 12,
-        range: 1,
-        moveMin: 1,
-        moveMax: 3,
-        attackMin: 4,
-        attackMax: 6,
+        range: 3,
+        moveMin: 2,
+        moveMax: 4,
+        attackMin: 1,
+        attackMax: 4,
         checked: false,
       },
     ];
@@ -181,7 +181,7 @@ const MissionIntro = ({ route, navigation }) => {
 
     console.log('No enemies added!', 'Turn:', turn, mission.levelCardTurn);
 
-    setPlanTimer(3)
+    setPlanTimer(30)
     setInitiativesList(array);
     setTurn(prevTurn => prevTurn + 1);
     setPlanTimerRunning(true);

@@ -13,14 +13,14 @@
   },
   {
     "id": 3,
-    "name": "PHANTOM NINJA",
-    "health": 13,
+    "name": "INFERNO WARRIOR",
+    "health": 20,
     "contractCost": 1
   },
   {
     "id": 4,
-    "name": "CYBER GHOST",
-    "health": 17,
+    "name": "THE BLACK KNIGHT",
+    "health": 26,
     "contractCost": 5
   },
   {
