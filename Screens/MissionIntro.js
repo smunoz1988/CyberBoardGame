@@ -157,7 +157,6 @@ const MissionIntro = ({ route, navigation }) => {
   // generar iniciativas
   const shuffleArray = (originalArray) => {
     if ((turn + 1) % mission.levelCardTurn === 0 && turn !== 0 && (turn + 1) !== 12) {
-      console.log('New enemies added!', 'Turn:', turn, mission.levelCardTurn);
       originalArray = addSoldiers(originalArray);
     }
     let array = originalArray.map(character => {
@@ -179,8 +178,6 @@ const MissionIntro = ({ route, navigation }) => {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
-
-    console.log('activePlayer:', activePlayer);
 
     setPlanTimer(30)
     setInitiativesList(array);

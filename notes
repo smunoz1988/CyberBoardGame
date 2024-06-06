@@ -9,8 +9,7 @@ https://www.freepik.es/vector-gratis/plantilla-diseno-cartel-estetica-ano-2000_1
 
 Nota: poner licencia en readme.
 
-en las misiones que son con olas, hay que tener una forma de ingresar los nuevos enemigos.
+limpiar codigo, dividir pequenas cosas en funciones
 
+incluir afectaciones de los mercenarios y enemigos. que se pueda agregar, que se muestre y que se pueda quitar.
 
-fin de turno. para el cronometro. se hacen las cosas manuales. si no pasa nada se lanzan iniciativas. si es un mapa donde cada cierto tiempo se dan opciones de nivel, que la misma app resuelva esto.
-se debe poner un condicional en el boton de lanzar iniciativas

@@ -97,12 +97,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   moveTextNum: {
-    color: 'blue',
+    color: 'white',
     fontFamily: 'Orbitron_900Black',
     fontSize: 20,
   },
   moveText: {
-    color: 'blue',
+    color: 'white',
     fontFamily: 'Orbitron_900Black',
     fontSize: 8,
   },
