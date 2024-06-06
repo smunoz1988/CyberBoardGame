@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "name": "THE WINGED SOLDIER",
-    "health": 25,
-    "contractCost": 3
+    "name": "TECH COMMANDER",
+    "health": 22,
+    "contractCost": 2
   },
   {
     "id": 2,
@@ -25,15 +25,15 @@
   },
   {
     "id": 5,
-    "name": "ICE SOLDIER",
-    "health": 25,
-    "contractCost": 6
+    "name": "SHADOW ASSASSIN",
+    "health": 14,
+    "contractCost": 3
   },
   {
     "id": 6,
-    "name": "SAMURAI",
-    "health": 19,
-    "contractCost": 7
+    "name": "THE GHOST HUNTRESS",
+    "health": 14,
+    "contractCost": 1
   },
   {
     "id": 7,
