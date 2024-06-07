@@ -4,12 +4,13 @@ import { CheckBox } from 'react-native-elements';
 import CharacterInitiative from '../Components/CharacterInitiative';
 import Timer from '../Components/Timer';
 import PhaseButton from '../Components/PhaseButton';
+import NeonTextSelect from '../Components/NeonTextSelect';
 
 const MissionIntro = ({ route, navigation }) => {
   const { selectedMercenaries, mission } = route.params;
   const enemies = mission.enemies;
   const [turn, setTurn] = useState(0);
-  const [planTimer, setPlanTimer] = useState(30);
+  const [planTimer, setPlanTimer] = useState(15);
   const [planTimerRunning, setPlanTimerRunning] = useState(false);
   const [gameTimer, setGameTimer] = useState(3600);
   const [gameTimerRunning, setGameTimerRunning] = useState(false);
@@ -127,7 +128,7 @@ const MissionIntro = ({ route, navigation }) => {
     const newSoldiers = [
       {
         type: 'enemy',
-        name: 'New Tech Soldier',
+        name: 'Tech Soldier',
         enemyId: newEnemiesId,
         hp: 12,
         range: 3,
@@ -139,7 +140,7 @@ const MissionIntro = ({ route, navigation }) => {
       },
       {
         type: 'enemy',
-        name: 'New Tech Soldier',
+        name: 'Tech Soldier',
         enemyId: newEnemiesId + 1,
         hp: 12,
         range: 3,
@@ -179,7 +180,7 @@ const MissionIntro = ({ route, navigation }) => {
       [array[i], array[j]] = [array[j], array[i]];
     }
 
-    setPlanTimer(30)
+    setPlanTimer(15)
     setInitiativesList(array);
     setTurn(prevTurn => prevTurn + 1);
     setPlanTimerRunning(true);
@@ -201,7 +202,6 @@ const MissionIntro = ({ route, navigation }) => {
     <View style={style.container}>
       <Text style={style.turn}>Mission: {mission.name}</Text>
       <Text style={style.turn}>Objective: {mission.objective}</Text>
-      <Text style={style.turn}>card turn: {mission.levelCardTurn}</Text>
       {turn == 0 ? (
         <>
           <Text>AQUI SE VA A PONER UNA ANIMACION DE INTRO DEL JUEGO</Text>
@@ -233,25 +233,26 @@ const MissionIntro = ({ route, navigation }) => {
       </View>
       {showMessage && <Text style={style.alertMessage}>Planning time is over! Game time has started.</Text>}
       <Text style={style.turn}>Turn: {turn}</Text>
-      {gamePhase === 'action' && <Text style={style.turn}>Active player: {initiativesList[activePlayer].name}</Text>}
-      <Text style={style.turn}>Active player: {activePlayer}</Text>
-      {gamePhase === 'planification' && (
-        <>
-          <Text style={style.turn}>Planification actions:</Text>
-          <Text style={style.alert}>- Move level token</Text>
-          <Text style={style.alert}>- Move mercenary cards on cooldown</Text>
-        </>
-      )}
-      {gamePhase === 'endTurn' && turn % mission.levelCardTurn === 0 && <Text style={style.alert}>resolve level cards</Text>}
-      {(turn + 1) % mission.levelCardTurn === 0 && turn !== 0 && gamePhase === 'endTurn' && turn !== 12 && (
-        <>
-        <Text style={style.alert}>End turn conditionals:</Text>
-        <Text style={style.alert}>- New enemies will be added</Text>
-        <Text style={style.alert}>Entrance number: {generateRandomNumber(1, 4)}</Text>
-        </>
-      )}
+      <View style={style.actionsContainer}>
+        {gamePhase === 'action' && initiativesList[activePlayer].type === 'enemy' && <NeonTextSelect>AP: {initiativesList[activePlayer].name} {initiativesList[activePlayer].enemyId}</NeonTextSelect>}
+        {gamePhase === 'action' && initiativesList[activePlayer].type === 'mercenary' && <NeonTextSelect>AP: {initiativesList[activePlayer].name}</NeonTextSelect>}
+        {gamePhase === 'planification' && (
+          <>
+            <Text style={style.turn}>Planification actions:</Text>
+            <Text style={style.alert}>- Move level token</Text>
+            <Text style={style.alert}>- Move mercenary cards on cooldown</Text>
+          </>
+        )}
+        {gamePhase === 'endTurn' && turn % mission.levelCardTurn === 0 && <Text style={style.alert}>resolve level cards</Text>}
+        {(turn + 1) % mission.levelCardTurn === 0 && turn !== 0 && gamePhase === 'endTurn' && turn !== 12 && (
+          <>
+          <Text style={style.alert}>End turn conditionals:</Text>
+          <Text style={style.alert}>- New enemies will be added</Text>
+          <Text style={style.alert}>Entrance number: {generateRandomNumber(1, 4)}</Text>
+          </>
+        )}
+      </View>
       <ScrollView>
-        <Text>INITIATIVES</Text>
         {initiativesList.map((character, index) => {
           const key = character.type === 'enemy' ? `${character.name}-${character.enemyId}` : `${character.name}`;
           return (
@@ -334,6 +335,12 @@ const style = StyleSheet.create({
     color: 'white',
     fontSize: 16,
   },
+  activePlayers: {
+    fontFamily: 'Orbitron_900Black',
+    color: 'Black',
+    textAlign: 'center',
+    fontSize: 32,
+  },
   initiativeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -379,6 +386,10 @@ const style = StyleSheet.create({
     textShadowColor: 'white',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
+  },
+  actionsContainer: {
+    borderWidth: 1,
+    borderColor: '#ddd',
   },
 });
 

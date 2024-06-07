@@ -8,7 +8,7 @@
         "enemies": [
           {
             "name": "Tech Soldier",
-            "quantity": 4,
+            "quantity": 5,
             "image": "Enemy1Image",
             "description": "Technology-enhanced soldier",
             "hp": 12,
@@ -20,7 +20,7 @@
           },
           {
             "name": "Iron Caveman",
-            "quantity": 1,
+            "quantity": 2,
             "image": "Enemy2Image",
             "description": "Iron armored caveman",
             "hp": 18,

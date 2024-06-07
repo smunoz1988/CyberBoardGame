@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   nameEnemy: {
-    fontSize: 16,
+    fontSize: 20,
     fontFamily: 'Orbitron_900Black',
     color: '#39FF14',  // Neon red for enemy names
     marginVertical: 10,

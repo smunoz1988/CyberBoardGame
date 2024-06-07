@@ -41,10 +41,12 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     margin: 10,
+    backgroundColor: 'black',
+    paddingVertical: 5,
   },
   neonText: {
     color: '#39FF14', 
-    fontSize: 20,
+    fontSize: 25,
     fontFamily: 'Orbitron_900Black',
     textShadowColor: 'cyan',
     textShadowOffset: { width: 1, height: 1 },
