@@ -29,8 +29,8 @@ Clone this repository to your local machine using:
 
 bash
 
-git clone https://github.com/yourusername/my-react-native-app.git
-cd my-react-native-app
+git clone [https://github.com/yourusername/my-react-native-app.git](https://github.com/smunoz1988/CyberBoardGame.git)
+cd CyberBoardGame
 
 Install Dependencies
 
