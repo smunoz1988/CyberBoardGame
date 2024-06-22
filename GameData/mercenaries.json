@@ -1,0 +1,63 @@
+[
+  {
+    "id": 1,
+    "name": "TECH COMMANDER",
+    "health": 22,
+    "contractCost": 2
+  },
+  {
+    "id": 2,
+    "name": "GRIMM TRIGGER",
+    "health": 17,
+    "contractCost": 2
+  },
+  {
+    "id": 3,
+    "name": "INFERNO WARRIOR",
+    "health": 20,
+    "contractCost": 1
+  },
+  {
+    "id": 4,
+    "name": "THE BLACK KNIGHT",
+    "health": 26,
+    "contractCost": 5
+  },
+  {
+    "id": 5,
+    "name": "SHADOW ASSASSIN",
+    "health": 14,
+    "contractCost": 3
+  },
+  {
+    "id": 6,
+    "name": "THE GHOST HUNTRESS",
+    "health": 14,
+    "contractCost": 1
+  },
+  {
+    "id": 7,
+    "name": "BATTLE MEDIC",
+    "health": 17,
+    "contractCost": 8
+  },
+  {
+    "id": 8,
+    "name": "HUNTER KILLER",
+    "health": 17,
+    "contractCost": 9
+  },
+  {
+    "id": 9,
+    "name": "HACKMASTER",
+    "health": 25,
+    "contractCost": 6
+  },
+  {
+    "id": 10,
+    "name": "DEATH KNIGHT",
+    "health": 19,
+    "contractCost": 8
+  }
+]
+  

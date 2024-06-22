@@ -1,0 +1,15 @@
+1. checar posibilidad de hacer una pantalla previa donde el usuario elija si empezar una nueva partida o 
+irse a una pantalla donde se muestre lore. ver mas opciones de que se puede mostrar.
+
+fuente titulo: https://fonts.google.com/specimen/Black+Ops+One?preview.text=EMPERYOR&query=ps
+
+referencias diseno:
+
+https://www.freepik.es/vector-gratis/plantilla-diseno-cartel-estetica-ano-2000_154651857.htm#fromView=search&page=1&position=40&uuid=77b9a257-e3ab-4151-92a9-7b80842c7fa3
+
+Nota: poner licencia en readme.
+
+limpiar codigo, dividir pequenas cosas en funciones
+
+incluir afectaciones de los mercenarios y enemigos. que se pueda agregar, que se muestre y que se pueda quitar.
+

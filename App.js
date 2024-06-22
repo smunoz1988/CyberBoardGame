@@ -1,27 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, BackHandler, Alert } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './Screens/HomeScreen';
+import MissionScreen from './Screens/MissionScreen';
+import MercenaryScreen from './Screens/MercenaryScreen';
+import MissionIntroWrapper from './Components/MissionIntroWrapper';
+import { useFonts, Orbitron_400Regular, Orbitron_900Black } from '@expo-google-fonts/orbitron';
 
-const App = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.tittle}>CYBER BOARD GAME</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const Stack = createNativeStackNavigator();
+
+const disableGesturesConfig = {
+  gestureEnabled: false,
+  headerLeft: () => null, // This removes the back button in the header if any
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-    color: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  tittle: {
-    color: 'white',
-    fontSize: 30,
-  },
-});
+const App = () => {
+  let [fontsLoaded] = useFonts({
+    Orbitron_400Regular,
+    Orbitron_900Black,
+  });
+
+  if (!fontsLoaded) {
+    return <View><Text>Loading...</Text></View>;
+  }
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="CyberBoardGame" component={HomeScreen} />
+        <Stack.Screen name="Mission" component={MissionScreen} />
+        <Stack.Screen name="Mercenary" component={MercenaryScreen} />
+        <Stack.Screen name="MissionIntro" component={MissionIntroWrapper} options={disableGesturesConfig} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 export default App;
